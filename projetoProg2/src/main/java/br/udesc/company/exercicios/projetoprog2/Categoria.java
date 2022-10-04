@@ -1,12 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package br.udesc.company.exercicios.projetoprog2;
 
 /**
  *
- * @author sonho
+ * @author Gustavo
  */
 public class Categoria {
     private int codigo;
@@ -28,8 +24,5 @@ public class Categoria {
     @Override
     public String toString() {
         return "Nome: " + nome;
-    }
-    
-    
-            
+    }       
 }

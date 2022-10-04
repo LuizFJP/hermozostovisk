@@ -1,34 +1,33 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package br.udesc.company.exercicios.projetoprog2;
 
 import java.util.List;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 
-
-
 /**
  *
- * @author sonho
+ * @author Gustavo
  */
 public class MainView extends javax.swing.JFrame implements Controle {
+    
     private List<Produto> produtos;
     private List<Categoria> categorias;
+    
     /**
      * Creates new form MainView
      */
     public MainView(){
         this.produtos = new ArrayList<Produto>();
         this.categorias = new ArrayList<Categoria>();
+        
         initComponents();
         this.setTitle("LGC - HermosoStovisk");
     }
+    
     public List<Categoria> getCategorias(){
         return this.categorias;
     }
+    
     public List<Produto> getProdutos(){
         return this.produtos;
     }
@@ -52,6 +51,7 @@ public class MainView extends javax.swing.JFrame implements Controle {
         miRelatorioProdutos = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(254, 248, 232));
 
         mCadastro.setText("Cadastrar");
 
@@ -102,11 +102,11 @@ public class MainView extends javax.swing.JFrame implements Controle {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1280, Short.MAX_VALUE)
+            .addGap(0, 1330, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 697, Short.MAX_VALUE)
+            .addGap(0, 1439, Short.MAX_VALUE)
         );
 
         pack();
@@ -158,5 +158,5 @@ public class MainView extends javax.swing.JFrame implements Controle {
             }
         }
         return null;
-}
+    }
 }

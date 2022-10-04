@@ -1,12 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package br.udesc.company.exercicios.projetoprog2;
 
 /**
  *
- * @author sonho
+ * @author Gustavo
  */
 public class Produto{
     private String nome;
@@ -14,7 +10,6 @@ public class Produto{
     private String preco;
     private String categoria;
     private String descricao;
-    
 
     public Produto(String nome, String preco, String descricao, String categoria) {
         this.nome = nome;
@@ -28,6 +23,7 @@ public class Produto{
     }
 
     public void setNome(String nome) {
+        if (!nome.isBlank())
         this.nome = nome;
     }
 
@@ -36,6 +32,7 @@ public class Produto{
     }
 
     public void setCodigo(String codigo) {
+        if (!codigo.isBlank())
         this.codigo = codigo;
     }
 
@@ -44,6 +41,7 @@ public class Produto{
     }
 
     public void setPreco(String preco) {
+        if(!preco.isBlank())
         this.preco = preco;
     }
 
@@ -66,10 +64,5 @@ public class Produto{
     public String relatoBusca(){
         return "Nome: " + getNome() + "\nPreço: " + getPreco() + "\nDescrição: " + getDescricao() + "\nCategoria: " + getCategoria() + "\n";
                 
-    }
-
-    
-    
-    
-    
+    } 
 }
