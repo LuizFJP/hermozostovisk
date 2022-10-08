@@ -1,5 +1,7 @@
-package br.udesc.company.exercicios.projetoprog2;
+package br.udesc.prog2.hermozostoviski.view;
 
+import br.udesc.prog2.hermozostoviski.model.Categoria;
+import br.udesc.prog2.hermozostoviski.model.Produto;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 

@@ -1,8 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
-package br.udesc.company.exercicios.projetoprog2;
+package br.udesc.prog2.hermozostoviski.view;
 
 /**
  *
