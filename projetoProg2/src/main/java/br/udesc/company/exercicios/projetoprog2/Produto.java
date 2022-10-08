@@ -11,12 +11,12 @@ package br.udesc.company.exercicios.projetoprog2;
 public class Produto{
     private String nome;
     private String codigo;
-    private String preco;
+    private double preco;
     private String categoria;
     private String descricao;
     
 
-    public Produto(String nome, String preco, String descricao, String categoria) {
+    public Produto(String nome, double preco, String descricao, String categoria) {
         this.nome = nome;
         this.descricao = descricao;
         this.preco = preco;
@@ -39,11 +39,11 @@ public class Produto{
         this.codigo = codigo;
     }
 
-    public String getPreco() {
+    public double getPreco() {
         return preco;
     }
 
-    public void setPreco(String preco) {
+    public void setPreco(double preco) {
         this.preco = preco;
     }
 
