@@ -1,38 +1,35 @@
-package br.udesc.prog2.hermozostoviski.model;
-
+package model;
+import interfaces.IPessoa;
 /**
  *
  * @author luizportel4
  */
-public class Cliente {
-    private String nome;
-    private String cpf;
+public class Cliente extends Pessoa implements IPessoa {
+
     private String endereco;
 
     public Cliente(String nome, String cpf) {
-        this.nome = nome;
-        this.cpf = cpf;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public String getCpf() {
-        return cpf;
+        super(nome, cpf);
     }
 
     public String getEndereco() {
         return endereco;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
 
     public void setEndereco(String endereco) {
         this.endereco = endereco;
     }
     
+    public String getNome() {
+        return super.nome;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
     
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 }

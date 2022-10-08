@@ -1,6 +1,6 @@
-package br.udesc.prog2.hermozostoviski.model;
+package model;
 
-import br.udesc.prog2.hermozostoviski.view.MainView;
+import view.MainView;
 
 
 

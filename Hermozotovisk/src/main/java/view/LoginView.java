@@ -1,4 +1,4 @@
-package br.udesc.prog2.hermozostoviski.view;
+package view;
 
 import javax.swing.JOptionPane;
 

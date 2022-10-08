@@ -1,6 +1,6 @@
-package br.udesc.prog2.hermozostoviski.view;
+package view;
 
-import br.udesc.prog2.hermozostoviski.model.Produto;
+import model.Produto;
 import javax.swing.JOptionPane;
 
 /**

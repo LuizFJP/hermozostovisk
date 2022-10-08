@@ -1,6 +1,6 @@
-package br.udesc.prog2.hermozostoviski.controller;
+package controller;
 
-import br.udesc.prog2.hermozostoviski.model.Produto;
+import model.Produto;
 
 /**
  *

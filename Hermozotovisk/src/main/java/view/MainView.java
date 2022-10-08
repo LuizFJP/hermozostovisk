@@ -1,8 +1,8 @@
-package br.udesc.prog2.hermozostoviski.view;
+package view;
 
-import br.udesc.prog2.hermozostoviski.controller.Controle;
-import br.udesc.prog2.hermozostoviski.model.Categoria;
-import br.udesc.prog2.hermozostoviski.model.Produto;
+import controller.Controle;
+import model.Categoria;
+import model.Produto;
 import java.util.List;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;

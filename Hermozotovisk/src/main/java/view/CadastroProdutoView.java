@@ -1,7 +1,7 @@
-package br.udesc.prog2.hermozostoviski.view;
+package view;
 
-import br.udesc.prog2.hermozostoviski.model.Categoria;
-import br.udesc.prog2.hermozostoviski.model.Produto;
+import model.Categoria;
+import model.Produto;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
