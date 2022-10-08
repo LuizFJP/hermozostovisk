@@ -4,11 +4,15 @@
  */
 package repository;
 
+import java.util.List;
+import model.Cliente;
+import model.Pessoa;
+
 /**
  *
  * @author luizportel4
  */
 public class Users {
     List<Pessoa> admin;
-    List<>
+    List<Cliente> cliente;
 }
