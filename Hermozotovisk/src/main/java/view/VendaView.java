@@ -1,14 +1,18 @@
 package view;
 
+import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
+import model.Produto;
+
 /**
  *
  * @author ndeba
  */
 public class VendaView extends javax.swing.JFrame {
 
-    /**
-     * Creates new form VendaView
-     */
+    private AdminView main = new AdminView();
+    DefaultListModel listaProdutos = new DefaultListModel();
+    
     public VendaView() {
         initComponents();
     }
@@ -47,7 +51,7 @@ public class VendaView extends javax.swing.JFrame {
         tfQuantidade = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         btRemover = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        btCadCliente = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -76,6 +80,11 @@ public class VendaView extends javax.swing.JFrame {
         jScrollPane2.setViewportView(tbProdutos);
 
         btPesquisar.setText("Pesquisar");
+        btPesquisar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btPesquisarActionPerformed(evt);
+            }
+        });
 
         tfTotal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -121,11 +130,6 @@ public class VendaView extends javax.swing.JFrame {
         });
         jScrollPane3.setViewportView(ltClientes);
 
-        ltProdutos.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         jScrollPane4.setViewportView(ltProdutos);
 
         tfQuantidade.addActionListener(new java.awt.event.ActionListener() {
@@ -138,7 +142,12 @@ public class VendaView extends javax.swing.JFrame {
 
         btRemover.setText("Remover");
 
-        jButton1.setText("Cadastrar Cliente");
+        btCadCliente.setText("Cadastrar Cliente");
+        btCadCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btCadClienteActionPerformed(evt);
+            }
+        });
 
         jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         jLabel11.setText("Cliente novo?");
@@ -181,17 +190,18 @@ public class VendaView extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(18, 18, 18)
-                                        .addComponent(jButton1))
+                                        .addComponent(btCadCliente))
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(jLabel11)
                                         .addGap(55, 55, 55))))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(tfQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(35, 35, 35)
@@ -264,7 +274,7 @@ public class VendaView extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel11)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton1)))
+                                .addComponent(btCadCliente)))
                         .addGap(28, 28, 28)
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
@@ -299,15 +309,39 @@ public class VendaView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_tfQuantidadeActionPerformed
 
+    private void btCadClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadClienteActionPerformed
+     
+    }//GEN-LAST:event_btCadClienteActionPerformed
+
+    private void btPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPesquisarActionPerformed
+        if (tfCodigo.getText().isBlank() & !tfNomeProduto.getText().isBlank()){
+            listaProdutos.addElement(main.buscarProdutoPorNome(tfNomeProduto.getText()));
+        }
+        else if(!tfCodigo.getText().isBlank() & tfNomeProduto.getText().isBlank()){
+            listaProdutos.addElement(main.buscarProdutoPorCodigo(tfCodigo.getText()));
+        }
+        else if (!tfCodigo.getText().isBlank() & !tfNomeProduto.getText().isBlank()){
+            
+            if (main.buscarProdutoPorNome(tfNomeProduto.getText()) == null){
+                listaProdutos.addElement(main.buscarProdutoPorCodigo(tfCodigo.getText()));
+            }
+            else{
+                listaProdutos.addElement(main.buscarProdutoPorCodigo(tfCodigo.getText()));
+            }
+        }
+        else 
+            JOptionPane.showMessageDialog(null, "Produto não encontrado");
+    }//GEN-LAST:event_btPesquisarActionPerformed
+
     /**
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btAdicionar;
+    private javax.swing.JButton btCadCliente;
     private javax.swing.JButton btPesquisar;
     private javax.swing.JButton btRemover;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

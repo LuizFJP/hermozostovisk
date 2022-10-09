@@ -7,11 +7,11 @@ package model;
 public class Produto{
     private String nome;
     private String codigo;
-    private String preco;
+    private double preco;
     private String categoria;
     private String descricao;
 
-    public Produto(String nome, String preco, String descricao, String categoria) {
+    public Produto(String nome, double preco, String descricao, String categoria) {
         this.nome = nome;
         this.descricao = descricao;
         this.preco = preco;
@@ -36,12 +36,12 @@ public class Produto{
         this.codigo = codigo;
     }
 
-    public String getPreco() {
+    public double getPreco() {
         return preco;
     }
 
-    public void setPreco(String preco) {
-        if(!preco.isBlank())
+    public void setPreco(double preco) {
+        if(preco < 0)
         this.preco = preco;
     }
 
@@ -59,10 +59,10 @@ public class Produto{
 
     @Override
     public String toString() {
-        return " " + nome + " " + preco + " " + descricao + " " + getCategoria() + "\n";
+        return " " + nome + " R$" + preco + " " + descricao + " " + getCategoria() + "\n";
     }
     public String relatoBusca(){
-        return "Nome: " + getNome() + "\nPreço: " + getPreco() + "\nDescrição: " + getDescricao() + "\nCategoria: " + getCategoria() + "\n";
+        return "Nome: " + getNome() + "\nPreço: R$" + getPreco() + "\nDescrição: " + getDescricao() + "\nCategoria: " + getCategoria() + "\n";
                 
     } 
 }
