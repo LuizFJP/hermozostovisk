@@ -8,6 +8,10 @@ package model;
  *
  * @author luizportel4
  */
-public class Vendedor {
+public class Vendedor extends Funcionario {
+
+    public Vendedor(String nome, String cpf, String senha) {
+        super(nome, cpf, senha);
+    }
     
 }

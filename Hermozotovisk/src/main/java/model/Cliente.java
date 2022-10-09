@@ -4,12 +4,13 @@ import interfaces.IPessoa;
  *
  * @author luizportel4
  */
-public class Cliente extends Pessoa implements IPessoa {
+public class Cliente extends Pessoa {
 
     private String endereco;
 
-    public Cliente(String nome, String cpf) {
+    public Cliente(String nome, String cpf, String endereco) {
         super(nome, cpf);
+        this.endereco = endereco;
     }
 
     public String getEndereco() {
@@ -25,7 +26,7 @@ public class Cliente extends Pessoa implements IPessoa {
         return super.nome;
     }
 
-    public String getCpf() {
+    public String getCPF() {
         return cpf;
     }
     

@@ -10,6 +10,7 @@ package interfaces;
  */
 public interface IPessoa {
     public String getNome();
-    public String getCpf();
+    public String getCPF();
     public void setNome(String nome);
 }
+
