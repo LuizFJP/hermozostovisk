@@ -1,6 +1,7 @@
 package model;
 
-import view.MainView;
+import view.AdminView;
+import view.LoginView;
 
 
 
@@ -12,8 +13,8 @@ public class App {
     public static void main(String[] args) {
 //        CadastroProdutoView cadastro = new CadastroProdutoView();
 //        cadastro.setVisible(true);
-        MainView main = new MainView();
-        main.setVisible(true);
+        LoginView login = new LoginView();
+        login.setVisible(true);
         
     }
 }

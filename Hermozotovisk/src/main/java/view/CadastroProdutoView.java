@@ -1,5 +1,6 @@
 package view;
 
+import dao.ProdutoDAO;
 import model.Categoria;
 import model.Produto;
 import javax.swing.JOptionPane;
@@ -10,19 +11,36 @@ import javax.swing.table.DefaultTableModel;
  * @author Gustavo
  */
 public class CadastroProdutoView extends javax.swing.JFrame {
-    private MainView main;
+
+    private AdminView main;
+    private ProdutoDAO produtoDAO;
+
     /**
      * Creates new form ViewCadastroProduto
+     *
      * @param main
      */
-    public CadastroProdutoView(MainView main) {
+    public CadastroProdutoView(AdminView main) {
         this.main = main;
+        this.produtoDAO = main.getProdutoDAO();
         initComponents();
         this.setTitle("Cadastrar Produtos");
-        for(Categoria cat: this.main.getCategorias()){
+        for (Categoria cat : this.main.getCategorias()) {
             cbCategoria.addItem(cat.getNome());
         }
-        
+        this.generateList();
+    }
+
+    public void generateList() {
+        for (Produto pDAO : this.produtoDAO.getProdutos()) {
+            DefaultTableModel model = (DefaultTableModel) tbListaProdutos.getModel();
+            Object data[] = {
+                pDAO.getNome(), pDAO.getCategoria(), pDAO.getPreco(), pDAO.getDescricao()
+            };
+            model.addRow(data);
+
+        }
+
     }
 
     /**
@@ -170,20 +188,15 @@ public class CadastroProdutoView extends javax.swing.JFrame {
         String preco = tfPrecoProduto.getText();
         String categoria = (String) cbCategoria.getSelectedItem();
         Produto prod = new Produto(nome, preco, descricao, categoria);
-        this.main.getProdutos().add(prod);
+        this.produtoDAO.addProduto(prod);
         JOptionPane.showMessageDialog(null, "Produto Criado com Sucesso!");
-        
-        DefaultTableModel model = (DefaultTableModel) tbListaProdutos.getModel();
-        Object data[] = {
-            tfNomeProduto.getText(), (String) cbCategoria.getSelectedItem(), tfPrecoProduto.getText(), tfDescricaoProduto.getText()
-        };
-        model.addRow(data);
+
+        this.generateList();
     }//GEN-LAST:event_btCadastroActionPerformed
-    
+
     /**
      * @param args the command line arguments
      */
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btCadastro;
