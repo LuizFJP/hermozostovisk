@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 view\RelatorioProdutoView$1.class
 repository\UsuarioRepository.class
 view\CadastroCategoriaView.class
@@ -30,3 +31,7 @@ view\LoginView.class
 repository\ProdutoRepository.class
 view\LoginView$3.class
 model\Admin.class
+=======
+interfaces/IPessoa.class
+model/Produto.class
+>>>>>>> 4faf6ef8f6a71143f79b4e0ebe61a4ab533986ad

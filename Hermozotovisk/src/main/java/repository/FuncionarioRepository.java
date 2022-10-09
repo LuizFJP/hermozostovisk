@@ -7,23 +7,24 @@ package repository;
 import java.util.ArrayList;
 import java.util.List;
 import model.Admin;
-import model.Pessoa;
+import model.Cliente;
+import model.Funcionario;
 
 /**
  *
  * @author luizportel4
  */
-public class UsuarioRepository {
+public class FuncionarioRepository {
+  
+    List<Funcionario> funcionarios;
 
-    List<Pessoa> usuarios;
-
-    public UsuarioRepository() {
-        this.usuarios = new ArrayList<>();
+    public FuncionarioRepository() {
+        this.funcionarios = new ArrayList<>();
         this.populateAdmin();
     }
 
-    public void addUsuario(Pessoa usuario) {
-        this.usuarios.add(usuario);
+    public void addFuncionario(Funcionario usuario) {
+        this.funcionarios.add(usuario);
     }
 
     private void populateAdmin() {
@@ -33,12 +34,12 @@ public class UsuarioRepository {
             new Admin("Nicolas", "03", "123")
         };
         for (Admin admin : admins) {
-            this.usuarios.add(admin);
+            this.funcionarios.add(admin);
         }
     }
 
-    public List<Pessoa> getUsuarios() {
-        return this.usuarios;
+    public List<Funcionario> getUsuarios() {
+        return this.funcionarios;
     }
 
 }

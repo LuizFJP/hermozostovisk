@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 C:\Users\ndeba\Desktop\UDESC\3 Semestre\prog2\T1\Hermozotovisk\src\main\java\view\CadastroProdutoView.java
 C:\Users\ndeba\Desktop\UDESC\3 Semestre\prog2\T1\Hermozotovisk\src\main\java\view\AdminView.java
 C:\Users\ndeba\Desktop\UDESC\3 Semestre\prog2\T1\Hermozotovisk\src\main\java\dao\UsuarioDAO.java
@@ -17,3 +18,27 @@ C:\Users\ndeba\Desktop\UDESC\3 Semestre\prog2\T1\Hermozotovisk\src\main\java\mod
 C:\Users\ndeba\Desktop\UDESC\3 Semestre\prog2\T1\Hermozotovisk\src\main\java\interfaces\IPessoa.java
 C:\Users\ndeba\Desktop\UDESC\3 Semestre\prog2\T1\Hermozotovisk\src\main\java\repository\UsuarioRepository.java
 C:\Users\ndeba\Desktop\UDESC\3 Semestre\prog2\T1\Hermozotovisk\src\main\java\view\CadastroCategoriaView.java
+=======
+/home/luizportel4/hermozostovisk/Hermozotovisk/src/main/java/dao/ProdutoDAO.java
+/home/luizportel4/hermozostovisk/Hermozotovisk/src/main/java/interfaces/IPessoa.java
+/home/luizportel4/hermozostovisk/Hermozotovisk/src/main/java/repository/ProdutoRepository.java
+/home/luizportel4/hermozostovisk/Hermozotovisk/src/main/java/dao/UsuarioDAO.java
+/home/luizportel4/hermozostovisk/Hermozotovisk/src/main/java/model/App.java
+/home/luizportel4/hermozostovisk/Hermozotovisk/src/main/java/model/Categoria.java
+/home/luizportel4/hermozostovisk/Hermozotovisk/src/main/java/view/RelatorioProdutoView.java
+/home/luizportel4/hermozostovisk/Hermozotovisk/src/main/java/view/CadastroProdutoView.java
+/home/luizportel4/hermozostovisk/Hermozotovisk/src/main/java/view/VendaView.java
+/home/luizportel4/hermozostovisk/Hermozotovisk/src/main/java/view/AdminView.java
+/home/luizportel4/hermozostovisk/Hermozotovisk/src/main/java/model/Produto.java
+/home/luizportel4/hermozostovisk/Hermozotovisk/src/main/java/model/Funcionario.java
+/home/luizportel4/hermozostovisk/Hermozotovisk/src/main/java/controller/Controle.java
+/home/luizportel4/hermozostovisk/Hermozotovisk/src/main/java/model/Admin.java
+/home/luizportel4/hermozostovisk/Hermozotovisk/src/main/java/view/LoginView.java
+/home/luizportel4/hermozostovisk/Hermozotovisk/src/main/java/model/Vendedor.java
+/home/luizportel4/hermozostovisk/Hermozotovisk/src/main/java/view/CadClienteView.java
+/home/luizportel4/hermozostovisk/Hermozotovisk/src/main/java/view/CadastroCategoriaView.java
+/home/luizportel4/hermozostovisk/Hermozotovisk/src/main/java/repository/UsuarioRepository.java
+/home/luizportel4/hermozostovisk/Hermozotovisk/src/main/java/model/Pessoa.java
+/home/luizportel4/hermozostovisk/Hermozotovisk/src/main/java/interfaces/IFuncionario.java
+/home/luizportel4/hermozostovisk/Hermozotovisk/src/main/java/model/Cliente.java
+>>>>>>> 4faf6ef8f6a71143f79b4e0ebe61a4ab533986ad

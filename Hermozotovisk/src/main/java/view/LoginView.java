@@ -1,10 +1,11 @@
 package view;
 
-import dao.UsuarioDAO;
+import dao.ClienteDAO;
+import dao.FuncionarioDAO;
 import javax.swing.JOptionPane;
 import model.Admin;
-import model.Cliente;
 import model.Pessoa;
+import model.Vendedor;
 
 /**
  *
@@ -15,10 +16,12 @@ public class LoginView extends javax.swing.JFrame {
     /**
      * Creates new form LoginView
      */
-    protected UsuarioDAO usuarioDao;
+    protected FuncionarioDAO funcionarioDAO;
+    protected ClienteDAO clienteDAO;
 
     public LoginView() {
-        this.usuarioDao = new UsuarioDAO();
+        this.funcionarioDAO = new FuncionarioDAO();
+        this.clienteDAO = new ClienteDAO();
         initComponents();
 
     }
@@ -140,11 +143,11 @@ public class LoginView extends javax.swing.JFrame {
         // TODO add your handling code here:
         String cpf = tfCPF.getText();
         String senha = tfSenha.getText();
-        Pessoa usuario = this.usuarioDao.getUsuario(cpf, senha);
+        Pessoa usuario = this.funcionarioDAO.getFuncionario(cpf, senha);
         if (usuario == null) {
-            JOptionPane.showMessageDialog(null, "CPF e/ou senha incorrentos ou o usuário não existe.");
-        } else if (usuario.getClass().equals(Cliente.class)) {
-            JOptionPane.showMessageDialog(null, "Cliente view não foi implementada ainda!");
+            JOptionPane.showMessageDialog(null, "CPF e/ou senha incorrentos ou o funcionário não existe.");
+        } else if (usuario.getClass().equals(Vendedor.class)) {
+            JOptionPane.showMessageDialog(null, "Vendedor view não foi implementada ainda!");
         } else if (usuario.getClass().equals(Admin.class)) {
             AdminView adminView = new AdminView();
             adminView.setVisible(true);

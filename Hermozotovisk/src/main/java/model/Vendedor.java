@@ -4,13 +4,14 @@
  */
 package model;
 
+/**
+ *
+ * @author luizportel4
+ */
+public class Vendedor extends Funcionario {
 
-import interfaces.IFuncionario;
-
-
-public class Admin extends Funcionario {
-
-    public Admin(String nome, String cpf, String senha) {
+    public Vendedor(String nome, String cpf, String senha) {
         super(nome, cpf, senha);
     }
+    
 }

@@ -6,7 +6,7 @@ import model.Categoria;
 import model.Produto;
 import java.util.List;
 import java.util.ArrayList;
-import repository.UsuarioRepository;
+import repository.FuncionarioRepository;
 
 /**
  *
@@ -14,7 +14,6 @@ import repository.UsuarioRepository;
  */
 public class AdminView extends javax.swing.JFrame implements Controle {
     
-    private List<Produto> produtos;
     private List<Categoria> categorias;
     private ProdutoDAO produtoDAO;
     /**    
@@ -22,7 +21,6 @@ public class AdminView extends javax.swing.JFrame implements Controle {
      * Creates new form MainView
      */
     public AdminView(){
-        this.produtos = new ArrayList<>();
         this.categorias = new ArrayList<>();
         this.produtoDAO = new ProdutoDAO();
         
@@ -32,10 +30,6 @@ public class AdminView extends javax.swing.JFrame implements Controle {
     
     public List<Categoria> getCategorias(){
         return this.categorias;
-    }
-    
-    public List<Produto> getProdutos(){
-        return this.produtos;
     }
     
     public ProdutoDAO getProdutoDAO() {
@@ -162,7 +156,7 @@ public class AdminView extends javax.swing.JFrame implements Controle {
 
     @Override
     public Produto buscarProdutoPorNome(String nome) {
-        for(Produto p: produtos){
+        for(Produto p: this.produtoDAO.getProdutos()){
             if(nome.equals(p.getNome())){
                 return p;
             }

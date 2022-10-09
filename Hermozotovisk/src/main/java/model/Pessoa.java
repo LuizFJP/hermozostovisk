@@ -14,10 +14,9 @@ public abstract class Pessoa implements IPessoa {
     protected String cpf;
     protected String senha;
 
-    public Pessoa(String nome, String cpf, String senha) {
+    public Pessoa(String nome, String cpf) {
         this.nome = nome;
         this.cpf = cpf;
-        this.senha = senha;
     }
 
     @Override
@@ -28,14 +27,4 @@ public abstract class Pessoa implements IPessoa {
 
     @Override
     public abstract void setNome(String nome);
-   
-    
-    @Override
-    public boolean checarSenha(String senha) {
-        if (senha.equals(this.senha)) {
-            return true;
-        } 
-        return false;
-    }
-
 }
