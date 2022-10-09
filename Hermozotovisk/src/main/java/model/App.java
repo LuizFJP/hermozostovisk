@@ -1,6 +1,7 @@
-package br.udesc.prog2.hermozostoviski.model;
+package model;
 
-import br.udesc.prog2.hermozostoviski.view.MainView;
+import view.AdminView;
+import view.LoginView;
 
 
 
@@ -12,8 +13,8 @@ public class App {
     public static void main(String[] args) {
 //        CadastroProdutoView cadastro = new CadastroProdutoView();
 //        cadastro.setVisible(true);
-        MainView main = new MainView();
-        main.setVisible(true);
+        LoginView login = new LoginView();
+        login.setVisible(true);
         
     }
 }

@@ -1,6 +1,6 @@
-package br.udesc.prog2.hermozostoviski.view;
+package view;
 
-import br.udesc.prog2.hermozostoviski.model.Produto;
+import model.Produto;
 import javax.swing.JOptionPane;
 
 /**
@@ -9,11 +9,11 @@ import javax.swing.JOptionPane;
  */
 
 public class RelatorioProdutoView extends javax.swing.JFrame {
-    private MainView main;
+    private AdminView main;
     /**
      * Creates new form RelatorioProdutosView
      */
-    public RelatorioProdutoView(MainView main) {
+    public RelatorioProdutoView(AdminView main) {
         this.main = main;
         
         initComponents();

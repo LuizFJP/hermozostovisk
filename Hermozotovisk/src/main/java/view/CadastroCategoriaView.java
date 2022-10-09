@@ -1,6 +1,6 @@
-package br.udesc.prog2.hermozostoviski.view;
+package view;
 
-import br.udesc.prog2.hermozostoviski.model.Categoria;
+import model.Categoria;
 import javax.swing.JOptionPane;
 
 /**
@@ -8,12 +8,12 @@ import javax.swing.JOptionPane;
  * @author Gustavo
  */
 public class CadastroCategoriaView extends javax.swing.JFrame {
-    private MainView main;
+    private AdminView main;
     /**
      * Creates new form CadastroCategoriaView
      * @param main
      */
-    public CadastroCategoriaView(MainView main) {
+    public CadastroCategoriaView(AdminView main) {
         this.main = main;
         initComponents();
     }

@@ -1,27 +1,30 @@
-package br.udesc.prog2.hermozostoviski.view;
+package view;
 
-import br.udesc.prog2.hermozostoviski.controller.Controle;
-import br.udesc.prog2.hermozostoviski.model.Categoria;
-import br.udesc.prog2.hermozostoviski.model.Produto;
+import controller.Controle;
+import dao.ProdutoDAO;
+import model.Categoria;
+import model.Produto;
 import java.util.List;
 import java.util.ArrayList;
-import javax.swing.table.DefaultTableModel;
+import repository.UsuarioRepository;
 
 /**
  *
  * @author Gustavo
  */
-public class MainView extends javax.swing.JFrame implements Controle {
+public class AdminView extends javax.swing.JFrame implements Controle {
     
     private List<Produto> produtos;
     private List<Categoria> categorias;
-    
+    private ProdutoDAO produtoDAO;
+    /**    
     /**
      * Creates new form MainView
      */
-    public MainView(){
-        this.produtos = new ArrayList<Produto>();
-        this.categorias = new ArrayList<Categoria>();
+    public AdminView(){
+        this.produtos = new ArrayList<>();
+        this.categorias = new ArrayList<>();
+        this.produtoDAO = new ProdutoDAO();
         
         initComponents();
         this.setTitle("LGC - HermosoStovisk");
@@ -33,6 +36,10 @@ public class MainView extends javax.swing.JFrame implements Controle {
     
     public List<Produto> getProdutos(){
         return this.produtos;
+    }
+    
+    public ProdutoDAO getProdutoDAO() {
+        return this.produtoDAO;
     }
     
     /**
