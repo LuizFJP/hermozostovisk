@@ -87,7 +87,8 @@ public class CadastroCategoriaView extends javax.swing.JFrame {
         Categoria cat = new Categoria(codigo, nome);
         this.main.getCategorias().add(cat);
         JOptionPane.showMessageDialog(null, "Categoria Cadastrada!");
-        
+        main.limparCampos(tfNomeCategoria);
+        main.limparCampos(tfCodigoCategoria);
     }//GEN-LAST:event_btCadastrarActionPerformed
 
     /**

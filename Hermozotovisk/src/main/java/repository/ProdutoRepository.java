@@ -26,4 +26,8 @@ public class ProdutoRepository {
     public List<Produto> getProdutos() {
         return this.produtos;
     }
+    
+    public void removeProduto(Produto produto){
+        this.produtos.remove(produto);
+    }
 }

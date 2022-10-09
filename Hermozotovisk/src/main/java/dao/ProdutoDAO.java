@@ -23,4 +23,7 @@ public class ProdutoDAO {
     public List<Produto> getProdutos() {
         return this.produtoRepository.getProdutos();
     }
+    public void removeProduto(Produto produto){
+        this.produtoRepository.removeProduto(produto);
+    }
 }

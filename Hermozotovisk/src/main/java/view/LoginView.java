@@ -40,7 +40,7 @@ public class LoginView extends javax.swing.JFrame {
         bttEntrar = new javax.swing.JButton();
         lbCadastro = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setText("CPF");
 
@@ -149,6 +149,7 @@ public class LoginView extends javax.swing.JFrame {
             AdminView adminView = new AdminView();
             adminView.setVisible(true);
         }
+        this.dispose();
     }//GEN-LAST:event_bttEntrarActionPerformed
 
     /**

@@ -6,42 +6,57 @@ import model.Categoria;
 import model.Produto;
 import java.util.List;
 import java.util.ArrayList;
-import repository.UsuarioRepository;
+import javax.swing.JTextField;
+import repository.ProdutoRepository;
 
 /**
  *
  * @author Gustavo
  */
 public class AdminView extends javax.swing.JFrame implements Controle {
-    
+
     private List<Produto> produtos;
     private List<Categoria> categorias;
     private ProdutoDAO produtoDAO;
-    /**    
+    private ProdutoRepository prodRepo;
+
     /**
+     * /**
      * Creates new form MainView
      */
-    public AdminView(){
+    public AdminView() {
         this.produtos = new ArrayList<>();
         this.categorias = new ArrayList<>();
         this.produtoDAO = new ProdutoDAO();
-        
+
         initComponents();
         this.setTitle("LGC - HermosoStovisk");
     }
-    
-    public List<Categoria> getCategorias(){
+
+    public List<Categoria> getCategorias() {
         return this.categorias;
     }
-    
-    public List<Produto> getProdutos(){
+
+    public List<Produto> getProdutos() {
         return this.produtos;
     }
-    
+
     public ProdutoDAO getProdutoDAO() {
         return this.produtoDAO;
     }
-    
+
+    public void limparCampos(JTextField text) {
+        text.setText("");
+    }
+    @Override
+    public Produto buscarProdutoPorNome(String nome) {
+        for (Produto p : this.produtoDAO.getProdutos()) {
+            if (nome.equals(p.getNome())) {
+                return p;
+            }
+        }
+        return null;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -147,7 +162,6 @@ public class AdminView extends javax.swing.JFrame implements Controle {
     /**
      * @param args the command line arguments
      */
-  
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar jMenuBar1;
@@ -160,13 +174,5 @@ public class AdminView extends javax.swing.JFrame implements Controle {
     private javax.swing.JMenuItem miRelatorioVenda;
     // End of variables declaration//GEN-END:variables
 
-    @Override
-    public Produto buscarProdutoPorNome(String nome) {
-        for(Produto p: produtos){
-            if(nome.equals(p.getNome())){
-                return p;
-            }
-        }
-        return null;
-    }
+    
 }
