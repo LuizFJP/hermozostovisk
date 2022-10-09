@@ -187,7 +187,7 @@ public class CadastroProdutoView extends javax.swing.JFrame {
         String descricao = tfDescricaoProduto.getText();
         String preco = tfPrecoProduto.getText();
         String categoria = (String) cbCategoria.getSelectedItem();
-        Produto prod = new Produto(nome, preco, descricao, categoria);
+        Produto prod = new Produto(nome, Double.parseDouble(preco), descricao, categoria);
         this.produtoDAO.addProduto(prod);
         JOptionPane.showMessageDialog(null, "Produto Criado com Sucesso!");
 

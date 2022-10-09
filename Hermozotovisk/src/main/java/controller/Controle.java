@@ -8,4 +8,6 @@ import model.Produto;
  */
 public interface Controle {
     Produto buscarProdutoPorNome(String nome);
+    
+    Produto buscarProdutoPorCodigo(String codigo);
 }
