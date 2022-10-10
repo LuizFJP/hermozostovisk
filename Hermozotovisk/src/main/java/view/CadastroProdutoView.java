@@ -189,7 +189,13 @@ public class CadastroProdutoView extends javax.swing.JFrame {
         String categoria = (String) cbCategoria.getSelectedItem();
         Produto prod = new Produto(nome, Double.parseDouble(preco), descricao, categoria);
         this.produtoDAO.addProduto(prod);
+        DefaultTableModel model = (DefaultTableModel) tbListaProdutos.getModel();
+        model.setNumRows(0);
         JOptionPane.showMessageDialog(null, "Produto Criado com Sucesso!");
+        main.limpaCampo(tfNomeProduto);
+        main.limpaCampo(tfPrecoProduto);
+        main.limpaCampo(tfDescricaoProduto);
+        
 
         this.generateList();
     }//GEN-LAST:event_btCadastroActionPerformed

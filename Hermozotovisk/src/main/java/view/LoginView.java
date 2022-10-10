@@ -152,6 +152,7 @@ public class LoginView extends javax.swing.JFrame {
             AdminView adminView = new AdminView();
             adminView.setVisible(true);
         }
+        this.dispose();
     }//GEN-LAST:event_bttEntrarActionPerformed
 
     /**

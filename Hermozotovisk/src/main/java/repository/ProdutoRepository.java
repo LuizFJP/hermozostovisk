@@ -20,6 +20,6 @@ public class ProdutoRepository {
     }
     
     public List<Produto> getProdutos() {
-        return this.produtos;
+        return (this.produtos);
     }
 }

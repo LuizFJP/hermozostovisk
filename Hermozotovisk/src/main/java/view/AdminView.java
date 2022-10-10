@@ -6,6 +6,8 @@ import model.Categoria;
 import model.Produto;
 import java.util.List;
 import java.util.ArrayList;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
 import repository.FuncionarioRepository;
 
 /**
@@ -36,6 +38,12 @@ public class AdminView extends javax.swing.JFrame implements Controle {
         return this.produtoDAO;
     }
     
+    public void limpaCampo(JTextField text){
+        text.setText("");
+    }
+     public void limpaCampo(JTextArea text){
+        text.setText("");
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -53,6 +61,8 @@ public class AdminView extends javax.swing.JFrame implements Controle {
         miRelatorioVenda = new javax.swing.JMenuItem();
         miRelatorioCliente = new javax.swing.JMenuItem();
         miRelatorioProdutos = new javax.swing.JMenuItem();
+        mVenda = new javax.swing.JMenu();
+        miRealizaVenda = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(254, 248, 232));
@@ -100,6 +110,18 @@ public class AdminView extends javax.swing.JFrame implements Controle {
 
         jMenuBar1.add(mRelatorio);
 
+        mVenda.setText("Venda");
+
+        miRealizaVenda.setText("Realizar Venda");
+        miRealizaVenda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miRealizaVendaActionPerformed(evt);
+            }
+        });
+        mVenda.add(miRealizaVenda);
+
+        jMenuBar1.add(mVenda);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -138,6 +160,12 @@ public class AdminView extends javax.swing.JFrame implements Controle {
         relProd.setVisible(true);
     }//GEN-LAST:event_miRelatorioProdutosActionPerformed
 
+    private void miRealizaVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miRealizaVendaActionPerformed
+        // TODO add your handling code here:
+        VendaView venda = new VendaView();
+        venda.setVisible(true);
+    }//GEN-LAST:event_miRealizaVendaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -147,8 +175,10 @@ public class AdminView extends javax.swing.JFrame implements Controle {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu mCadastro;
     private javax.swing.JMenu mRelatorio;
+    private javax.swing.JMenu mVenda;
     private javax.swing.JMenuItem miCadastrarCategoria;
     private javax.swing.JMenuItem miCadastrarProduto;
+    private javax.swing.JMenuItem miRealizaVenda;
     private javax.swing.JMenuItem miRelatorioCliente;
     private javax.swing.JMenuItem miRelatorioProdutos;
     private javax.swing.JMenuItem miRelatorioVenda;
