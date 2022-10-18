@@ -1,2 +1,4 @@
-interfaces/IPessoa.class
+controller/Controle.class
 model/Produto.class
+model/Categoria.class
+view/VendaView.class

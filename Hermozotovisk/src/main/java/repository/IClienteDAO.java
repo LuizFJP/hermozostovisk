@@ -2,15 +2,16 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
  */
-package interfaces;
+package repository;
+
+import java.util.List;
+import model.Cliente;
 
 /**
  *
  * @author luizportel4
  */
-public interface IPessoa {
-    public String getNome();
-    public String getCPF();
-    public void setNome(String nome);
+public interface IClienteDAO {
+    public void addCliente(Cliente cliente);
+    public List<Cliente> getClientes();
 }
-
