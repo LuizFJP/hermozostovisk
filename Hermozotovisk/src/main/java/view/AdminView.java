@@ -162,4 +162,13 @@ public class AdminView extends javax.swing.JFrame implements Controle {
         }
         return null;
     }
+
+    @Override
+    public Produto buscarProdutoPorCodigo(String codigo) {
+        for (Produto p : this.produtoDAO.getProdutos()){
+            if(codigo.equals(p.getCodigo()))
+                return p;
+        }
+        return null;
+    }
 }
