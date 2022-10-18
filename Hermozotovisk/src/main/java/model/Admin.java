@@ -5,7 +5,7 @@
 package model;
 
 
-import interfaces.IFuncionario;
+import repository.IFuncionario;
 
 
 public class Admin extends Funcionario {

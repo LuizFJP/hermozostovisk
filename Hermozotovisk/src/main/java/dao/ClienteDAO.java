@@ -4,23 +4,26 @@
  */
 package dao;
 
+import java.util.ArrayList;
 import java.util.List;
 import model.Cliente;
-import model.Funcionario;
-import repository.ClienteRepository;
+import model.Pessoa;
+import repository.IClienteDAO;
 
 /**
  *
  * @author luizportel4
  */
-public class ClienteDAO {
-    private ClienteRepository clienteRepository;
+public class ClienteDAO implements IClienteDAO{
+    public static List<Cliente> clientes = new ArrayList<>();   
 
-    public ClienteDAO() {
-       this.clienteRepository = new ClienteRepository();
+    @Override
+    public void addCliente(Cliente cliente) {
+        clientes.add(cliente);
     }
- 
-    public void addCliente(Cliente usuario) {
-        this.clienteRepository.addCliente(usuario);
+
+    @Override
+    public List<Cliente> getClientes() {
+        return this.clientes;
     }
 }

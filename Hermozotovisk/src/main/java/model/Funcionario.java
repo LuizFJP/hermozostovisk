@@ -4,7 +4,7 @@
  */
 package model;
 
-import interfaces.IFuncionario;
+import repository.IFuncionario;
 
 /**
  *
