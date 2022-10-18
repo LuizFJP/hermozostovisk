@@ -21,6 +21,7 @@ public class LoginView extends javax.swing.JFrame {
  
     public LoginView() {
         initComponents();
+        this.setTitle("Realizar Login");
 
     }
 

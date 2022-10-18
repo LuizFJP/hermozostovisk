@@ -15,6 +15,7 @@ public class VendaView extends javax.swing.JFrame {
     
     public VendaView() {
         initComponents();
+        this.setTitle("Realizar Venda");
     }
 
     /**
@@ -54,7 +55,7 @@ public class VendaView extends javax.swing.JFrame {
         btCadCliente = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setText("Cod. Produto:");
 

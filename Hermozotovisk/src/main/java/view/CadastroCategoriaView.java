@@ -16,6 +16,7 @@ public class CadastroCategoriaView extends javax.swing.JFrame {
     public CadastroCategoriaView(AdminView main) {
         this.main = main;
         initComponents();
+        this.setTitle("Cadastrar Categoria");
     }
 
     /**
@@ -32,6 +33,8 @@ public class CadastroCategoriaView extends javax.swing.JFrame {
         tfCodigoCategoria = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         btCadastrar = new javax.swing.JButton();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         tfNomeCategoria.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 

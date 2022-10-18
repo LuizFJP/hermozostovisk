@@ -24,7 +24,9 @@ public class RelatorioProdutoView extends javax.swing.JFrame{
         for(Produto prod : this.produtoDAO.getProdutos()){
             taNome.append(prod.getNome() + "(" + prod.getCodigo() + ")");
             taNome.append("\n");
+            
         }
+        this.setTitle("Relatório de Produtos");
     }
     public String listaProdutos(){
         String buscarCat = tfBuscaCategoria.getText();
@@ -32,7 +34,6 @@ public class RelatorioProdutoView extends javax.swing.JFrame{
         for(Produto prod : this.produtoDAO.getProdutos()){
             if(prod.getCategoria().equals(buscarCat) && !buscarCat.isBlank()){
                 text += prod.getNome() + "\n";
-                
             }
         }
         return text;
@@ -62,6 +63,8 @@ public class RelatorioProdutoView extends javax.swing.JFrame{
         jScrollPane2 = new javax.swing.JScrollPane();
         taBuscaCat = new javax.swing.JTextArea();
 
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
         taNome.setEditable(false);
         taNome.setColumns(20);
         taNome.setLineWrap(true);
@@ -70,7 +73,7 @@ public class RelatorioProdutoView extends javax.swing.JFrame{
         jScrollPane1.setViewportView(taNome);
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel2.setText("Lista de Produtos");
+        jLabel2.setText("Lista de Produtos (preço maior para o menor)");
 
         taBusca.setEditable(false);
         taBusca.setColumns(20);
@@ -179,8 +182,6 @@ public class RelatorioProdutoView extends javax.swing.JFrame{
             main.limpaCampo(taBusca);
             taBusca.append(p.relatoBusca());
             main.limpaCampo(tfBuscarNome);
-        }else{
-            JOptionPane.showMessageDialog(null, "Produto não está no Sistema");
         }
     }//GEN-LAST:event_btBuscarActionPerformed
 

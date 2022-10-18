@@ -81,6 +81,8 @@ public class CadastroProdutoView extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
         tfPrecoProduto.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         lbTituloProduto.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N

@@ -6,12 +6,9 @@ import model.Categoria;
 import model.Produto;
 import java.util.List;
 import java.util.ArrayList;
-<<<<<<< HEAD
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import repository.FuncionarioRepository;
-=======
->>>>>>> fd86356dc4ed1f58ddc7c6e7b07d54fd8b82d8ea
+
 
 /**
  *
@@ -66,6 +63,9 @@ public class AdminView extends javax.swing.JFrame implements Controle {
         miRelatorioProdutos = new javax.swing.JMenuItem();
         mVenda = new javax.swing.JMenu();
         miRealizaVenda = new javax.swing.JMenuItem();
+        mRemover = new javax.swing.JMenu();
+        miRemoverCliente = new javax.swing.JMenuItem();
+        miRemoverProduto = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(254, 248, 232));
@@ -125,6 +125,16 @@ public class AdminView extends javax.swing.JFrame implements Controle {
 
         jMenuBar1.add(mVenda);
 
+        mRemover.setText("Remover");
+
+        miRemoverCliente.setText("Remover Cliente");
+        mRemover.add(miRemoverCliente);
+
+        miRemoverProduto.setText("Remover Produto");
+        mRemover.add(miRemoverProduto);
+
+        jMenuBar1.add(mRemover);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -178,6 +188,7 @@ public class AdminView extends javax.swing.JFrame implements Controle {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu mCadastro;
     private javax.swing.JMenu mRelatorio;
+    private javax.swing.JMenu mRemover;
     private javax.swing.JMenu mVenda;
     private javax.swing.JMenuItem miCadastrarCategoria;
     private javax.swing.JMenuItem miCadastrarProduto;
@@ -185,6 +196,8 @@ public class AdminView extends javax.swing.JFrame implements Controle {
     private javax.swing.JMenuItem miRelatorioCliente;
     private javax.swing.JMenuItem miRelatorioProdutos;
     private javax.swing.JMenuItem miRelatorioVenda;
+    private javax.swing.JMenuItem miRemoverCliente;
+    private javax.swing.JMenuItem miRemoverProduto;
     // End of variables declaration//GEN-END:variables
 
     @Override

@@ -17,6 +17,7 @@ public class CadClienteView extends javax.swing.JFrame {
     public CadClienteView(LoginView main) {
         this.main = main;
         initComponents();
+        this.setTitle("Cadastrar Cliente");
     }
 
     /**
@@ -37,7 +38,7 @@ public class CadClienteView extends javax.swing.JFrame {
         btSalvar = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         tfNome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

@@ -12,7 +12,7 @@ import model.Produto;
  *
  * @author luizportel4
  */
-public class ProdutoDAO {
+public class ProdutoDAO{
     public static List<Produto> produtos = new ArrayList<>();
     
     public void addProduto(Produto produto) {
@@ -22,4 +22,11 @@ public class ProdutoDAO {
     public List<Produto> getProdutos() {
         return produtos;
     }
+    public void removeProduto(Produto produto){
+        produtos.remove(produto);
+    }
+
+
+
+    
 }
