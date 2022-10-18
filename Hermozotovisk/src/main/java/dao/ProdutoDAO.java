@@ -7,20 +7,19 @@ package dao;
 import java.util.ArrayList;
 import java.util.List;
 import model.Produto;
-import repository.ProdutoRepository;
 
 /**
  *
  * @author luizportel4
  */
 public class ProdutoDAO {
-    ProdutoRepository produtoRepository = new ProdutoRepository();
+    public static List<Produto> produtos = new ArrayList<>();
     
     public void addProduto(Produto produto) {
-        this.produtoRepository.addProduct(produto);
+        produtos.add(produto);
     }
     
     public List<Produto> getProdutos() {
-        return this.produtoRepository.getProdutos();
+        return produtos;
     }
 }

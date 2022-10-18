@@ -4,7 +4,7 @@ import dao.ClienteDAO;
 import dao.FuncionarioDAO;
 import javax.swing.JOptionPane;
 import model.Admin;
-import model.Pessoa;
+import model.Funcionario;
 import model.Vendedor;
 
 /**
@@ -16,12 +16,10 @@ public class LoginView extends javax.swing.JFrame {
     /**
      * Creates new form LoginView
      */
-    protected FuncionarioDAO funcionarioDAO;
-    protected ClienteDAO clienteDAO;
-
+    protected FuncionarioDAO funcionarioDAO = new FuncionarioDAO();
+    protected ClienteDAO clienteDAO = new ClienteDAO();
+ 
     public LoginView() {
-        this.funcionarioDAO = new FuncionarioDAO();
-        this.clienteDAO = new ClienteDAO();
         initComponents();
 
     }
@@ -143,7 +141,7 @@ public class LoginView extends javax.swing.JFrame {
         // TODO add your handling code here:
         String cpf = tfCPF.getText();
         String senha = tfSenha.getText();
-        Pessoa usuario = this.funcionarioDAO.getFuncionario(cpf, senha);
+        Funcionario usuario = this.funcionarioDAO.findFuncionario(cpf, senha);
         if (usuario == null) {
             JOptionPane.showMessageDialog(null, "CPF e/ou senha incorrentos ou o funcionário não existe.");
         } else if (usuario.getClass().equals(Vendedor.class)) {

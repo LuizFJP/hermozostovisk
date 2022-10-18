@@ -6,7 +6,6 @@ import model.Categoria;
 import model.Produto;
 import java.util.List;
 import java.util.ArrayList;
-import repository.FuncionarioRepository;
 
 /**
  *
@@ -15,14 +14,14 @@ import repository.FuncionarioRepository;
 public class AdminView extends javax.swing.JFrame implements Controle {
     
     private List<Categoria> categorias;
-    private ProdutoDAO produtoDAO;
+    private ProdutoDAO produtoDAO = new ProdutoDAO();;
     /**    
     /**
      * Creates new form MainView
      */
     public AdminView(){
         this.categorias = new ArrayList<>();
-        this.produtoDAO = new ProdutoDAO();
+
         
         initComponents();
         this.setTitle("LGC - HermosoStovisk");
