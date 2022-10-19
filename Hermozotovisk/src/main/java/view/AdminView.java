@@ -186,9 +186,10 @@ public class AdminView extends javax.swing.JFrame implements Controle {
 
     private void miRemoverProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miRemoverProdutoActionPerformed
         // TODO add your handling code here:
+
       RemoverProdutoView remProd = new RemoverProdutoView();
       remProd.setVisible(true);
-        
+
     }//GEN-LAST:event_miRemoverProdutoActionPerformed
 
     /**

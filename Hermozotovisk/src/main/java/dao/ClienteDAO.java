@@ -24,6 +24,21 @@ public class ClienteDAO implements IClienteDAO{
 
     @Override
     public List<Cliente> getClientes() {
-        return this.clientes;
+        return clientes;
+    }
+
+    @Override
+    public Cliente getClienteCPF(String cpf) {
+        for (Cliente cliente : clientes) {
+            if(cliente.getCPF().equals(cpf)) {
+                return cliente;
+            }
+        }
+        return null;
+    }
+    
+    @Override
+    public void removeClient(int i) {
+        clientes.remove(i);
     }
 }
