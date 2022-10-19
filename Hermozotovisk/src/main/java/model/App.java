@@ -2,7 +2,7 @@ package model;
 
 import view.AdminView;
 import view.LoginView;
-
+import repository.IFuncionarioDAO;
 
 
 /**
@@ -15,6 +15,9 @@ public class App {
 //        cadastro.setVisible(true);
         LoginView login = new LoginView();
         login.setVisible(true);
+        
+        
+        
         
     }
 }

@@ -1,5 +1,6 @@
 package view;
 
+import dao.ClienteDAO;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import model.Produto;
@@ -10,7 +11,9 @@ import model.Produto;
  */
 public class VendaView extends javax.swing.JFrame {
 
+    private ClienteDAO clienteDAO = new ClienteDAO();
     private AdminView main = new AdminView();
+    
     DefaultListModel listaProdutos = new DefaultListModel();
     
     public VendaView() {
@@ -26,6 +29,8 @@ public class VendaView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jList1 = new javax.swing.JList<>();
         jLabel1 = new javax.swing.JLabel();
         tfNomeProduto = new javax.swing.JTextField();
         tfCodigo = new javax.swing.JTextField();
@@ -53,6 +58,13 @@ public class VendaView extends javax.swing.JFrame {
         btRemover = new javax.swing.JButton();
         btCadCliente = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
+
+        jList1.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane1.setViewportView(jList1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -241,9 +253,9 @@ public class VendaView extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(tfCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btPesquisar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(tfCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -310,7 +322,8 @@ public class VendaView extends javax.swing.JFrame {
     }//GEN-LAST:event_tfQuantidadeActionPerformed
 
     private void btCadClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadClienteActionPerformed
-     
+        CadClienteView cadastroClienteView = new CadClienteView();
+        cadastroClienteView.setVisible(true);
     }//GEN-LAST:event_btCadClienteActionPerformed
 
     private void btPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPesquisarActionPerformed
@@ -353,11 +366,13 @@ public class VendaView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JList<String> jList1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JList<String> ltClientes;
-    private javax.swing.JList<String> ltProdutos;
+    private javax.swing.JList<Produto> ltProdutos;
     private javax.swing.JTable tbProdutos;
     private javax.swing.JTextField tfCPF;
     private javax.swing.JTextField tfCodigo;

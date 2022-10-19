@@ -9,6 +9,7 @@ import java.util.List;
 import model.Admin;
 import model.Funcionario;
 import model.Pessoa;
+import model.Vendedor;
 import repository.IFuncionarioDAO;
 
 /**
@@ -19,7 +20,8 @@ public class FuncionarioDAO implements IFuncionarioDAO {
     public static List<Funcionario> funcionarios = new ArrayList<>();
 
     public FuncionarioDAO() {
-        this.populateAdmin();  
+        this.populateAdmin();
+        this.populateVendedor();
     }
 
     @Override
@@ -49,6 +51,15 @@ public class FuncionarioDAO implements IFuncionarioDAO {
         };
         for (Admin admin : admins) {
             funcionarios.add(admin);
+        }
+    }
+    
+    private void populateVendedor() {
+        Vendedor[] vendors = {
+            new Vendedor("Josias", "11", "123"),
+        };
+        for (Vendedor v : vendors) {
+            funcionarios.add(v);
         }
     }
 }

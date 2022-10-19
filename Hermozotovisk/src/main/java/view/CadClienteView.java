@@ -1,5 +1,6 @@
 package view;
 
+import dao.ClienteDAO;
 import javax.swing.JOptionPane;
 import model.Cliente;
 
@@ -9,13 +10,11 @@ import model.Cliente;
  */
 public class CadClienteView extends javax.swing.JFrame {
 
-    LoginView main;
-
+    private ClienteDAO clienteDAO = new ClienteDAO();
     /**
      * Creates new form CadClienteView
      */
-    public CadClienteView(LoginView main) {
-        this.main = main;
+    public CadClienteView() {
         initComponents();
     }
 
@@ -37,7 +36,7 @@ public class CadClienteView extends javax.swing.JFrame {
         btSalvar = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         tfNome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -129,7 +128,7 @@ public class CadClienteView extends javax.swing.JFrame {
     private void btSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSalvarActionPerformed
         // TODO add your handling code here:
         Cliente cliente = new Cliente(tfNome.getText(), tfCPF.getText(), tfEndereco.getText());
-        this.main.clienteDAO.addCliente(cliente);
+        clienteDAO.addCliente(cliente);
         JOptionPane.showMessageDialog(null, "Cliente Cadastrado!");
         dispose();
     }//GEN-LAST:event_btSalvarActionPerformed
