@@ -6,10 +6,11 @@ package model;
  */
 public class ItemProduto extends Produto{
 
-    private int quantidade;
+    public Integer quantidade;
     
-    public ItemProduto(String nome, double preco, String descricao, String categoria) {
+    public ItemProduto(String nome, double preco, String descricao, String categoria, Integer quantidade) {
         super(nome, preco, descricao, categoria);
+        this.quantidade = quantidade;
     }
 
     @Override
@@ -48,12 +49,7 @@ public class ItemProduto extends Produto{
     }
 
     @Override
-    public void setCodigo(String codigo) {
-        super.setCodigo(codigo); 
-    }
-
-    @Override
-    public String getCodigo() {
+    public int getCodigo() {
         return super.getCodigo();
     }
 
@@ -66,4 +62,8 @@ public class ItemProduto extends Produto{
     public String getNome() {
         return super.getNome();
     } 
+    
+    public Integer getQuantidade(){
+        return this.quantidade;
+    }
 }

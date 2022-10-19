@@ -38,9 +38,7 @@ public class CadastroProdutoView extends javax.swing.JFrame {
                 pDAO.getNome(), pDAO.getCategoria(), pDAO.getPreco(), pDAO.getDescricao()
             };
             model.addRow(data);
-
         }
-
     }
 
     /**
@@ -67,6 +65,8 @@ public class CadastroProdutoView extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         tbListaProdutos = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
+        tfQuantidade = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -80,6 +80,8 @@ public class CadastroProdutoView extends javax.swing.JFrame {
             }
         ));
         jScrollPane1.setViewportView(jTable1);
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         tfPrecoProduto.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
@@ -117,23 +119,30 @@ public class CadastroProdutoView extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel3.setText("Lista de Produtos");
 
+        jLabel4.setText("Quantidade");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(52, 52, 52)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(tfPrecoProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel2)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(tfDescricaoProduto, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(cbCategoria, javax.swing.GroupLayout.Alignment.LEADING, 0, 180, Short.MAX_VALUE)
-                        .addComponent(lbNomeCategoria, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(tfNomeProduto, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
-                        .addComponent(lbNomeProduto, javax.swing.GroupLayout.Alignment.LEADING))
-                    .addComponent(btCadastro))
+                    .addComponent(tfDescricaoProduto)
+                    .addComponent(cbCategoria, 0, 180, Short.MAX_VALUE)
+                    .addComponent(lbNomeCategoria)
+                    .addComponent(tfNomeProduto, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
+                    .addComponent(lbNomeProduto)
+                    .addComponent(btCadastro)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tfPrecoProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tfQuantidade)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -160,14 +169,18 @@ public class CadastroProdutoView extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(tfNomeProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 30, Short.MAX_VALUE)
+                        .addGap(18, 29, Short.MAX_VALUE)
                         .addComponent(lbNomeCategoria)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cbCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel1)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel4))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(tfPrecoProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(tfPrecoProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tfQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -187,10 +200,23 @@ public class CadastroProdutoView extends javax.swing.JFrame {
         String descricao = tfDescricaoProduto.getText();
         String preco = tfPrecoProduto.getText();
         String categoria = (String) cbCategoria.getSelectedItem();
-        Produto prod = new Produto(nome, Double.parseDouble(preco), descricao, categoria);
+        String quantidade = tfQuantidade.getText();
+        
+        Produto prod;
+        if (quantidade.isBlank())
+            prod = new Produto(nome, Double.parseDouble(preco), descricao, categoria);
+        else
+            prod = new Produto(nome, Double.parseDouble(preco), descricao, categoria, Integer.parseInt(quantidade));
         this.produtoDAO.addProduto(prod);
+        
+        DefaultTableModel model = (DefaultTableModel) tbListaProdutos.getModel();
+        model.setNumRows(0);
         JOptionPane.showMessageDialog(null, "Produto Criado com Sucesso!");
-
+        main.limpaCampo(tfNomeProduto);
+        main.limpaCampo(tfPrecoProduto);
+        main.limpaCampo(tfDescricaoProduto);
+        main.limpaCampo(tfQuantidade);
+        
         this.generateList();
     }//GEN-LAST:event_btCadastroActionPerformed
 
@@ -204,6 +230,7 @@ public class CadastroProdutoView extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
@@ -214,5 +241,6 @@ public class CadastroProdutoView extends javax.swing.JFrame {
     private javax.swing.JTextField tfDescricaoProduto;
     private javax.swing.JTextField tfNomeProduto;
     private javax.swing.JTextField tfPrecoProduto;
+    private javax.swing.JTextField tfQuantidade;
     // End of variables declaration//GEN-END:variables
 }

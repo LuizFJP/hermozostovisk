@@ -6,18 +6,32 @@ package model;
  */
 public class Produto{
     private String nome;
-    private String codigo;
+    private int codigo;
     private double preco;
     private String categoria;
     private String descricao;
+    private static int codigoProduto = 1;
+    public Integer quantidade;
 
     public Produto(String nome, double preco, String descricao, String categoria) {
         this.nome = nome;
         this.descricao = descricao;
         this.preco = preco;
         this.categoria = categoria;
+        this.codigo = Produto.codigoProduto;
+        Produto.codigoProduto += 1;
     }
 
+    public Produto(String nome, double preco, String descricao, String categoria, Integer quantidade) {
+        this.nome = nome;
+        this.descricao = descricao;
+        this.preco = preco;
+        this.categoria = categoria;
+        this.codigo = Produto.codigoProduto;
+        Produto.codigoProduto += 1;
+        this.quantidade = quantidade;
+    }
+    
     public String getNome() {
         return nome;
     }
@@ -27,15 +41,10 @@ public class Produto{
         this.nome = nome;
     }
 
-    public String getCodigo() {
-        return codigo;
+    public int getCodigo(){
+        return this.codigo;
     }
-
-    public void setCodigo(String codigo) {
-        if (!codigo.isBlank())
-        this.codigo = codigo;
-    }
-
+    
     public double getPreco() {
         return preco;
     }
@@ -53,16 +62,19 @@ public class Produto{
         return descricao;
     }
 
+    public Integer getQuantidade(){
+        return quantidade;
+    }
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
 
     @Override
     public String toString() {
-        return " " + nome + " R$" + preco + " " + descricao + " " + getCategoria() + "\n";
+        return " " + nome + " - R$" + preco + " - Em estoque: " + quantidade;
     }
     public String relatoBusca(){
-        return "Nome: " + getNome() + "\nPreço: R$" + getPreco() + "\nDescrição: " + getDescricao() + "\nCategoria: " + getCategoria() + "\n";
+        return "Nome: " + getNome() + "\nPreço: R$" + getPreco() + "\nDescrição: " + getDescricao() + "\nCategoria: " + getCategoria() + "\nCodigo: " + getCodigo() + "\n";
                 
     } 
 }
