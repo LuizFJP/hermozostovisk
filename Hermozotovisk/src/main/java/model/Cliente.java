@@ -33,4 +33,8 @@ public class Cliente extends Pessoa {
     public void setNome(String nome) {
         this.nome = nome;
     }
+    
+    public void removeClient(String cpf) {
+        
+    }
 }

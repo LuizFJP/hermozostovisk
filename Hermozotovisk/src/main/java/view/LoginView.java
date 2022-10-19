@@ -39,7 +39,6 @@ public class LoginView extends javax.swing.JFrame {
         tfCPF = new javax.swing.JTextField();
         lbEsqueci = new javax.swing.JLabel();
         bttEntrar = new javax.swing.JButton();
-        lbCadastro = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -68,14 +67,6 @@ public class LoginView extends javax.swing.JFrame {
             }
         });
 
-        lbCadastro.setFont(new java.awt.Font("Garuda", 0, 12)); // NOI18N
-        lbCadastro.setText("Não é cadastrado? Clique aqui.");
-        lbCadastro.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lbCadastroMouseClicked(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -93,8 +84,7 @@ public class LoginView extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(tfCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(tfSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(lbEsqueci, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lbCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(lbEsqueci, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(78, 78, 78))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(bttEntrar)
@@ -113,9 +103,7 @@ public class LoginView extends javax.swing.JFrame {
                     .addComponent(jLabel2))
                 .addGap(37, 37, 37)
                 .addComponent(lbEsqueci)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lbCadastro)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 74, Short.MAX_VALUE)
                 .addComponent(bttEntrar)
                 .addGap(36, 36, 36))
         );
@@ -130,12 +118,6 @@ public class LoginView extends javax.swing.JFrame {
     private void lbEsqueciMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbEsqueciMouseClicked
         JOptionPane.showMessageDialog(null, "Que pena!");
     }//GEN-LAST:event_lbEsqueciMouseClicked
-
-    private void lbCadastroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbCadastroMouseClicked
-        // TODO add your handling code here:
-        CadClienteView cadCliente = new CadClienteView(this);
-        cadCliente.setVisible(true);
-    }//GEN-LAST:event_lbCadastroMouseClicked
 
     private void bttEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttEntrarActionPerformed
         // TODO add your handling code here:
@@ -160,7 +142,6 @@ public class LoginView extends javax.swing.JFrame {
     private javax.swing.JButton bttEntrar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel lbCadastro;
     private javax.swing.JLabel lbEsqueci;
     private javax.swing.JTextField tfCPF;
     private javax.swing.JTextField tfSenha;
