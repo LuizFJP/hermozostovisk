@@ -88,12 +88,19 @@ public class RemoverProdutoView extends javax.swing.JFrame {
 
     private void btRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRemoverActionPerformed
         // TODO add your handling code here:
-        String codigo = tfCodigoProduto.getText();
-        for(Produto pDAO : produtoDAO.getProdutos()){
-            if(pDAO.getCodigo() == Integer.parseInt(codigo)){
-                produtoDAO.removeProduto(pDAO);
-            }
-        }
+        
+            int codigo = Integer.parseInt(tfCodigoProduto.getText());
+            System.out.println(codigo);
+            produtoDAO.getProdutos();
+            System.out.println(produtoDAO.getProdutos());
+            for(Produto pDAO : produtoDAO.getProdutos()){
+                int codiguin = pDAO.getCodigo();
+                if(codiguin == codigo){
+                    produtoDAO.removeProduto(pDAO);
+                }
+             }
+            System.out.println(produtoDAO.getProdutos());
+       
     }//GEN-LAST:event_btRemoverActionPerformed
 
     /**
