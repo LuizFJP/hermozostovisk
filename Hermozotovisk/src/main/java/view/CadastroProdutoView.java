@@ -81,6 +81,8 @@ public class CadastroProdutoView extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
         tfPrecoProduto.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         lbTituloProduto.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -189,7 +191,13 @@ public class CadastroProdutoView extends javax.swing.JFrame {
         String categoria = (String) cbCategoria.getSelectedItem();
         Produto prod = new Produto(nome, Double.parseDouble(preco), descricao, categoria);
         this.produtoDAO.addProduto(prod);
+        DefaultTableModel model = (DefaultTableModel) tbListaProdutos.getModel();
+        model.setNumRows(0);
         JOptionPane.showMessageDialog(null, "Produto Criado com Sucesso!");
+        main.limpaCampo(tfNomeProduto);
+        main.limpaCampo(tfPrecoProduto);
+        main.limpaCampo(tfDescricaoProduto);
+        
 
         this.generateList();
     }//GEN-LAST:event_btCadastroActionPerformed

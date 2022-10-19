@@ -21,6 +21,7 @@ public class LoginView extends javax.swing.JFrame {
  
     public LoginView() {
         initComponents();
+        this.setTitle("Realizar Login");
 
     }
 
@@ -132,6 +133,7 @@ public class LoginView extends javax.swing.JFrame {
             AdminView adminView = new AdminView();
             adminView.setVisible(true);
         }
+        this.dispose();
     }//GEN-LAST:event_bttEntrarActionPerformed
 
     /**
