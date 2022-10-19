@@ -1,6 +1,7 @@
 package view;
 
 import dao.ProdutoDAO;
+import exceptions.CadastroException;
 import model.Categoria;
 import model.Produto;
 import javax.swing.JOptionPane;
@@ -189,6 +190,16 @@ public class CadastroProdutoView extends javax.swing.JFrame {
         String descricao = tfDescricaoProduto.getText();
         String preco = tfPrecoProduto.getText();
         String categoria = (String) cbCategoria.getSelectedItem();
+        Produto aux = null;
+        for(int i = 0; i < produtoDAO.getProdutos().size(); i++){
+            if(produtoDAO.getProdutos().get(i).getNome().equals(nome)){
+                aux = produtoDAO.getProdutos().get(i);
+            }
+        }
+        if(aux != null){
+        JOptionPane.showMessageDialog(null, "Error! Product Already Exist");
+        main.limpaCampo(tfNomeProduto);
+        }else{
         Produto prod = new Produto(nome, Double.parseDouble(preco), descricao, categoria);
         this.produtoDAO.addProduto(prod);
         DefaultTableModel model = (DefaultTableModel) tbListaProdutos.getModel();
@@ -197,9 +208,10 @@ public class CadastroProdutoView extends javax.swing.JFrame {
         main.limpaCampo(tfNomeProduto);
         main.limpaCampo(tfPrecoProduto);
         main.limpaCampo(tfDescricaoProduto);
-        
-
+       
         this.generateList();
+        }
+        
     }//GEN-LAST:event_btCadastroActionPerformed
 
     /**

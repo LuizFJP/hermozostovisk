@@ -15,5 +15,5 @@ public interface IClienteDAO {
     public void addCliente(Cliente cliente);
     public List<Cliente> getClientes();
     public Cliente getClienteCPF(String cpf);
-    public void removeClient(String cpf);
+    public void removeClient(int i);
 }

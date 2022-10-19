@@ -38,8 +38,7 @@ public class ClienteDAO implements IClienteDAO{
     }
     
     @Override
-    public void removeClient(String cpf) {
-        Cliente c = this.getClienteCPF(cpf);
-        clientes.remove(c);
+    public void removeClient(int i) {
+        clientes.remove(i);
     }
 }

@@ -57,7 +57,7 @@ public class Produto{
 
     @Override
     public String toString() {
-        return " " + nome + " R$" + preco + " " + descricao + " " + getCategoria() + "\n";
+        return " " + nome + " R$" + preco + " " + descricao + " " + getCategoria() + "\n" + "Código: " + getCodigo() + "\n";
     }
     public String relatoBusca(){
         return "Nome: " + getNome() + "\nPreço: R$" + getPreco() + "\nDescrição: " + getDescricao() + "\nCategoria: " + getCategoria() + "\nCodigo: " + getCodigo() + "\n";

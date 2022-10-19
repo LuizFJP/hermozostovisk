@@ -22,8 +22,11 @@ public class ProdutoDAO{
     public List<Produto> getProdutos() {
         return produtos;
     }
-    public void removeProduto(Produto produto){
-        produtos.remove(produto);
+    public void removeProduto(int i){
+        produtos.remove(i);
+    }
+    public void removeProduto(Produto prod){
+        produtos.remove(prod);
     }
 
 
