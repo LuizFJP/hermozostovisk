@@ -1,9 +1,10 @@
 package view;
 
 import dao.ProdutoDAO;
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import model.Produto;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -12,17 +13,19 @@ import javax.swing.JOptionPane;
 
 public class RelatorioProdutoView extends javax.swing.JFrame{
     private AdminView main;
-    private ProdutoDAO produtoDAO;
+    private ProdutoDAO produtoDAO = new ProdutoDAO();
     /**
      * Creates new form RelatorioProdutosView
      */
     public RelatorioProdutoView(AdminView main) {
         this.main = main;
-        this.produtoDAO = main.getProdutoDAO();
         
         initComponents();
-        for(Produto prod : this.produtoDAO.getProdutos()){
-            taNome.append(prod.getNome() + "(" + prod.getCodigo() + ")");
+        List<Produto> produtos = this.produtoDAO.getProdutos();
+        Collections.sort(produtos);
+        for(Produto prod : produtos){
+            
+            taNome.append("| cod: " + prod.getCodigo() + "| nome: " + prod.getNome() + "| preço: R$" + prod.getPreco());
             taNome.append("\n");
             
         }
