@@ -127,7 +127,7 @@ public class LoginView extends javax.swing.JFrame {
         if (usuario == null) {
             JOptionPane.showMessageDialog(null, "CPF e/ou senha incorrentos ou o funcionário não existe.");
         } else if (usuario instanceof Vendedor) {
-            VendaView vendaView = new VendaView();
+            VendaView vendaView = new VendaView(usuario);
             vendaView.setVisible(true);
         } else if (usuario instanceof Admin) {
             AdminView adminView = new AdminView();

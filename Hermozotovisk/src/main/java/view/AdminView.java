@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import model.Admin;
 
 
 /**
@@ -180,8 +181,8 @@ public class AdminView extends javax.swing.JFrame implements Controle {
 
     private void miRealizaVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miRealizaVendaActionPerformed
         // TODO add your handling code here:
-        VendaView venda = new VendaView();
-        venda.setVisible(true);
+        /*CarrinhoView venda = new CarrinhoView(usuario);
+        venda.setVisible(true);*/
     }//GEN-LAST:event_miRealizaVendaActionPerformed
 
     /**
