@@ -103,7 +103,9 @@ public class LoginView extends javax.swing.JFrame {
                     .addComponent(jLabel2))
                 .addGap(37, 37, 37)
                 .addComponent(lbEsqueci)
+
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
+
                 .addComponent(bttEntrar)
                 .addGap(36, 36, 36))
         );
@@ -118,6 +120,7 @@ public class LoginView extends javax.swing.JFrame {
     private void lbEsqueciMouseClicked(java.awt.event.MouseEvent evt) {                                       
         JOptionPane.showMessageDialog(null, "Que pena!");
     }                                      
+
 
     private void bttEntrarActionPerformed(java.awt.event.ActionEvent evt) {                                          
         // TODO add your handling code here:

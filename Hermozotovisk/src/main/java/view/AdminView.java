@@ -137,6 +137,11 @@ public class AdminView extends javax.swing.JFrame implements Controle {
         mRemover.add(miRemoverCliente);
 
         miRemoverProduto.setText("Remover Produto");
+        miRemoverProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miRemoverProdutoActionPerformed(evt);
+            }
+        });
         mRemover.add(miRemoverProduto);
 
         jMenuBar1.add(mRemover);
@@ -184,6 +189,14 @@ public class AdminView extends javax.swing.JFrame implements Controle {
         /*CarrinhoView venda = new CarrinhoView(usuario);
         venda.setVisible(true);*/
     }//GEN-LAST:event_miRealizaVendaActionPerformed
+
+    private void miRemoverProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miRemoverProdutoActionPerformed
+        // TODO add your handling code here:
+
+      RemoverProdutoView remProd = new RemoverProdutoView();
+      remProd.setVisible(true);
+
+    }//GEN-LAST:event_miRemoverProdutoActionPerformed
 
     /**
      * @param args the command line arguments

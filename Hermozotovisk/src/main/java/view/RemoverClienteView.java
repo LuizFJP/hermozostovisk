@@ -4,21 +4,20 @@
  */
 package view;
 
-import dao.ProdutoDAO;
-import model.Produto;
+import dao.ClienteDAO;
 
 /**
  *
  * @author sonho
  */
-public class RemoverProdutoView extends javax.swing.JFrame {
-    ProdutoDAO produtoDAO = new ProdutoDAO();
+public class RemoverClienteView extends javax.swing.JFrame {
+    ClienteDAO cliDAO = new ClienteDAO();
     /**
      * Creates new form RemoverProdutoView
      */
-    public RemoverProdutoView() {
+    public RemoverClienteView() {
         initComponents();
-        this.setTitle("Remover Produto");
+        this.setTitle("Remover Cliente");
     }
 
     /**
@@ -31,7 +30,7 @@ public class RemoverProdutoView extends javax.swing.JFrame {
     private void initComponents() {
 
         lbTitulo = new javax.swing.JLabel();
-        tfCodigoProduto = new javax.swing.JTextField();
+        tfCPF = new javax.swing.JTextField();
         lbInserirCodigo = new javax.swing.JLabel();
         btRemover = new javax.swing.JButton();
 
@@ -39,9 +38,9 @@ public class RemoverProdutoView extends javax.swing.JFrame {
 
         lbTitulo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lbTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lbTitulo.setText("Remover Produto");
+        lbTitulo.setText("Remover Cliente");
 
-        lbInserirCodigo.setText("Insira o código do produto");
+        lbInserirCodigo.setText("Insira o CPF do cliente");
 
         btRemover.setText("Remover");
         btRemover.addActionListener(new java.awt.event.ActionListener() {
@@ -66,8 +65,8 @@ public class RemoverProdutoView extends javax.swing.JFrame {
                         .addGap(38, 38, 38)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lbInserirCodigo)
-                            .addComponent(tfCodigoProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(198, Short.MAX_VALUE))
+                            .addComponent(tfCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(206, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -77,7 +76,7 @@ public class RemoverProdutoView extends javax.swing.JFrame {
                 .addGap(61, 61, 61)
                 .addComponent(lbInserirCodigo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tfCodigoProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(tfCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
                 .addComponent(btRemover)
                 .addGap(40, 40, 40))
@@ -88,12 +87,11 @@ public class RemoverProdutoView extends javax.swing.JFrame {
 
     private void btRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRemoverActionPerformed
         // TODO add your handling code here:
-
-        int codigo = Integer.parseInt(tfCodigoProduto.getText());
+        String cpf = tfCPF.getText();
         
-        for(int i = 0; i < produtoDAO.getProdutos().size(); i++){
-            if(produtoDAO.getProdutos().get(i).getCodigo() == codigo){
-                produtoDAO.removeProduto(i);
+        for(int i = 0; i < cliDAO.getClientes().size(); i++){
+            if(cliDAO.getClientes().get(i).getCPF().equals(cpf)){
+                cliDAO.removeClient(i);
             }
         }
     }//GEN-LAST:event_btRemoverActionPerformed
@@ -106,6 +104,6 @@ public class RemoverProdutoView extends javax.swing.JFrame {
     private javax.swing.JButton btRemover;
     private javax.swing.JLabel lbInserirCodigo;
     private javax.swing.JLabel lbTitulo;
-    private javax.swing.JTextField tfCodigoProduto;
+    private javax.swing.JTextField tfCPF;
     // End of variables declaration//GEN-END:variables
 }

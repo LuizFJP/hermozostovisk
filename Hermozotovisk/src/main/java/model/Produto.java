@@ -4,7 +4,9 @@ package model;
  *
  * @author Gustavo
  */
-public class Produto{
+public class Produto implements Comparable<Produto> {
+
+    
     private String nome;
     private int codigo;
     private double preco;
@@ -12,6 +14,17 @@ public class Produto{
     private String descricao;
     private static int codigoProduto = 1;
     public Integer quantidade;
+    
+    @Override
+    public int compareTo(Produto o) {
+        if(this.preco == o.preco) {
+            return 0;
+        } else if(this.preco < o.preco) {
+            return 1;
+        } else {
+            return -1;
+        }
+    }
 
     public Produto(String nome, double preco, String descricao, String categoria) {
         this.nome = nome;
@@ -71,6 +84,7 @@ public class Produto{
 
     @Override
     public String toString() {
+
         return " " + nome + " - R$" + preco + " - Em estoque: " + quantidade;
     }
     public String relatoBusca(){
