@@ -170,6 +170,8 @@ public class AdminView extends javax.swing.JFrame implements Controle {
 
     private void miRelatorioClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miRelatorioClienteActionPerformed
         // TODO add your handling code here:
+        RelatorioClienteView relCliente = new RelatorioClienteView();
+        relCliente.setVisible(true);
     }//GEN-LAST:event_miRelatorioClienteActionPerformed
 
     private void miCadastrarCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miCadastrarCategoriaActionPerformed
@@ -186,8 +188,6 @@ public class AdminView extends javax.swing.JFrame implements Controle {
 
     private void miRealizaVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miRealizaVendaActionPerformed
         // TODO add your handling code here:
-        /*CarrinhoView venda = new CarrinhoView(usuario);
-        venda.setVisible(true);*/
     }//GEN-LAST:event_miRealizaVendaActionPerformed
 
     private void miRemoverProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miRemoverProdutoActionPerformed

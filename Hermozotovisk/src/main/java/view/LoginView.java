@@ -20,6 +20,7 @@ public class LoginView extends javax.swing.JFrame {
     protected ClienteDAO clienteDAO = new ClienteDAO();
  
     public LoginView() {
+        this.setTitle("Realizar Login");
         initComponents();
 
     }

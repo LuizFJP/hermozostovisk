@@ -210,7 +210,7 @@ public class CadastroProdutoView extends javax.swing.JFrame {
             }
         }
         if(aux != null){
-        JOptionPane.showMessageDialog(null, "Error! Product Already Exist");
+        JOptionPane.showMessageDialog(null, "Produto já existe!");
         main.limpaCampo(tfNomeProduto);
         }else{
         Produto prod;

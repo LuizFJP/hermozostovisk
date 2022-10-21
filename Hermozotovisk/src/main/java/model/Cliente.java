@@ -37,4 +37,8 @@ public class Cliente extends Pessoa {
     public void removeClient(String cpf) {
         
     }
+    @Override
+    public String toString(){
+        return "Nome: " + this.getNome() + "\nEndereço: " + this.getEndereco() + "\nCPF: " + this.getCPF() + "\n";
+    }
 }

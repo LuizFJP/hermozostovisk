@@ -5,6 +5,7 @@
 package view;
 
 import dao.ClienteDAO;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -34,7 +35,7 @@ public class RemoverClienteView extends javax.swing.JFrame {
         lbInserirCodigo = new javax.swing.JLabel();
         btRemover = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         lbTitulo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lbTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -87,12 +88,18 @@ public class RemoverClienteView extends javax.swing.JFrame {
 
     private void btRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRemoverActionPerformed
         // TODO add your handling code here:
+        int confirmar = JOptionPane.showConfirmDialog(null, "Deseja excluir este cliente do banco de dados??", "Apagar Cliente", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if(confirmar == JOptionPane.YES_OPTION){
         String cpf = tfCPF.getText();
         
         for(int i = 0; i < cliDAO.getClientes().size(); i++){
             if(cliDAO.getClientes().get(i).getCPF().equals(cpf)){
                 cliDAO.removeClient(i);
             }
+        }
+        JOptionPane.showMessageDialog(null, "Cliente removido do banco de dados","Cliente Removido",JOptionPane.WARNING_MESSAGE); 
+     }else{
+            JOptionPane.showMessageDialog(null, "Operação cancelada", "Operação cancelada", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_btRemoverActionPerformed
 

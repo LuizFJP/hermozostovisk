@@ -430,12 +430,12 @@ public class VendaView extends javax.swing.JFrame {
         Produto item = ltProdutos.getSelectedValue();
         int quantidade = (int) spQuantidade.getValue();
         
-        if (quantidade <= 0 || quantidade > item.quantidade){
+        if (quantidade <= 0 || quantidade > item.getQuantidade()){
             main.mensagem("Quantidade invalida ou excedente");
         }
         else{
         DefaultTableModel model = (DefaultTableModel) tbProdutos.getModel();
-        model.addRow(new Object[]{item.getNome(), item.getCodigo(), quantidade, item.getPreco()*quantidade});
+        model.addRow(new Object[]{item.getNome(), item.getCodigo(), item.getQuantidade(), item.getPreco()*quantidade});
         atualizarTotal();
         ltProdutos.getSelectedValue().quantidade -= (int) spQuantidade.getValue();
         

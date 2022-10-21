@@ -63,6 +63,7 @@ public class ItemProduto extends Produto{
         return super.getNome();
     } 
     
+    @Override
     public Integer getQuantidade(){
         return this.quantidade;
     }

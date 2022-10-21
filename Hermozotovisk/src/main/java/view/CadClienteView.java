@@ -127,7 +127,7 @@ public class CadClienteView extends javax.swing.JFrame {
         // TODO add your handling code here:
         Cliente cliente = new Cliente(tfNome.getText(), tfCPF.getText(), tfEndereco.getText());
         clienteDAO.addCliente(cliente);
-        JOptionPane.showMessageDialog(null, "Cliente Cadastrado!");
+        JOptionPane.showMessageDialog(null, "Cliente Cadastrado!","Cadastro de cliente",JOptionPane.WARNING_MESSAGE);
         dispose();
     }//GEN-LAST:event_btSalvarActionPerformed
 

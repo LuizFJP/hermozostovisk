@@ -5,6 +5,7 @@
 package view;
 
 import dao.ProdutoDAO;
+import javax.swing.JOptionPane;
 import model.Produto;
 
 /**
@@ -13,6 +14,7 @@ import model.Produto;
  */
 public class RemoverProdutoView extends javax.swing.JFrame {
     ProdutoDAO produtoDAO = new ProdutoDAO();
+    private AdminView main;
     /**
      * Creates new form RemoverProdutoView
      */
@@ -35,7 +37,7 @@ public class RemoverProdutoView extends javax.swing.JFrame {
         lbInserirCodigo = new javax.swing.JLabel();
         btRemover = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         lbTitulo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lbTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -88,14 +90,19 @@ public class RemoverProdutoView extends javax.swing.JFrame {
 
     private void btRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRemoverActionPerformed
         // TODO add your handling code here:
-
-        int codigo = Integer.parseInt(tfCodigoProduto.getText());
-        
+        int confirmar = JOptionPane.showConfirmDialog(null, "Deseja remover o produto do estoque?", "Remover Produto", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if(confirmar == JOptionPane.YES_OPTION){
+           int codigo = Integer.parseInt(tfCodigoProduto.getText());
         for(int i = 0; i < produtoDAO.getProdutos().size(); i++){
             if(produtoDAO.getProdutos().get(i).getCodigo() == codigo){
                 produtoDAO.removeProduto(i);
             }
         }
+        JOptionPane.showMessageDialog(null, "Produto removido do estoque","Produto Removido",JOptionPane.WARNING_MESSAGE); 
+        }else{
+            JOptionPane.showMessageDialog(null, "Operação cancelada", "Operação cancelada", JOptionPane.WARNING_MESSAGE);
+        }
+        
     }//GEN-LAST:event_btRemoverActionPerformed
 
     /**
