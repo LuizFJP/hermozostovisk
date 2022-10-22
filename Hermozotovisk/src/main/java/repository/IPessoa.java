@@ -13,4 +13,3 @@ public interface IPessoa {
     public String getCPF();
     public void setNome(String nome);
 }
-

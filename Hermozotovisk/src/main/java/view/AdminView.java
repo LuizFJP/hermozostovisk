@@ -222,7 +222,7 @@ public class AdminView extends javax.swing.JFrame implements Controle {
     @Override
     public Produto buscarProdutoPorNome(String nome) {
         for(Produto p: this.produtoDAO.getProdutos()){
-            if(nome.equals(p.getNome())){
+            if(p.getNome().contains(nome)){
                 return p;
             }
         }
