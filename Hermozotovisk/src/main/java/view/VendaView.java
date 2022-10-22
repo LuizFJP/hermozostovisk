@@ -7,24 +7,26 @@ import javax.swing.table.DefaultTableModel;
 import model.Funcionario;
 import model.ItemProduto;
 import model.Produto;
-import controller.Busca;
+import dao.ProdutoDAO;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
-import java.util.stream.Collectors;
+import javax.swing.JOptionPane;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
 import model.Cliente;
+import controller.Controller;
 
 /**
  *
  * @author Nicolas
  */
-public class VendaView extends javax.swing.JFrame implements Busca {
+public class VendaView extends javax.swing.JFrame implements Controller {
 
+    private ProdutoDAO produtoDAO = new ProdutoDAO();
     private ClienteDAO clienteDAO = new ClienteDAO();
-    private AdminView main = new AdminView();
     private List<ItemProduto> pedido = new ArrayList();
     
     
@@ -425,7 +427,7 @@ public class VendaView extends javax.swing.JFrame implements Busca {
         int quantidade = (int) spQuantidade.getValue();
         
         if (quantidade <= 0 || quantidade > item.getQuantidade()){
-            main.mensagem("Quantidade invalida ou excedente");
+           mensagem("Quantidade invalida ou excedente");
         }
         else{
         inserirItemTabela(item, quantidade);
@@ -434,8 +436,8 @@ public class VendaView extends javax.swing.JFrame implements Busca {
         
         pedido.add(new ItemProduto(item.getNome(), item.getPreco(), item.getDescricao(), item.getCategoria(), quantidade));
         
-        main.limpaCampo(tfNomeProduto);
-        main.limpaCampo(tfCodigo);
+        limpaCampo(tfNomeProduto);
+        limpaCampo(tfCodigo);
         }
     }//GEN-LAST:event_btAdicionarActionPerformed
   
@@ -446,8 +448,8 @@ public class VendaView extends javax.swing.JFrame implements Busca {
 
     private void btPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPesquisarActionPerformed
         
-        Produto resultadoPorNome = main.buscarProdutoPorNome(tfNomeProduto.getText());
-        Produto resultadoPorCodigo = main.buscarProdutoPorCodigo(tfCodigo.getText());
+        Produto resultadoPorNome = buscarProdutoPorNome(tfNomeProduto.getText());
+        Produto resultadoPorCodigo = buscarProdutoPorCodigo(tfCodigo.getText());
         
         //APENAS A PESQUISA POR NOME ESTÁ FUNCIONANDO!
         
@@ -461,24 +463,21 @@ public class VendaView extends javax.swing.JFrame implements Busca {
             if (resultadoPorNome.equals(resultadoPorCodigo))
                 verificarEMostrar(resultadoPorNome);
             else {
-            main.mensagem("Não encotrado");
-            main.limpaCampo(tfNomeProduto);
-            main.limpaCampo(tfCodigo);
+            mensagem("Não encotrado");
+            limpaCampo(tfNomeProduto);
+            limpaCampo(tfCodigo);
             }
         }
     }//GEN-LAST:event_btPesquisarActionPerformed
 
     private void btRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRemoverActionPerformed
 
-        removerItemTabela();
-        
         ltProdutos.getSelectedValue().quantidade += (int) spQuantidade.getValue();
         for(ItemProduto item : pedido){
-            ItemProduto itemARemover = (ItemProduto) ltProdutos.getSelectedValue();
-            itemARemover.quantidade = item.quantidade;
-            if (itemARemover.equals(item))
-                    pedido.remove(item);
+            if(item.getNome().equals(tbProdutos.getValueAt(tbProdutos.getSelectedRow(), 0)))
+               pedido.remove(item);
         }
+        removerItemTabela();
     }//GEN-LAST:event_btRemoverActionPerformed
 
     private void btFecharPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btFecharPedidoActionPerformed
@@ -573,7 +572,7 @@ public class VendaView extends javax.swing.JFrame implements Busca {
     
     private void verificarEMostrar (Produto p){
         if (p == null)
-            main.mensagem("Não encontrado!");
+            mensagem("Não encontrado!");
         
         mostrarResultado(p);
     }
@@ -592,12 +591,21 @@ public class VendaView extends javax.swing.JFrame implements Busca {
     
     @Override
     public Produto buscarProdutoPorNome(String nome) { //todos precisam ser implementados
-       return null;
+       for(Produto p: produtoDAO.getProdutos()){
+            if(p.getNome().contains(nome)){
+                return p;
+            }
+        }
+        return null;
     }
 
     @Override
     public Produto buscarProdutoPorCodigo(String codigo) {
-       return null;
+       for (Produto p : this.produtoDAO.getProdutos()){
+            if(codigo.equals(p.getCodigo()))
+                return p;
+        }
+        return null;
     }
 
     @Override
@@ -616,5 +624,20 @@ public class VendaView extends javax.swing.JFrame implements Busca {
     public Cliente buscarClientePorCPF(String CPF) {
         Map<String, Cliente> clientes = (Map<String, Cliente>) clienteDAO.getClientes();
         return clientes.get(CPF);
+    }
+
+    @Override
+    public void mensagem(String mensagem) {
+         JOptionPane.showMessageDialog(null, mensagem);
+    }
+
+    @Override
+    public void limpaCampo(JTextField textField) {
+        textField.setText("");
+    }
+
+    @Override
+    public void limpaCampo(JTextArea textArea) {
+        textArea.setText("");
     }
 }

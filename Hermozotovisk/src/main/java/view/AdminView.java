@@ -10,14 +10,14 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import dao.ClienteDAO;
 import model.Cliente;
-import controller.Busca;
+import controller.Controller;
 
 
 /**
  *
  * @author Gustavo
  */
-public class AdminView extends javax.swing.JFrame implements Busca {
+public class AdminView extends javax.swing.JFrame implements Controller {
     
     private List<Categoria> categorias;
     private ProdutoDAO produtoDAO = new ProdutoDAO();
@@ -42,16 +42,17 @@ public class AdminView extends javax.swing.JFrame implements Busca {
         return this.produtoDAO;
     }
     
-    public void limpaCampo(JTextField text){
-        text.setText("");
-    }
-     public void limpaCampo(JTextArea text){
-        text.setText("");
+    @Override
+    public void limpaCampo(JTextField textField){
+        textField.setText("");
     }
      
-    public void mensagem(String mensagem){
-        JOptionPane.showMessageDialog(null, mensagem);
+    @Override
+    public void limpaCampo(JTextArea textArea){
+        textArea.setText("");
     }
+     
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -256,5 +257,10 @@ public class AdminView extends javax.swing.JFrame implements Busca {
                 return c;
         }
         return null;
+    }
+
+    @Override
+    public void mensagem(String mensagem) {
+          JOptionPane.showMessageDialog(null, mensagem);
     }
 }
