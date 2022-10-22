@@ -7,12 +7,14 @@ import javax.swing.table.DefaultTableModel;
 import model.Funcionario;
 import model.ItemProduto;
 import model.Produto;
+import controller.Busca;
+import model.Cliente;
 
 /**
  *
  * @author Nicolas
  */
-public class VendaView extends javax.swing.JFrame {
+public class VendaView extends javax.swing.JFrame implements Busca {
 
     private ClienteDAO clienteDAO = new ClienteDAO();
     private AdminView main = new AdminView();
@@ -586,4 +588,24 @@ public class VendaView extends javax.swing.JFrame {
     private javax.swing.JTextField tfNomeProduto;
     private javax.swing.JTextField tfTotal;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public Produto buscarProdutoPorNome(String nome) { //todos precisam ser implementados
+       return null;
+    }
+
+    @Override
+    public Produto buscarProdutoPorCodigo(String codigo) {
+       return null;
+    }
+
+    @Override
+    public Cliente buscarClientePorNome(String nome) {
+        return null;
+    }
+
+    @Override
+    public Cliente buscarClientePorCPF(String CPF) {
+       return null;
+    }
 }
