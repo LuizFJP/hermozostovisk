@@ -57,6 +57,7 @@ public class FuncionarioDAO implements IFuncionarioDAO {
     private void populateVendedor() {
         Vendedor[] vendors = {
             new Vendedor("Josias", "11", "123"),
+            new Vendedor("Geroncia", "12", "123"),
         };
         for (Vendedor v : vendors) {
             funcionarios.add(v);
