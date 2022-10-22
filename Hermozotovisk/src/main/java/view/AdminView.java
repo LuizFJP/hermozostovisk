@@ -1,6 +1,5 @@
 package view;
 
-import controller.Controle;
 import dao.ProdutoDAO;
 import model.Categoria;
 import model.Produto;
@@ -9,17 +8,20 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import model.Admin;
+import dao.ClienteDAO;
+import model.Cliente;
+import controller.Busca;
 
 
 /**
  *
  * @author Gustavo
  */
-public class AdminView extends javax.swing.JFrame implements Controle {
+public class AdminView extends javax.swing.JFrame implements Busca {
     
     private List<Categoria> categorias;
-    private ProdutoDAO produtoDAO = new ProdutoDAO();;
+    private ProdutoDAO produtoDAO = new ProdutoDAO();
+    private ClienteDAO clienteDAO = new ClienteDAO();
     /**    
     /**
      * Creates new form MainView
@@ -234,6 +236,24 @@ public class AdminView extends javax.swing.JFrame implements Controle {
         for (Produto p : this.produtoDAO.getProdutos()){
             if(codigo.equals(p.getCodigo()))
                 return p;
+        }
+        return null;
+    }
+
+    @Override
+    public Cliente buscarClientePorNome(String nome) {
+        for (Cliente c : clienteDAO.getClientes()) {
+            if(c.getNome().contains(nome))
+                return c;
+        }
+        return null;
+    }
+
+    @Override
+    public Cliente buscarClientePorCPF(String CPF) {
+        for (Cliente c : clienteDAO.getClientes()) {
+            if(CPF.equals(c.getCPF()))
+                return c;
         }
         return null;
     }
