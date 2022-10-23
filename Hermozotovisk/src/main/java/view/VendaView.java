@@ -34,12 +34,11 @@ public class VendaView extends javax.swing.JFrame implements Controller {
     
     private Vendedor vendedor;
     List<ItemProduto> pedido = new ArrayList<>();
-    
-    public VendaView(Funcionario vendedor) {     
 
+    public VendaView(Funcionario vendedor) {
         initComponents();
         
-        this.setVisible(true);
+        this.setExtendedState (java.awt.Frame.MAXIMIZED_BOTH);
         
         this.vendedor = (Vendedor) vendedor;
         this.setTitle("Realizar Venda");
@@ -110,8 +109,8 @@ public class VendaView extends javax.swing.JFrame implements Controller {
         jScrollPane1.setViewportView(jList1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setAlwaysOnTop(true);
-        setLocation(new java.awt.Point(100, 100));
+        setTitle("Hermozostovisky\n");
+        setLocation(new java.awt.Point(0, 0));
         setState(1);
 
         jLabel1.setText("Cod. Produto:");
@@ -219,14 +218,29 @@ public class VendaView extends javax.swing.JFrame implements Controller {
 
         bgFormasDePagamento.add(rbCredito);
         rbCredito.setText("Cartão de Crédito");
+        rbCredito.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbCreditoActionPerformed(evt);
+            }
+        });
 
         bgFormasDePagamento.add(rbDebito);
         rbDebito.setText("Cartão Débito");
+        rbDebito.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbDebitoActionPerformed(evt);
+            }
+        });
 
         spQuantidade.setValue(1);
 
         bgFormasDePagamento.add(rbBoletoBancario);
         rbBoletoBancario.setText("Boleto Bancário");
+        rbBoletoBancario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbBoletoBancarioActionPerformed(evt);
+            }
+        });
 
         jLabel12.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel12.setText("DADOS DA COMPRA");
@@ -340,7 +354,7 @@ public class VendaView extends javax.swing.JFrame implements Controller {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jScrollPane5)
+                                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 564, Short.MAX_VALUE)
                                 .addContainerGap())
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(btFecharPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -401,7 +415,7 @@ public class VendaView extends javax.swing.JFrame implements Controller {
                             .addComponent(tfTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel5)
                             .addComponent(btFecharPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -452,7 +466,7 @@ public class VendaView extends javax.swing.JFrame implements Controller {
 
         getAccessibleContext().setAccessibleParent(JLabel12);
 
-        setSize(new java.awt.Dimension(1080, 828));
+        setSize(new java.awt.Dimension(1100, 828));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -461,6 +475,7 @@ public class VendaView extends javax.swing.JFrame implements Controller {
         int quantidade = (int) spQuantidade.getValue();
         if (quantidade <= 0 || quantidade > item.getQuantidade()) {
             mensagem("Quantidade invalida ou excedente");
+            System.out.println("Quantidade invalida ou excedente");
         } else {
             inserirItemTabela(item, quantidade);
             atualizarTotal();
@@ -476,37 +491,35 @@ public class VendaView extends javax.swing.JFrame implements Controller {
     }//GEN-LAST:event_btCadClienteActionPerformed
 
     private void btPesquisarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPesquisarProdutoActionPerformed
+        Produto resultadoPorNome = buscarProdutoPorNome(tfNomeProduto.getText());
 
-        try {
-            int codigoProduto = Integer.parseInt(tfCodigo.getText());
-            
-            Produto resultadoPorNome = buscarProdutoPorNome(tfNomeProduto.getText());
-            Produto resultadoPorCodigo = buscarProdutoPorCodigo(codigoProduto);
-        
-        if (campoCodigoVazio() && !campoNomeProdutoVazio()){
+        if (campoCodigoVazio() && !campoNomeProdutoVazio()) {
             verificarEMostrar(resultadoPorNome);
-        }
-        else if(campoNomeProdutoVazio() && !campoCodigoVazio()){
-            verificarEMostrar(resultadoPorCodigo);
-        }
-        else if(!campoNomeProdutoVazio() && !campoCodigoVazio()){
-            if (resultadoPorNome.equals(resultadoPorCodigo))
-                verificarEMostrar(resultadoPorNome);
-            } else if (campoNomeProdutoVazio() && !campoCodigoVazio()) {
-                verificarEMostrar(resultadoPorCodigo);
-            } else if (!campoNomeProdutoVazio() && !campoCodigoVazio()) {
-                if (resultadoPorNome.equals(resultadoPorCodigo)) {
-                    verificarEMostrar(resultadoPorNome);
-                } else {
-                    mensagem("Não encotrado");
-                    limpaCampo(tfNomeProduto);
-                    limpaCampo(tfCodigo);
+        } else {
+            try {
+                int codigoProduto = Integer.parseInt(tfCodigo.getText());
+                Produto resultadoPorCodigo = buscarProdutoPorCodigo(codigoProduto);
+                if (campoNomeProdutoVazio() && !campoCodigoVazio()) {
+                    verificarEMostrar(resultadoPorCodigo);
+                } else if (!campoNomeProdutoVazio() && !campoCodigoVazio()) {
+                    if (resultadoPorNome.equals(resultadoPorCodigo)) {
+                        verificarEMostrar(resultadoPorNome);
+                    }
+                } else if (campoNomeProdutoVazio() && !campoCodigoVazio()) {
+                    verificarEMostrar(resultadoPorCodigo);
+                } else if (!campoNomeProdutoVazio() && !campoCodigoVazio()) {
+                    if (resultadoPorNome.equals(resultadoPorCodigo)) {
+                        verificarEMostrar(resultadoPorNome);
+                    } else {
+                        mensagem("Não encotrado");
+                        limpaCampo(tfNomeProduto);
+                        limpaCampo(tfCodigo);
+                    }
                 }
+            } catch (NumberFormatException err) {
+                limpaCampo(tfCodigo);
+                mensagem("Por favor, informe apenas números na busca por código");
             }
-
-        } catch (NumberFormatException err) {
-            limpaCampo(tfCodigo);
-            mensagem("Por favor, informe apenas números na busca por código");
         }
     }//GEN-LAST:event_btPesquisarProdutoActionPerformed
 
@@ -529,7 +542,6 @@ public class VendaView extends javax.swing.JFrame implements Controller {
     private void btCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCancelarActionPerformed
         devolverProdutos();
         pedido = new ArrayList<>();
-        atualizarVistaDeQuantidadeEmEstoque();
     }//GEN-LAST:event_btCancelarActionPerformed
 
     private void btPesquisarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPesquisarClienteActionPerformed
@@ -558,20 +570,34 @@ public class VendaView extends javax.swing.JFrame implements Controller {
         try{
         Venda venda = gerarVenda(pedido);
         vendaDAO.getVendas().add(venda);
+        JOptionPane.showMessageDialog(null, "Compra Realizada com Sucesso!","Compra Concluida", JOptionPane.WARNING_MESSAGE);
+        System.out.println("Foi");
         }
         catch (NullPointerException ex){
-                mensagem ("Operação invelida"); 
+               mensagem("Operacao failed");
+               System.out.println("falhou");
         }
+        
     }//GEN-LAST:event_btConcluirActionPerformed
 
     private void rbDinheiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbDinheiroActionPerformed
-        if (rbDinheiro.isSelected()){
+        if (rbDinheiro.isSelected())
            cbParcelas.setSelectedIndex(0);
            cbParcelas.setEnabled(false);
-        }else{
-            cbParcelas.setEnabled(false);
-        }
+           
     }//GEN-LAST:event_rbDinheiroActionPerformed
+
+    private void rbCreditoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbCreditoActionPerformed
+        cbParcelas.setEnabled(true);
+    }//GEN-LAST:event_rbCreditoActionPerformed
+
+    private void rbDebitoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbDebitoActionPerformed
+        cbParcelas.setEnabled(true);
+    }//GEN-LAST:event_rbDebitoActionPerformed
+
+    private void rbBoletoBancarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbBoletoBancarioActionPerformed
+        cbParcelas.setEnabled(true);
+    }//GEN-LAST:event_rbBoletoBancarioActionPerformed
 
     /**
      * @param args the command line arguments
@@ -625,9 +651,9 @@ public class VendaView extends javax.swing.JFrame implements Controller {
     private javax.swing.JTextField tfTotal;
     // End of variables declaration//GEN-END:variables
 
-  //----------------- Metodos de manipulaçao da venda -----------------//
-    private String getFormaDePagemento(){
-        if (rbDinheiro.isSelected()){
+    //----------------- Metodos de manipulaçao da venda -----------------//
+    private String getFormaDePagemento() {
+        if (rbDinheiro.isSelected()) {
             return "Dinheiro (à vista)";
         } else if (rbCredito.isSelected()) {
             return "Cartão de Crédito";
@@ -639,10 +665,18 @@ public class VendaView extends javax.swing.JFrame implements Controller {
     }
 
     private Venda gerarVenda(List<ItemProduto> pedido) {
+
+        if(pedido == null){
+            JOptionPane.showMessageDialog(null, "Compra inválida!"
+                    + "\nPreencha corretamente todos os campos!","Compra inválida", JOptionPane.ERROR_MESSAGE);
+            return null;
+        }else{
+
         Cliente cliente = ltClientes.getSelectedValue();
         String formaDePagamento = getFormaDePagemento() + cbParcelas.getSelectedItem();
         Venda venda = new Venda(vendedor, cliente, pedido, formaDePagamento);
         return venda;
+        }
     }
 
     private List<ItemProduto> gerarPedido() {
@@ -732,9 +766,6 @@ public class VendaView extends javax.swing.JFrame implements Controller {
     }
 
     //----------------- Metodos de orientação pesquisa e busca -----------------//
-    private void atualizarVistaDeQuantidadeEmEstoque() {
-        verificarEMostrar(buscarProdutoPorNome(ltProdutos.getSelectedValue().getNome()));
-    }
 
     private void verificarEMostrar(Produto p) {
         if (p == null) {
@@ -838,4 +869,4 @@ public class VendaView extends javax.swing.JFrame implements Controller {
     public void limpaCampo(JTextArea textArea) {
         textArea.setText("");
     }
-} 
+}

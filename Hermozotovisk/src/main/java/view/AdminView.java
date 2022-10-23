@@ -100,6 +100,11 @@ public class AdminView extends javax.swing.JFrame implements Controller {
         mRelatorio.setText("Relatórios");
 
         miRelatorioVenda.setText("Relatório de Vendas");
+        miRelatorioVenda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miRelatorioVendaActionPerformed(evt);
+            }
+        });
         mRelatorio.add(miRelatorioVenda);
 
         miRelatorioCliente.setText("Relatório de Clientes");
@@ -182,6 +187,12 @@ public class AdminView extends javax.swing.JFrame implements Controller {
       remProd.setVisible(true);
 
     }//GEN-LAST:event_miRemoverProdutoActionPerformed
+
+    private void miRelatorioVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miRelatorioVendaActionPerformed
+        // TODO add your handling code here:
+        RelatorioVendasView relVendas = new RelatorioVendasView();
+        relVendas.setVisible(true);
+    }//GEN-LAST:event_miRelatorioVendaActionPerformed
 
     /**
      * @param args the command line arguments

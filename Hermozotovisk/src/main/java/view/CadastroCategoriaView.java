@@ -1,6 +1,8 @@
 package view;
 
 import model.Categoria;
+import utils.Mensagem;
+import utils.Limpador;
 import javax.swing.JOptionPane;
 
 /**
@@ -8,9 +10,12 @@ import javax.swing.JOptionPane;
  * @author Gustavo
  */
 public class CadastroCategoriaView extends javax.swing.JFrame {
+
     private AdminView main;
+
     /**
      * Creates new form CadastroCategoriaView
+     *
      * @param main
      */
     public CadastroCategoriaView(AdminView main) {
@@ -85,14 +90,20 @@ public class CadastroCategoriaView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadastrarActionPerformed
-        int codigo = Integer.parseInt(tfCodigoCategoria.getText());
-        String nome = tfNomeCategoria.getText();
-        Categoria cat = new Categoria(codigo, nome);
-        this.main.getCategorias().add(cat);
-        JOptionPane.showMessageDialog(null, "Categoria Cadastrada!");
-        main.limpaCampo(tfNomeCategoria);
-        main.limpaCampo(tfCodigoCategoria);
-        
+        try {
+            int codigo = Integer.parseInt(tfCodigoCategoria.getText());
+            String nome = tfNomeCategoria.getText();
+            Categoria cat = new Categoria(codigo, nome);
+            this.main.getCategorias().add(cat);
+            new Mensagem().mensagem("Categoria Cadastrada!");
+            main.limpaCampo(tfNomeCategoria);
+            main.limpaCampo(tfCodigoCategoria);
+
+        } catch (NumberFormatException err) {
+            new Limpador().limpaCampo(tfCodigoCategoria);
+            new Mensagem().mensagem("Informe apenas números ao cadastrar a categoria");
+        }
+
     }//GEN-LAST:event_btCadastrarActionPerformed
 
     /**
