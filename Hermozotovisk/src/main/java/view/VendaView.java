@@ -17,6 +17,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import model.Cliente;
 import controller.Controller;
+import dao.VendaDAO;
 import java.util.stream.Collectors;
 import model.Venda;
 import model.Vendedor;
@@ -29,13 +30,17 @@ public class VendaView extends javax.swing.JFrame implements Controller {
 
     private ProdutoDAO produtoDAO = new ProdutoDAO();
     private ClienteDAO clienteDAO = new ClienteDAO();
+    private VendaDAO vendaDAO = new VendaDAO();
+    
     private Vendedor vendedor;
     List<ItemProduto> pedido = new ArrayList<>();
     
     public VendaView(Funcionario vendedor) {     
 
         initComponents();
-        setLocationRelativeTo(this);
+        
+        this.setVisible(true);
+        
         this.vendedor = (Vendedor) vendedor;
         this.setTitle("Realizar Venda");
         lbVendedorAtual.setText("Vendedor(a): " + vendedor.getNome());
@@ -106,8 +111,7 @@ public class VendaView extends javax.swing.JFrame implements Controller {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setAlwaysOnTop(true);
-        setLocation(new java.awt.Point(0, 0));
-        setLocationByPlatform(true);
+        setLocation(new java.awt.Point(100, 100));
         setState(1);
 
         jLabel1.setText("Cod. Produto:");
@@ -198,6 +202,11 @@ public class VendaView extends javax.swing.JFrame implements Controller {
 
         bgFormasDePagamento.add(rbDinheiro);
         rbDinheiro.setText("Dinheiro (à vista)");
+        rbDinheiro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbDinheiroActionPerformed(evt);
+            }
+        });
 
         JLabel12.setText("Endereço:");
 
@@ -467,8 +476,10 @@ public class VendaView extends javax.swing.JFrame implements Controller {
     }//GEN-LAST:event_btCadClienteActionPerformed
 
     private void btPesquisarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPesquisarProdutoActionPerformed
+
         try {
             int codigoProduto = Integer.parseInt(tfCodigo.getText());
+            
             Produto resultadoPorNome = buscarProdutoPorNome(tfNomeProduto.getText());
             Produto resultadoPorCodigo = buscarProdutoPorCodigo(codigoProduto);
         
@@ -543,8 +554,28 @@ public class VendaView extends javax.swing.JFrame implements Controller {
     }//GEN-LAST:event_btPesquisarClienteActionPerformed
 
     private void btConcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btConcluirActionPerformed
-
+       
+        try{
+        Venda venda = gerarVenda(pedido);
+        vendaDAO.getVendas().add(venda);
+        JOptionPane.showMessageDialog(null, "Compra Realizada com Sucesso!","Compra Concluida", JOptionPane.WARNING_MESSAGE);
+        System.out.println("Foi");
+        }
+        catch (NullPointerException ex){
+               mensagem("Operacao failed");
+               System.out.println("falhou");
+        }
+        
     }//GEN-LAST:event_btConcluirActionPerformed
+
+    private void rbDinheiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbDinheiroActionPerformed
+        if (rbDinheiro.isSelected()){
+           cbParcelas.setSelectedIndex(0);
+           cbParcelas.setEnabled(false);
+        }else{
+            cbParcelas.setEnabled(false);
+        }
+    }//GEN-LAST:event_rbDinheiroActionPerformed
 
     /**
      * @param args the command line arguments
@@ -612,10 +643,16 @@ public class VendaView extends javax.swing.JFrame implements Controller {
     }
 
     private Venda gerarVenda(List<ItemProduto> pedido) {
+        if(pedido == null){
+            JOptionPane.showMessageDialog(null, "Compra inválida!"
+                    + "\nPreencha corretamente todos os campos!","Compra inválida", JOptionPane.ERROR_MESSAGE);
+            return null;
+        }else{
         Cliente cliente = ltClientes.getSelectedValue();
         String formaDePagamento = getFormaDePagemento() + cbParcelas.getSelectedItem();
         Venda venda = new Venda(vendedor, cliente, pedido, formaDePagamento);
         return venda;
+        }
     }
 
     private List<ItemProduto> gerarPedido() {

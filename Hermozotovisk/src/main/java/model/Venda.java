@@ -36,7 +36,7 @@ public class Venda implements Comparator<Venda> {
             valorTotal += produto.getPreco() * produto.getQuantidade();
         }
     }
-
+    
     public LocalDateTime getDataHoraVenda() {
         return dataHoraVenda;
     }
@@ -69,9 +69,11 @@ public class Venda implements Comparator<Venda> {
             produtos += p.getNome() + " R$" + p.getPreco() + " " + p.getQuantidade() + "Un. \n";
         }
         
-        return"Realizada dia " + dataHoraVenda.toString() + "Vendedor: " + vendedor
-                + "\nForma de pagamanto: " + formaDePagamento + " Valor total R$" + valorTotal 
-                + "\nProdutos: \n" + produtos;
+        return"VENDA REALIZADA DIA: " + getDataHoraVenda() +
+                "\nCLIENTE: " + getCliente() + 
+                "\nVENDEDOR: " + getVendedor()
+                + "\nFORMA DE PAGAMENTO: " + getFormaDePagamento() + " VALOR TOTAL: R$" + getValorTotal()
+                + "\nPRODUTOS: \n" + produtos;
     }
 
     @Override
