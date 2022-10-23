@@ -7,12 +7,19 @@ view/CadastroProdutoView.class
 view/VendaView.class
 =======
 view\CadastroCategoriaView.class
+<<<<<<< HEAD
+=======
 exceptions\CadastroException.class
+>>>>>>> df5b684ffd25f65defc7b72473680344d57a4bd5
 model\Pessoa.class
 model\Cliente.class
 model\Produto.class
 view\AdminView$1.class
 view\CadClienteView.class
+<<<<<<< HEAD
+view\RemoverProdutoView$1.class
+=======
+>>>>>>> df5b684ffd25f65defc7b72473680344d57a4bd5
 view\CadastroProdutoView$1.class
 view\RelatorioProdutoView$2.class
 model\App.class
@@ -23,14 +30,26 @@ view\VendaView.class
 view\LoginView$2.class
 view\LoginView.class
 view\RelatorioProdutoView$1.class
+<<<<<<< HEAD
+controller\Controller.class
+=======
+>>>>>>> df5b684ffd25f65defc7b72473680344d57a4bd5
 view\AdminView$3.class
 view\CadastroCategoriaView$1.class
 view\CadClienteView$2.class
 view\CadastroProdutoView.class
+<<<<<<< HEAD
+view\RemoverProdutoView.class
+model\Categoria.class
+view\LoginView$1.class
+repository\VendaRepository.class
+dao\VendaDAO.class
+=======
 model\Categoria.class
 view\LoginView$1.class
 exceptions\RelatorioException.class
 repository\VendaRepository.class
+>>>>>>> df5b684ffd25f65defc7b72473680344d57a4bd5
 view\CadClienteView$1.class
 view\AdminView$4.class
 view\RelatorioProdutoView.class

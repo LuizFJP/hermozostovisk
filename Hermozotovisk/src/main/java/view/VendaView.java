@@ -340,7 +340,7 @@ public class VendaView extends javax.swing.JFrame implements Controller {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jScrollPane5)
+                                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 564, Short.MAX_VALUE)
                                 .addContainerGap())
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(btFecharPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -401,7 +401,7 @@ public class VendaView extends javax.swing.JFrame implements Controller {
                             .addComponent(tfTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel5)
                             .addComponent(btFecharPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -452,7 +452,7 @@ public class VendaView extends javax.swing.JFrame implements Controller {
 
         getAccessibleContext().setAccessibleParent(JLabel12);
 
-        setSize(new java.awt.Dimension(1080, 828));
+        setSize(new java.awt.Dimension(1100, 828));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -556,10 +556,14 @@ public class VendaView extends javax.swing.JFrame implements Controller {
         try{
         Venda venda = gerarVenda(pedido);
         vendaDAO.getVendas().add(venda);
+        JOptionPane.showMessageDialog(null, "Compra Realizada com Sucesso!","Compra Concluida", JOptionPane.WARNING_MESSAGE);
+        System.out.println("Foi");
         }
         catch (NullPointerException ex){
-                mensagem ("Operação invelida"); 
+               mensagem("Operacao failed");
+               System.out.println("falhou");
         }
+        
     }//GEN-LAST:event_btConcluirActionPerformed
 
     private void rbDinheiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbDinheiroActionPerformed
@@ -637,10 +641,16 @@ public class VendaView extends javax.swing.JFrame implements Controller {
     }
 
     private Venda gerarVenda(List<ItemProduto> pedido) {
+        if(pedido == null){
+            JOptionPane.showMessageDialog(null, "Compra inválida!"
+                    + "\nPreencha corretamente todos os campos!","Compra inválida", JOptionPane.ERROR_MESSAGE);
+            return null;
+        }else{
         Cliente cliente = ltClientes.getSelectedValue();
         String formaDePagamento = getFormaDePagemento() + cbParcelas.getSelectedItem();
         Venda venda = new Venda(vendedor, cliente, pedido, formaDePagamento);
         return venda;
+        }
     }
 
     private List<ItemProduto> gerarPedido() {
