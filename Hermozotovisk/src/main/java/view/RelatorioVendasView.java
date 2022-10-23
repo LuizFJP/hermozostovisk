@@ -5,6 +5,9 @@
 package view;
 
 import dao.VendaDAO;
+import java.util.Collections;
+import java.util.List;
+import javax.swing.JOptionPane;
 import model.Venda;
 
 /**
@@ -13,15 +16,21 @@ import model.Venda;
  */
 public class RelatorioVendasView extends javax.swing.JFrame {
     VendaDAO vendinha = new VendaDAO();
+    Venda venda;
     /**
      * Creates new form RelatorioVendasView
      */
     public RelatorioVendasView() {
         initComponents();
+        this.setTitle("Relatório de Vendas");
+        List<Venda> vendas = this.vendinha.getVendas();
+        Collections.sort(vendas, venda);
+        double total = 0;
         for(Venda v : vendinha.getVendas()){
-            v.compare(v, v);
             taMostraVenda.append(v.toString() + "\n");
+            total += v.getValorTotal();
         }
+        taTotalVendas.append("R$"+Double.toString(total));
     }
 
     /**
@@ -36,50 +45,132 @@ public class RelatorioVendasView extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         taMostraVenda = new javax.swing.JTextArea();
         lbVendas = new javax.swing.JLabel();
+        tfBuscaCodigo = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        taListaCodigo = new javax.swing.JTextArea();
+        btPesquisar = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        taTotalVendas = new javax.swing.JTextArea();
+        lbTotal = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         taMostraVenda.setEditable(false);
         taMostraVenda.setColumns(20);
+        taMostraVenda.setLineWrap(true);
         taMostraVenda.setRows(5);
         jScrollPane1.setViewportView(taMostraVenda);
 
         lbVendas.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         lbVendas.setText("Vendas Realizadas");
 
+        jLabel1.setText("Pesquisar por código");
+
+        taListaCodigo.setEditable(false);
+        taListaCodigo.setColumns(20);
+        taListaCodigo.setRows(5);
+        jScrollPane2.setViewportView(taListaCodigo);
+
+        btPesquisar.setText("Pesquisar");
+        btPesquisar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btPesquisarActionPerformed(evt);
+            }
+        });
+
+        taTotalVendas.setEditable(false);
+        taTotalVendas.setColumns(20);
+        taTotalVendas.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        taTotalVendas.setLineWrap(true);
+        taTotalVendas.setRows(1);
+        taTotalVendas.setAutoscrolls(false);
+        jScrollPane3.setViewportView(taTotalVendas);
+
+        lbTotal.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lbTotal.setText("Total:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(35, 35, 35)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 695, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(310, Short.MAX_VALUE)
-                .addComponent(lbVendas)
-                .addGap(310, 310, 310))
+                .addGap(16, 16, 16)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lbTotal)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lbVendas)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 395, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(tfBuscaCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btPesquisar))
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1))
+                        .addGap(16, 16, 16))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(lbVendas)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(34, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addComponent(lbVendas)
+                        .addGap(9, 9, 9)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(56, 56, 56)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(tfBuscaCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btPesquisar))
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addComponent(lbTotal)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(53, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPesquisarActionPerformed
+        // TODO add your handling code here:
+        int codigo = Integer.parseInt(tfBuscaCodigo.getText());
+        for(Venda v : vendinha.getVendas()){
+            if(codigo == v.getCodigo()){
+                taListaCodigo.append(v.toString());
+            }
+        }
+    }//GEN-LAST:event_btPesquisarActionPerformed
 
     /**
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btPesquisar;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JLabel lbTotal;
     private javax.swing.JLabel lbVendas;
+    private javax.swing.JTextArea taListaCodigo;
     private javax.swing.JTextArea taMostraVenda;
+    private javax.swing.JTextArea taTotalVendas;
+    private javax.swing.JTextField tfBuscaCodigo;
     // End of variables declaration//GEN-END:variables
 }

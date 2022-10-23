@@ -13,5 +13,11 @@ public class Vendedor extends Funcionario {
     public Vendedor(String nome, String cpf, String senha) {
         super(nome, cpf, senha);
     }
+
+    @Override
+    public String toString() {
+        return this.nome;
+    }
+    
     
 }

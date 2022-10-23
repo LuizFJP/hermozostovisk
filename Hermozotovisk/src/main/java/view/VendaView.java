@@ -544,8 +544,6 @@ public class VendaView extends javax.swing.JFrame implements Controller {
         if(cancelar == JOptionPane.YES_OPTION){
         devolverProdutos();
         pedido = new ArrayList<>();
-
-        this.dispose();
         }else{
             JOptionPane.showMessageDialog(null, "Operação Cancelada","Action: Operação Cancelada",JOptionPane.WARNING_MESSAGE);
         }
