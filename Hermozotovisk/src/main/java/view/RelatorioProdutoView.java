@@ -4,6 +4,7 @@ import dao.ProdutoDAO;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import javax.swing.JOptionPane;
 import model.Produto;
 
 /**
@@ -37,6 +38,8 @@ public class RelatorioProdutoView extends javax.swing.JFrame{
         for(Produto prod : this.produtoDAO.getProdutos()){
             if(prod.getCategoria().equals(buscarCat) && !buscarCat.isBlank()){
                 text += prod.getNome() + "\n";
+            }else{
+                JOptionPane.showMessageDialog(null, "Categoria não encontrada no sistema!","Error: Categoria não existente", JOptionPane.ERROR_MESSAGE);
             }
         }
         return text;
@@ -134,16 +137,16 @@ public class RelatorioProdutoView extends javax.swing.JFrame{
                         .addGap(50, 50, 50)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lbBuscaCat)
+                                .addComponent(lbBuscaCat)
+                                .addContainerGap(237, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(tfBuscaCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(btnBuscaCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 162, Short.MAX_VALUE))))))
+                                        .addComponent(btnBuscaCategoria, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE))))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -178,13 +181,15 @@ public class RelatorioProdutoView extends javax.swing.JFrame{
     }// </editor-fold>//GEN-END:initComponents
 
     private void btBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarActionPerformed
-
+        
         String buscar = tfBuscarNome.getText();
         Produto p = main.buscarProdutoPorNome(buscar);
         if(p != null){
             main.limpaCampo(taBusca);
             taBusca.append(p.relatoBusca());
             main.limpaCampo(tfBuscarNome);
+        }else{
+            JOptionPane.showMessageDialog(null, "Produto não consta no sistema", "Erro: Produto não encontrado", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btBuscarActionPerformed
 
