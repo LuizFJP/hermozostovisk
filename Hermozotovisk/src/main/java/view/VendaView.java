@@ -182,9 +182,16 @@ public class VendaView extends javax.swing.JFrame implements Controller {
                 "Nome", "Código", "Quantidade", "Preço"
             }
         ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Double.class
+            };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false
             };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
@@ -425,17 +432,16 @@ public class VendaView extends javax.swing.JFrame implements Controller {
     private void btAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAdicionarActionPerformed
         Produto item = ltProdutos.getSelectedValue();
         int quantidade = (int) spQuantidade.getValue();
-        
         if (quantidade <= 0 || quantidade > item.getQuantidade()){
            mensagem("Quantidade invalida ou excedente");
         }
         else{
         inserirItemTabela(item, quantidade);
         atualizarTotal();
-        ltProdutos.getSelectedValue().quantidade -= (int) spQuantidade.getValue();
+        /*ltProdutos.getSelectedValue().quantidade -= (int) spQuantidade.getValue();
         
         pedido.add(new ItemProduto(item.getNome(), item.getPreco(), item.getDescricao(), item.getCategoria(), quantidade));
-        
+        */
         limpaCampo(tfNomeProduto);
         limpaCampo(tfCodigo);
         }
@@ -472,11 +478,6 @@ public class VendaView extends javax.swing.JFrame implements Controller {
 
     private void btRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRemoverActionPerformed
 
-        ltProdutos.getSelectedValue().quantidade += (int) spQuantidade.getValue();
-        for(ItemProduto item : pedido){
-            if(item.getNome().equals(tbProdutos.getValueAt(tbProdutos.getSelectedRow(), 0)))
-               pedido.remove(item);
-        }
         removerItemTabela();
     }//GEN-LAST:event_btRemoverActionPerformed
 
@@ -553,10 +554,15 @@ public class VendaView extends javax.swing.JFrame implements Controller {
         for (int i = 0; i < tbProdutos.getRowCount(); i++){
             if (item.getNome().equals(tbProdutos.getValueAt(i, 0))){
                Integer quantidadeAnterior = Integer.parseInt(tbProdutos.getValueAt(i, 2).toString());
-               tbProdutos.setValueAt(quantidadeAnterior + quantidade, i, 2);
-               Double novoPreco = item.getPreco() * Integer.parseInt(tbProdutos.getValueAt(i, 2).toString());
-               tbProdutos.setValueAt(novoPreco, i, 3);
-               return false;
+              if(quantidadeAnterior + Integer.parseInt(spQuantidade.getValue().toString()) > item.getQuantidade()){
+                 mensagem("Produto excedente da quantidade em estoque");
+                 return false;
+              }else{
+                  tbProdutos.setValueAt(quantidadeAnterior + quantidade, i, 2);
+                  Double novoPreco = item.getPreco() * Integer.parseInt(tbProdutos.getValueAt(i, 2).toString());
+                  tbProdutos.setValueAt(novoPreco, i, 3);
+                return false;
+              }
             }
         }
         model.addRow(new Object[]{item.getNome(), item.getCodigo(), quantidade, item.getPreco()*quantidade});

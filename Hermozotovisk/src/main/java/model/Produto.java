@@ -11,7 +11,7 @@ public class Produto implements Comparable<Produto> {
     private int codigo;
     private double preco;
     private String categoria;
-    private String descricao;
+    String descricao;
     private static int codigoProduto = 1;
     public Integer quantidade;
     
