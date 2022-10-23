@@ -30,10 +30,10 @@ public class VendaView extends javax.swing.JFrame implements Controller {
     List<ItemProduto> pedido = new ArrayList<>();
     
     public VendaView(Funcionario vendedor) {
-        initComponents();
         
-        vendedorAtual.setText("Vendedor(a): " + vendedor.getNome());
+        initComponents();
         this.setTitle("Realizar Venda");
+        lbVendedorAtual.setText("Vendedor(a): " + vendedor.getNome());
         atualizarTotal();
     }
 
@@ -89,7 +89,7 @@ public class VendaView extends javax.swing.JFrame implements Controller {
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         btPesquisarCliente = new javax.swing.JButton();
-        vendedorAtual = new javax.swing.JLabel();
+        lbVendedorAtual = new javax.swing.JLabel();
         btCancelar = new javax.swing.JButton();
         tfCPF = new javax.swing.JTextField();
         tfNomeCliente = new javax.swing.JTextField();
@@ -234,7 +234,8 @@ public class VendaView extends javax.swing.JFrame implements Controller {
             }
         });
 
-        vendedorAtual.setText("Vendedor(a): null");
+        lbVendedorAtual.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lbVendedorAtual.setText("Vendedor(a): null");
 
         btCancelar.setText("CANCELAR VENDA");
         btCancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -337,7 +338,7 @@ public class VendaView extends javax.swing.JFrame implements Controller {
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                         .addComponent(jLabel6)
                                         .addGap(218, 218, 218))
-                                    .addComponent(vendedorAtual, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
+                                    .addComponent(lbVendedorAtual, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -345,7 +346,7 @@ public class VendaView extends javax.swing.JFrame implements Controller {
                 .addGap(15, 15, 15)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(vendedorAtual))
+                    .addComponent(lbVendedorAtual))
                 .addGap(17, 17, 17)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -459,7 +460,7 @@ public class VendaView extends javax.swing.JFrame implements Controller {
     private void btPesquisarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPesquisarProdutoActionPerformed
         
         Produto resultadoPorNome = buscarProdutoPorNome(tfNomeProduto.getText());
-        Produto resultadoPorCodigo = buscarProdutoPorCodigo(tfCodigo.getText());
+        Produto resultadoPorCodigo = buscarProdutoPorCodigo(Integer.parseInt(tfCodigo.getText()));
         
         //APENAS A PESQUISA POR NOME ESTÁ FUNCIONANDO!
         
@@ -556,6 +557,7 @@ public class VendaView extends javax.swing.JFrame implements Controller {
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JLabel lbVendedorAtual;
     private javax.swing.JList<Cliente> ltClientes;
     private javax.swing.JList<Produto> ltProdutos;
     private javax.swing.JRadioButton rbBoletoBancario;
@@ -570,7 +572,6 @@ public class VendaView extends javax.swing.JFrame implements Controller {
     private javax.swing.JTextField tfNomeCliente;
     private javax.swing.JTextField tfNomeProduto;
     private javax.swing.JTextField tfTotal;
-    private javax.swing.JLabel vendedorAtual;
     // End of variables declaration//GEN-END:variables
 
    //----------------- Metodos de manipulaçao da venda -----------------//
@@ -712,9 +713,9 @@ public class VendaView extends javax.swing.JFrame implements Controller {
         }
         return null;
     }
-
-    @Override //Não Funciona (Map)
-    public Produto buscarProdutoPorCodigo(String codigo) {
+    @Override
+     //Não Funciona (Map)
+    public Produto buscarProdutoPorCodigo(int codigo) {
        /*for (Produto p : this.produtoDAO.getProdutos()){
             if(codigo.equals(p.getCodigo()))
                 return p;

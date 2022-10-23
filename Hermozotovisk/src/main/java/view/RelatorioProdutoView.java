@@ -118,7 +118,7 @@ public class RelatorioProdutoView extends javax.swing.JFrame{
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2)
-                        .addGap(384, 384, 384)
+                        .addGap(231, 231, 231)
                         .addComponent(jLabel5)
                         .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
