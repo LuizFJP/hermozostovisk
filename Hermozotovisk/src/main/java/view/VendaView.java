@@ -34,14 +34,14 @@ public class VendaView extends javax.swing.JFrame implements Controller {
     
     public VendaView(Funcionario vendedor) {
         initComponents();
-        setLocationRelativeTo(this);
+        
+        this.setVisible(true);
+        
         this.vendedor = (Vendedor) vendedor;
         vendedorAtual.setText("Vendedor(a): " + vendedor.getNome());
         this.setTitle("Realizar Venda");
         atualizarTotal();
     }
-
-    
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -107,8 +107,7 @@ public class VendaView extends javax.swing.JFrame implements Controller {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setAlwaysOnTop(true);
-        setLocation(new java.awt.Point(0, 0));
-        setLocationByPlatform(true);
+        setLocation(new java.awt.Point(100, 100));
         setState(1);
 
         jLabel1.setText("Cod. Produto:");
@@ -199,6 +198,11 @@ public class VendaView extends javax.swing.JFrame implements Controller {
 
         bgFormasDePagamento.add(rbDinheiro);
         rbDinheiro.setText("Dinheiro (à vista)");
+        rbDinheiro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbDinheiroActionPerformed(evt);
+            }
+        });
 
         JLabel12.setText("Endereço:");
 
@@ -472,8 +476,6 @@ public class VendaView extends javax.swing.JFrame implements Controller {
         Produto resultadoPorNome = buscarProdutoPorNome(tfNomeProduto.getText());
         Produto resultadoPorCodigo = buscarProdutoPorCodigo(Integer.parseInt(tfCodigo.getText()));
         
-        //APENAS A PESQUISA POR NOME ESTÁ FUNCIONANDO!
-        
         if (campoCodigoVazio() && !campoNomeProdutoVazio()){
             verificarEMostrar(resultadoPorNome);
         }
@@ -538,7 +540,18 @@ public class VendaView extends javax.swing.JFrame implements Controller {
 
     private void btConcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btConcluirActionPerformed
         
+        
+        
     }//GEN-LAST:event_btConcluirActionPerformed
+
+    private void rbDinheiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbDinheiroActionPerformed
+        if (rbDinheiro.isSelected()){
+           cbParcelas.setSelectedIndex(0);
+           cbParcelas.setEnabled(false);
+        }else{
+            cbParcelas.setEnabled(false);
+        }
+    }//GEN-LAST:event_rbDinheiroActionPerformed
 
     /**
      * @param args the command line arguments
