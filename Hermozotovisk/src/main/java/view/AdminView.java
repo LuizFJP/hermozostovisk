@@ -244,7 +244,7 @@ public class AdminView extends javax.swing.JFrame implements Controller {
     @Override
     public Cliente buscarClientePorNome(String nome) {
         for (Cliente c : clienteDAO.getClientes()) {
-            if(c.getNome().contains(nome))
+            if(c.getNome().toLowerCase().contains(nome.toLowerCase()))
                 return c;
         }
         return null;

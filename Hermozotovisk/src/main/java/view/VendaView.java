@@ -619,7 +619,7 @@ public class VendaView extends javax.swing.JFrame implements Controller {
     @Override
     public Produto buscarProdutoPorNome(String nome) { //todos precisam ser implementados
        for(Produto p: produtoDAO.getProdutos()){
-            if(p.getNome().contains(nome)){
+            if(p.getNome().toLowerCase().contains(nome.toLowerCase())){
                 return p;
             }
         }
