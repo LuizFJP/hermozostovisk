@@ -505,12 +505,16 @@ public class VendaView extends javax.swing.JFrame implements Controller {
                 } else if (!campoNomeProdutoVazio() && !campoCodigoVazio()) {
                     if (resultadoPorNome.equals(resultadoPorCodigo)) {
                         verificarEMostrar(resultadoPorNome);
+                        limpaCampo(tfNomeProduto);
+                        limpaCampo(tfCodigo);
                     }
                 } else if (campoNomeProdutoVazio() && !campoCodigoVazio()) {
                     verificarEMostrar(resultadoPorCodigo);
+                    limpaCampo(tfCodigo);
                 } else if (!campoNomeProdutoVazio() && !campoCodigoVazio()) {
                     if (resultadoPorNome.equals(resultadoPorCodigo)) {
                         verificarEMostrar(resultadoPorNome);
+                        limpaCampo(tfNomeProduto);
                     } else {
                         mensagem("Não encotrado");
                         limpaCampo(tfNomeProduto);
