@@ -17,6 +17,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import model.Cliente;
 import controller.Controller;
+import dao.VendaDAO;
 import java.util.stream.Collectors;
 import model.Venda;
 import model.Vendedor;
@@ -29,6 +30,8 @@ public class VendaView extends javax.swing.JFrame implements Controller {
 
     private ProdutoDAO produtoDAO = new ProdutoDAO();
     private ClienteDAO clienteDAO = new ClienteDAO();
+    private VendaDAO vendaDAO = new VendaDAO();
+    
     private Vendedor vendedor;
     List<ItemProduto> pedido = new ArrayList<>();
     
@@ -551,10 +554,14 @@ public class VendaView extends javax.swing.JFrame implements Controller {
     }//GEN-LAST:event_btPesquisarClienteActionPerformed
 
     private void btConcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btConcluirActionPerformed
-
-        
-        
-        
+       
+        try{
+        Venda venda = gerarVenda(pedido);
+        vendaDAO.getVendas().add(venda);
+        }
+        catch (NullPointerException ex){
+                mensagem ("Operação invelida"); 
+        }
     }//GEN-LAST:event_btConcluirActionPerformed
 
     private void rbDinheiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbDinheiroActionPerformed
