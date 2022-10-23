@@ -82,6 +82,11 @@ public class Produto implements Comparable<Produto> {
         this.descricao = descricao;
     }
 
+    public void setQuantidade(Integer quantidade){
+        if (quantidade >= 0)
+        this.quantidade = quantidade;
+    }
+    
     @Override
     public String toString() {
 

@@ -27,8 +27,7 @@ public class VendaView extends javax.swing.JFrame implements Controller {
 
     private ProdutoDAO produtoDAO = new ProdutoDAO();
     private ClienteDAO clienteDAO = new ClienteDAO();
-    private List<ItemProduto> pedido = new ArrayList();
-    
+    List<ItemProduto> pedido = new ArrayList<>();
     
     public VendaView(Funcionario vendedor) {
         initComponents();
@@ -438,10 +437,7 @@ public class VendaView extends javax.swing.JFrame implements Controller {
         else{
         inserirItemTabela(item, quantidade);
         atualizarTotal();
-        /*ltProdutos.getSelectedValue().quantidade -= (int) spQuantidade.getValue();
         
-        pedido.add(new ItemProduto(item.getNome(), item.getPreco(), item.getDescricao(), item.getCategoria(), quantidade));
-        */
         limpaCampo(tfNomeProduto);
         limpaCampo(tfCodigo);
         }
@@ -482,12 +478,10 @@ public class VendaView extends javax.swing.JFrame implements Controller {
     }//GEN-LAST:event_btRemoverActionPerformed
 
     private void btFecharPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btFecharPedidoActionPerformed
-       
-        //aind nao programado
-        
-        
-        
-        
+
+        pedido = gerarPedido();
+        mensagem("Pedido gerado com sucesso");
+        verificarEMostrar(buscarProdutoPorNome(tfNomeProduto.getText()));
     }//GEN-LAST:event_btFecharPedidoActionPerformed
 
     /**
@@ -541,6 +535,33 @@ public class VendaView extends javax.swing.JFrame implements Controller {
     private javax.swing.JLabel vendedorAtual;
     // End of variables declaration//GEN-END:variables
 
+   //----------------- Metodos de criaçao da venda -----------------//
+    
+    private List<ItemProduto>gerarPedido(){
+        List<ItemProduto> pedidoGerado = new ArrayList<>();
+        
+        byte colunaNome = 0;
+        byte colunaCodigo = 1;
+        byte colunaQuantidade = 2;
+        byte colunaPreco = 3;
+        
+        for (int linhaAtual = 0; linhaAtual < tbProdutos.getRowCount(); linhaAtual++){
+            String nome = (String)tbProdutos.getValueAt(linhaAtual, colunaNome);
+            Integer codigo = (int)tbProdutos.getValueAt(linhaAtual, colunaCodigo);
+            Integer quantidade = (int)tbProdutos.getValueAt(linhaAtual, colunaQuantidade);
+            Double preco = (Double)tbProdutos.getValueAt(linhaAtual, colunaPreco);
+            
+            ItemProduto item = new ItemProduto(nome, codigo, quantidade, preco);
+            
+            pedidoGerado.add(item);
+            
+            Produto prod = buscarProdutoPorNome(nome);
+            prod.setQuantidade(prod.getQuantidade() - quantidade);
+        }
+        
+        return pedidoGerado;
+    }
+    
    //----------------- Metodos de comando da tabela -----------------//
     
     private void mostrarResultado(Produto resultado){

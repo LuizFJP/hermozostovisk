@@ -51,6 +51,6 @@ public class ItemProduto {
 
     @Override
     public String toString() {
-        return super.toString();
+        return "";
     }
 }
