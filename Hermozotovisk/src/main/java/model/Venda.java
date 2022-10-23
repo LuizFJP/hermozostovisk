@@ -19,12 +19,13 @@ public class Venda {
     
     private final DateTimeFormatter formataçãoData;
     
-    public Venda(Vendedor vendedor, Cliente cliente, List<ItemProduto> itensCompra){
+    public Venda(Vendedor vendedor, Cliente cliente, List<ItemProduto> itensCompra, String formaDePagamento){
         this.formataçãoData = DateTimeFormatter.ofPattern("dd/MM/yyyy - hh:mm:ss");
         this.dataHoraVenda = LocalDateTime.now();
         this.vendedor = vendedor;
         this.cliente = cliente;
         this.itensCompra = itensCompra;
+        this.formaDePagamento = formaDePagamento;
         calculaValor();
     }
     
@@ -60,6 +61,14 @@ public class Venda {
     
     @Override
     public String toString(){
-        return"";
+        String produtos = "";
+        
+        for (ItemProduto p : itensCompra){
+            produtos += p.getNome() + " R$" + p.getPreco() + " " + p.getQuantidade() + "Un. \n";
+        }
+        
+        return"Realizada dia " + dataHoraVenda.toString() + "Vendedor: " + vendedor
+                + "\nForma de pagamanto: " + formaDePagamento + " Valor total R$" + valorTotal 
+                + "\nProdutos: \n" + produtos;
     }
 }

@@ -1,5 +1,7 @@
 package model;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author ndeba
@@ -28,7 +30,10 @@ public class ItemProduto extends Produto{
         return preco;
     }
 
-    public Integer getQuantidade() {
+    public int getQuantidadeEstoque(){
+        return super.getQuantidade();
+    }
+    public int getQuantidade() {
         return quantidade;
     }
 

@@ -82,7 +82,7 @@ public class Produto implements Comparable<Produto> {
         return descricao;
     }
 
-    public Integer getQuantidade(){
+    public int getQuantidade(){
         return quantidade;
     }
     public void setDescricao(String descricao) {
@@ -97,7 +97,7 @@ public class Produto implements Comparable<Produto> {
     @Override
     public String toString() {
 
-        return " " + nome + " - R$" + preco + " - Em estoque: " + quantidade;
+        return " " + nome + " - R$" + preco + " - Disponivel: " + quantidade;
     }
     public String relatoBusca(){
         return "Nome: " + getNome() + "\nPreço: R$" + getPreco() + "\nDescrição: " + getDescricao() + "\nCategoria: " + getCategoria() + "\nCodigo: " + getCodigo() + "\n";

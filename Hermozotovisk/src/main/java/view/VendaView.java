@@ -18,6 +18,8 @@ import javax.swing.JTextField;
 import model.Cliente;
 import controller.Controller;
 import java.util.stream.Collectors;
+import model.Venda;
+import model.Vendedor;
 
 /**
  *
@@ -27,11 +29,14 @@ public class VendaView extends javax.swing.JFrame implements Controller {
 
     private ProdutoDAO produtoDAO = new ProdutoDAO();
     private ClienteDAO clienteDAO = new ClienteDAO();
+    private Vendedor vendedor;
     List<ItemProduto> pedido = new ArrayList<>();
     
-    public VendaView(Funcionario vendedor) {
-        
+    public VendaView(Funcionario vendedor) {     
+
         initComponents();
+        setLocationRelativeTo(this);
+        this.vendedor = (Vendedor) vendedor;
         this.setTitle("Realizar Venda");
         lbVendedorAtual.setText("Vendedor(a): " + vendedor.getNome());
         atualizarTotal();
@@ -84,8 +89,8 @@ public class VendaView extends javax.swing.JFrame implements Controller {
         spQuantidade = new javax.swing.JSpinner();
         rbBoletoBancario = new javax.swing.JRadioButton();
         jLabel12 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        btConcluir = new javax.swing.JButton();
+        cbParcelas = new javax.swing.JComboBox<>();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         btPesquisarCliente = new javax.swing.JButton();
@@ -103,8 +108,8 @@ public class VendaView extends javax.swing.JFrame implements Controller {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setAlwaysOnTop(true);
-        setAutoRequestFocus(false);
         setLocation(new java.awt.Point(0, 0));
+        setLocationByPlatform(true);
         setState(1);
 
         jLabel1.setText("Cod. Produto:");
@@ -219,9 +224,14 @@ public class VendaView extends javax.swing.JFrame implements Controller {
         jLabel12.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel12.setText("DADOS DA COMPRA");
 
-        jButton1.setText("CONCLUIR");
+        btConcluir.setText("CONCLUIR");
+        btConcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btConcluirActionPerformed(evt);
+            }
+        });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1x (à vista)", "2x", "3x", "4x", "5x", "6x", "7x", "8x", "9x", "10x", "11x", "12x" }));
+        cbParcelas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1x (à vista)", "2x", "3x", "4x", "5x", "6x", "7x", "8x", "9x", "10x", "11x", "12x" }));
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
@@ -280,9 +290,9 @@ public class VendaView extends javax.swing.JFrame implements Controller {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(79, 79, 79)
-                                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(cbParcelas, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
-                                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(btConcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
                                         .addComponent(btCancelar))
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -323,7 +333,7 @@ public class VendaView extends javax.swing.JFrame implements Controller {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 546, Short.MAX_VALUE)
+                                .addComponent(jScrollPane5)
                                 .addContainerGap())
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(btFecharPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -416,8 +426,8 @@ public class VendaView extends javax.swing.JFrame implements Controller {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btConcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cbParcelas, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(btCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(7, 7, 7))
                             .addGroup(layout.createSequentialGroup()
@@ -432,6 +442,8 @@ public class VendaView extends javax.swing.JFrame implements Controller {
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(64, Short.MAX_VALUE))
         );
+
+        getAccessibleContext().setAccessibleParent(JLabel12);
 
         setSize(new java.awt.Dimension(1080, 828));
         setLocationRelativeTo(null);
@@ -488,9 +500,13 @@ public class VendaView extends javax.swing.JFrame implements Controller {
 
     private void btFecharPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btFecharPedidoActionPerformed
 
-        pedido = gerarPedido();
-        mensagem("Pedido gerado com sucesso");
-        verificarEMostrar(buscarProdutoPorNome(ltProdutos.getSelectedValue().getNome()));
+        if (gerarPedido() == null)
+            mensagem("Algum produto excede a capacidade disponível, verifique a disponibilidade e refaça o pedido.");
+        else{
+            pedido = gerarPedido();
+            mensagem("Pedido gerado com sucesso");
+            verificarEMostrar(buscarProdutoPorNome(ltProdutos.getSelectedValue().getNome()));
+        }
     }//GEN-LAST:event_btFecharPedidoActionPerformed
 
     private void btCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCancelarActionPerformed
@@ -522,6 +538,10 @@ public class VendaView extends javax.swing.JFrame implements Controller {
         
     }//GEN-LAST:event_btPesquisarClienteActionPerformed
 
+    private void btConcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btConcluirActionPerformed
+        
+    }//GEN-LAST:event_btConcluirActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -532,12 +552,12 @@ public class VendaView extends javax.swing.JFrame implements Controller {
     private javax.swing.JButton btAdicionar;
     private javax.swing.JButton btCadCliente;
     private javax.swing.JButton btCancelar;
+    private javax.swing.JButton btConcluir;
     private javax.swing.JButton btFecharPedido;
     private javax.swing.JButton btPesquisarCliente;
     private javax.swing.JButton btPesquisarProduto;
     private javax.swing.JButton btRemover;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> cbParcelas;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -574,7 +594,27 @@ public class VendaView extends javax.swing.JFrame implements Controller {
     private javax.swing.JTextField tfTotal;
     // End of variables declaration//GEN-END:variables
 
-   //----------------- Metodos de manipulaçao da venda -----------------//
+  //----------------- Metodos de manipulaçao da venda -----------------//
+    private String getFormaDePagemento(){
+        if (rbDinheiro.isSelected()){
+            return "Dinheiro (à vista)";
+        }
+        else if (rbCredito.isSelected()){
+            return "Cartão de Crédito";
+        }
+        else if (rbDebito.isSelected()){
+            return "Cartão de Débito";
+        }
+            return "Boleto Bancário";
+ 
+    }
+    
+    private Venda gerarVenda(List<ItemProduto> pedido){
+        Cliente cliente = ltClientes.getSelectedValue();
+        String formaDePagamento = getFormaDePagemento() + cbParcelas.getSelectedItem();
+        Venda venda = new Venda(vendedor, cliente, pedido, formaDePagamento);
+        return venda;
+    }
     
     private List<ItemProduto>gerarPedido(){
         List<ItemProduto> pedidoGerado = new ArrayList<>();
@@ -593,9 +633,12 @@ public class VendaView extends javax.swing.JFrame implements Controller {
            
             ItemProduto item = new ItemProduto(nome, codigo, preco, quantidade);
             
-            pedidoGerado.add(item);
-            
             Produto prod = buscarProdutoPorNome(nome);
+            if (prod.getQuantidade() < item.getQuantidade()){
+                return null;
+            }
+                
+            pedidoGerado.add(item);
             prod.setQuantidade(prod.getQuantidade() - quantidade);
         }
         
@@ -713,15 +756,8 @@ public class VendaView extends javax.swing.JFrame implements Controller {
         }
         return null;
     }
-    @Override
-     //Não Funciona (Map)
+    @Override //Funciona em plenitude
     public Produto buscarProdutoPorCodigo(int codigo) {
-       /*for (Produto p : this.produtoDAO.getProdutos()){
-            if(codigo.equals(p.getCodigo()))
-                return p;
-        }
-        return null;*/
-       
        
        Map<Integer, Produto> produtos = produtoDAO.getProdutos().stream()
                .collect(Collectors.toMap(Produto::getCodigo, produto -> produto));
@@ -767,4 +803,4 @@ public class VendaView extends javax.swing.JFrame implements Controller {
     public void limpaCampo(JTextArea textArea) {
         textArea.setText("");
     }
-}
+} 
