@@ -469,9 +469,15 @@ public class VendaView extends javax.swing.JFrame implements Controller {
             int codigoProduto = Integer.parseInt(tfCodigo.getText());
             Produto resultadoPorNome = buscarProdutoPorNome(tfNomeProduto.getText());
             Produto resultadoPorCodigo = buscarProdutoPorCodigo(codigoProduto);
-
-            //APENAS A PESQUISA POR NOME ESTÁ FUNCIONANDO!
-            if (campoCodigoVazio() && !campoNomeProdutoVazio()) {
+        
+        if (campoCodigoVazio() && !campoNomeProdutoVazio()){
+            verificarEMostrar(resultadoPorNome);
+        }
+        else if(campoNomeProdutoVazio() && !campoCodigoVazio()){
+            verificarEMostrar(resultadoPorCodigo);
+        }
+        else if(!campoNomeProdutoVazio() && !campoCodigoVazio()){
+            if (resultadoPorNome.equals(resultadoPorCodigo))
                 verificarEMostrar(resultadoPorNome);
             } else if (campoNomeProdutoVazio() && !campoCodigoVazio()) {
                 verificarEMostrar(resultadoPorCodigo);
@@ -489,8 +495,6 @@ public class VendaView extends javax.swing.JFrame implements Controller {
             limpaCampo(tfCodigo);
             mensagem("Por favor, informe apenas números na busca por código");
         }
-
-
     }//GEN-LAST:event_btPesquisarProdutoActionPerformed
 
     private void btRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRemoverActionPerformed
@@ -592,9 +596,9 @@ public class VendaView extends javax.swing.JFrame implements Controller {
     private javax.swing.JLabel vendedorAtual;
     // End of variables declaration//GEN-END:variables
 
-    //----------------- Metodos de manipulaçao da venda -----------------//
-    private String getFormaDePagemento() {
-        if (rbDinheiro.isSelected()) {
+  //----------------- Metodos de manipulaçao da venda -----------------//
+    private String getFormaDePagemento(){
+        if (rbDinheiro.isSelected()){
             return "Dinheiro (à vista)";
         } else if (rbCredito.isSelected()) {
             return "Cartão de Crédito";
@@ -805,4 +809,4 @@ public class VendaView extends javax.swing.JFrame implements Controller {
     public void limpaCampo(JTextArea textArea) {
         textArea.setText("");
     }
-}
+} 

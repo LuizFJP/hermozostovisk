@@ -234,7 +234,8 @@ public class AdminView extends javax.swing.JFrame implements Controller {
 
     @Override
     public Produto buscarProdutoPorCodigo(int codigo) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        throw new UnsupportedOperationException("Not supported."); 
+
     }
 
 
