@@ -491,6 +491,7 @@ public class VendaView extends javax.swing.JFrame implements Controller {
     }//GEN-LAST:event_btCadClienteActionPerformed
 
     private void btPesquisarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPesquisarProdutoActionPerformed
+        try{
         Produto resultadoPorNome = buscarProdutoPorNome(tfNomeProduto.getText());
 
         if (campoCodigoVazio() && !campoNomeProdutoVazio()) {
@@ -504,12 +505,16 @@ public class VendaView extends javax.swing.JFrame implements Controller {
                 } else if (!campoNomeProdutoVazio() && !campoCodigoVazio()) {
                     if (resultadoPorNome.equals(resultadoPorCodigo)) {
                         verificarEMostrar(resultadoPorNome);
+                        limpaCampo(tfNomeProduto);
+                        limpaCampo(tfCodigo);
                     }
                 } else if (campoNomeProdutoVazio() && !campoCodigoVazio()) {
                     verificarEMostrar(resultadoPorCodigo);
+                    limpaCampo(tfCodigo);
                 } else if (!campoNomeProdutoVazio() && !campoCodigoVazio()) {
                     if (resultadoPorNome.equals(resultadoPorCodigo)) {
                         verificarEMostrar(resultadoPorNome);
+                        limpaCampo(tfNomeProduto);
                     } else {
                         mensagem("Não encotrado");
                         limpaCampo(tfNomeProduto);
@@ -520,6 +525,11 @@ public class VendaView extends javax.swing.JFrame implements Controller {
                 limpaCampo(tfCodigo);
                 mensagem("Por favor, informe apenas números na busca por código");
             }
+        }
+        }catch(NullPointerException ex){
+            String mensagem = "Selecione um produto!";
+            System.out.println(mensagem);
+            mensagem(mensagem);
         }
     }//GEN-LAST:event_btPesquisarProdutoActionPerformed
 
@@ -544,6 +554,7 @@ public class VendaView extends javax.swing.JFrame implements Controller {
         if(cancelar == JOptionPane.YES_OPTION){
         devolverProdutos();
         pedido = new ArrayList<>();
+        limparTodosOsCampos();
         }else{
             JOptionPane.showMessageDialog(null, "Operação Cancelada","Action: Operação Cancelada",JOptionPane.WARNING_MESSAGE);
         }
@@ -572,17 +583,21 @@ public class VendaView extends javax.swing.JFrame implements Controller {
 
     private void btConcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btConcluirActionPerformed
        
-        try{
-        Venda venda = gerarVenda(pedido);
-        vendaDAO.getVendas().add(venda);
-        JOptionPane.showMessageDialog(null, "Compra Realizada com Sucesso!","Compra Concluida", JOptionPane.WARNING_MESSAGE);
-        System.out.println("Foi");
+        if (ltClientes.getSelectedValue() == null){
+            mensagem("Selecione o cliente!");
         }
-        catch (NullPointerException ex){
-               mensagem("Operacao failed");
-               System.out.println("falhou");
+        else{
+            try{
+            Venda venda = gerarVenda(pedido);
+            vendaDAO.getVendas().add(venda);
+            JOptionPane.showMessageDialog(null, "Compra Realizada com Sucesso!","Compra Concluida", JOptionPane.WARNING_MESSAGE);
+            System.out.println("Foi");
+            }
+            catch (NullPointerException ex){
+                   mensagem("Operacao failed");
+                   System.out.println("falhou");
+            }
         }
-        
     }//GEN-LAST:event_btConcluirActionPerformed
 
     private void rbDinheiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbDinheiroActionPerformed
@@ -826,7 +841,7 @@ public class VendaView extends javax.swing.JFrame implements Controller {
         return null;
     }
 
-    @Override //Funciona em plenitude
+    @Override //Funciona em plenitude (List)
     public Produto buscarProdutoPorCodigo(int codigo) {
         Map<Integer, Produto> produtos = produtoDAO.getProdutos().stream()
                 .collect(Collectors.toMap(Produto::getCodigo, produto -> produto));
@@ -834,11 +849,11 @@ public class VendaView extends javax.swing.JFrame implements Controller {
         return produtos.get(codigo);
     }
 
-    @Override //Funciona parcialmente (List)
+    @Override //Funciona em plenitude
     public Cliente buscarClientePorNome(String nome) {
 
-        for (Cliente c : this.clienteDAO.getClientes()) {
-            if (nome.toLowerCase().contains(c.getNome().toLowerCase())) {
+        for (Cliente c : clienteDAO.getClientes()) {
+            if (c.getNome().toLowerCase().contains(nome.toLowerCase())) {
                 return c;
             }
         }
@@ -869,9 +884,18 @@ public class VendaView extends javax.swing.JFrame implements Controller {
     public void limpaCampo(JTextField textField) {
         textField.setText("");
     }
-
     @Override
     public void limpaCampo(JTextArea textArea) {
         textArea.setText("");
+    }
+    
+    public void limparTodosOsCampos(){
+        limpaCampo(tfNomeProduto);
+        limpaCampo(tfNomeCliente);
+        limpaCampo(tfCPF);
+        limpaCampo(tfCodigo);
+        
+        DefaultListModel<Produto> listaProdutos = new DefaultListModel();
+        ltProdutos.setModel(listaProdutos);
     }
 }
