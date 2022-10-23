@@ -233,13 +233,11 @@ public class AdminView extends javax.swing.JFrame implements Controller {
     }
 
     @Override
-    public Produto buscarProdutoPorCodigo(String codigo) {
-        for (Produto p : this.produtoDAO.getProdutos()){
-            if(codigo.equals(p.getCodigo()))
-                return p;
-        }
-        return null;
+    public Produto buscarProdutoPorCodigo(int codigo) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+
+
 
     @Override
     public Cliente buscarClientePorNome(String nome) {

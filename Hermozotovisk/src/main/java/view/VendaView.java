@@ -31,7 +31,7 @@ public class VendaView extends javax.swing.JFrame implements Controller {
     private ClienteDAO clienteDAO = new ClienteDAO();
     private Vendedor vendedor;
     List<ItemProduto> pedido = new ArrayList<>();
-    
+
     public VendaView(Funcionario vendedor) {
         initComponents();
         setLocationRelativeTo(this);
@@ -41,8 +41,6 @@ public class VendaView extends javax.swing.JFrame implements Controller {
         atualizarTotal();
     }
 
-    
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -450,45 +448,49 @@ public class VendaView extends javax.swing.JFrame implements Controller {
     private void btAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAdicionarActionPerformed
         Produto item = ltProdutos.getSelectedValue();
         int quantidade = (int) spQuantidade.getValue();
-        if (quantidade <= 0 || quantidade > item.getQuantidade()){
-           mensagem("Quantidade invalida ou excedente");
-        }
-        else{
-        inserirItemTabela(item, quantidade);
-        atualizarTotal();
-        
-        limpaCampo(tfNomeProduto);
-        limpaCampo(tfCodigo);
+        if (quantidade <= 0 || quantidade > item.getQuantidade()) {
+            mensagem("Quantidade invalida ou excedente");
+        } else {
+            inserirItemTabela(item, quantidade);
+            atualizarTotal();
+
+            limpaCampo(tfNomeProduto);
+            limpaCampo(tfCodigo);
         }
     }//GEN-LAST:event_btAdicionarActionPerformed
-  
+
     private void btCadClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadClienteActionPerformed
         CadClienteView cadastroClienteView = new CadClienteView();
         cadastroClienteView.setVisible(true);
     }//GEN-LAST:event_btCadClienteActionPerformed
 
     private void btPesquisarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPesquisarProdutoActionPerformed
-        
-        Produto resultadoPorNome = buscarProdutoPorNome(tfNomeProduto.getText());
-        Produto resultadoPorCodigo = buscarProdutoPorCodigo(tfCodigo.getText());
-        
-        //APENAS A PESQUISA POR NOME ESTÁ FUNCIONANDO!
-        
-        if (campoCodigoVazio() && !campoNomeProdutoVazio()){
-            verificarEMostrar(resultadoPorNome);
-        }
-        else if(campoNomeProdutoVazio() && !campoCodigoVazio()){
-            verificarEMostrar(resultadoPorCodigo);
-        }
-        else if(!campoNomeProdutoVazio() && !campoCodigoVazio()){
-            if (resultadoPorNome.equals(resultadoPorCodigo))
+        try {
+            int codigoProduto = Integer.parseInt(tfCodigo.getText());
+            Produto resultadoPorNome = buscarProdutoPorNome(tfNomeProduto.getText());
+            Produto resultadoPorCodigo = buscarProdutoPorCodigo(codigoProduto);
+
+            //APENAS A PESQUISA POR NOME ESTÁ FUNCIONANDO!
+            if (campoCodigoVazio() && !campoNomeProdutoVazio()) {
                 verificarEMostrar(resultadoPorNome);
-            else {
-            mensagem("Não encotrado");
-            limpaCampo(tfNomeProduto);
-            limpaCampo(tfCodigo);
+            } else if (campoNomeProdutoVazio() && !campoCodigoVazio()) {
+                verificarEMostrar(resultadoPorCodigo);
+            } else if (!campoNomeProdutoVazio() && !campoCodigoVazio()) {
+                if (resultadoPorNome.equals(resultadoPorCodigo)) {
+                    verificarEMostrar(resultadoPorNome);
+                } else {
+                    mensagem("Não encotrado");
+                    limpaCampo(tfNomeProduto);
+                    limpaCampo(tfCodigo);
+                }
             }
+
+        } catch (NumberFormatException err) {
+            limpaCampo(tfCodigo);
+            mensagem("Por favor, informe apenas números na busca por código");
         }
+
+
     }//GEN-LAST:event_btPesquisarProdutoActionPerformed
 
     private void btRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRemoverActionPerformed
@@ -500,7 +502,7 @@ public class VendaView extends javax.swing.JFrame implements Controller {
 
         if (gerarPedido() == null)
             mensagem("Algum produto excede a capacidade disponível, verifique a disponibilidade e refaça o pedido.");
-        else{
+        else {
             pedido = gerarPedido();
             mensagem("Pedido gerado com sucesso");
             verificarEMostrar(buscarProdutoPorNome(ltProdutos.getSelectedValue().getNome()));
@@ -514,30 +516,28 @@ public class VendaView extends javax.swing.JFrame implements Controller {
     }//GEN-LAST:event_btCancelarActionPerformed
 
     private void btPesquisarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPesquisarClienteActionPerformed
-        
+
         Cliente resultadoPorNome = buscarClientePorNome(tfNomeCliente.getText());
         Cliente resultadoPorCPF = buscarClientePorCPF(tfCPF.getText());
-        
-        if (campoCPFVazio() && !campoNomeClienteVazio()){
+
+        if (campoCPFVazio() && !campoNomeClienteVazio()) {
             verificarEMostrar(resultadoPorNome);
-        }
-        else if(campoNomeClienteVazio() && !campoCPFVazio()){
+        } else if (campoNomeClienteVazio() && !campoCPFVazio()) {
             verificarEMostrar(resultadoPorCPF);
-        }
-        else if(!campoNomeClienteVazio() && !campoCPFVazio()){
-            if (resultadoPorNome.equals(resultadoPorCPF))
+        } else if (!campoNomeClienteVazio() && !campoCPFVazio()) {
+            if (resultadoPorNome.equals(resultadoPorCPF)) {
                 verificarEMostrar(resultadoPorNome);
-            else {
-            mensagem("Não encotrado");
-            limpaCampo(tfNomeProduto);
-            limpaCampo(tfCodigo);
+            } else {
+                mensagem("Não encotrado");
+                limpaCampo(tfNomeProduto);
+                limpaCampo(tfCodigo);
             }
         }
-        
+
     }//GEN-LAST:event_btPesquisarClienteActionPerformed
 
     private void btConcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btConcluirActionPerformed
-        
+
     }//GEN-LAST:event_btConcluirActionPerformed
 
     /**
@@ -592,211 +592,208 @@ public class VendaView extends javax.swing.JFrame implements Controller {
     private javax.swing.JLabel vendedorAtual;
     // End of variables declaration//GEN-END:variables
 
-   //----------------- Metodos de manipulaçao da venda -----------------//
-    private String getFormaDePagemento(){
-        if (rbDinheiro.isSelected()){
+    //----------------- Metodos de manipulaçao da venda -----------------//
+    private String getFormaDePagemento() {
+        if (rbDinheiro.isSelected()) {
             return "Dinheiro (à vista)";
-        }
-        else if (rbCredito.isSelected()){
+        } else if (rbCredito.isSelected()) {
             return "Cartão de Crédito";
-        }
-        else if (rbDebito.isSelected()){
+        } else if (rbDebito.isSelected()) {
             return "Cartão de Débito";
         }
-            return "Boleto Bancário";
- 
+        return "Boleto Bancário";
+
     }
-    
-    private Venda gerarVenda(List<ItemProduto> pedido){
+
+    private Venda gerarVenda(List<ItemProduto> pedido) {
         Cliente cliente = ltClientes.getSelectedValue();
         String formaDePagamento = getFormaDePagemento() + cbParcelas.getSelectedItem();
         Venda venda = new Venda(vendedor, cliente, pedido, formaDePagamento);
         return venda;
     }
-    
-    private List<ItemProduto>gerarPedido(){
+
+    private List<ItemProduto> gerarPedido() {
         List<ItemProduto> pedidoGerado = new ArrayList<>();
-        
+
         byte colunaNome = 0;
         byte colunaCodigo = 1;
         byte colunaQuantidade = 2;
         byte colunaPreco = 3;
-        
-        for (int linhaAtual = 0; linhaAtual < tbProdutos.getRowCount(); linhaAtual++){
-            
-            String nome = (String)tbProdutos.getValueAt(linhaAtual, colunaNome);
-            Integer codigo = (int)tbProdutos.getValueAt(linhaAtual, colunaCodigo);
-            Double preco = (Double)tbProdutos.getValueAt(linhaAtual, colunaPreco);
-            Integer quantidade = (int)tbProdutos.getValueAt(linhaAtual, colunaQuantidade);
-           
+
+        for (int linhaAtual = 0; linhaAtual < tbProdutos.getRowCount(); linhaAtual++) {
+
+            String nome = (String) tbProdutos.getValueAt(linhaAtual, colunaNome);
+            Integer codigo = (int) tbProdutos.getValueAt(linhaAtual, colunaCodigo);
+            Double preco = (Double) tbProdutos.getValueAt(linhaAtual, colunaPreco);
+            Integer quantidade = (int) tbProdutos.getValueAt(linhaAtual, colunaQuantidade);
+
             ItemProduto item = new ItemProduto(nome, codigo, preco, quantidade);
-            
+
             Produto prod = buscarProdutoPorNome(nome);
-            if (prod.getQuantidade() < item.getQuantidade()){
+            if (prod.getQuantidade() < item.getQuantidade()) {
                 return null;
             }
-                
+
             pedidoGerado.add(item);
             prod.setQuantidade(prod.getQuantidade() - quantidade);
         }
-        
+
         return pedidoGerado;
     }
-    
-    private void devolverProdutos(){
-        if (pedido.isEmpty()){
+
+    private void devolverProdutos() {
+        if (pedido.isEmpty()) {
             mensagem("nenhum pedido feito");
-        }else{
+        } else {
             for (ItemProduto item : pedido) {
                 Produto prod = buscarProdutoPorNome(item.getNome());
-                buscarProdutoPorNome(item.getNome()).setQuantidade(prod.getQuantidade() + item.getQuantidade()); 
+                buscarProdutoPorNome(item.getNome()).setQuantidade(prod.getQuantidade() + item.getQuantidade());
             }
-        }    
+        }
     }
-    
-   //----------------- Metodos de manipulaçao da tabela -----------------//
-    
+
+    //----------------- Metodos de manipulaçao da tabela -----------------//
     private void atualizarTotal() {
         Double valorTotalDaCompra = 0.0;
-        for (int i = 0; i < tbProdutos.getRowCount(); i++){
+        for (int i = 0; i < tbProdutos.getRowCount(); i++) {
             valorTotalDaCompra += Double.parseDouble(tbProdutos.getValueAt(i, 3).toString());
         }
         tfTotal.setText("" + valorTotalDaCompra);
     }
-    
-    private void mostrarResultado(Produto resultado){
+
+    private void mostrarResultado(Produto resultado) {
         DefaultListModel<Produto> listaProdutos = new DefaultListModel();
         listaProdutos.addElement(resultado);
-            ltProdutos.setModel(listaProdutos);
+        ltProdutos.setModel(listaProdutos);
     }
-    
-    private void mostrarResultado(Cliente resultado){
+
+    private void mostrarResultado(Cliente resultado) {
         DefaultListModel<Cliente> listaClientes = new DefaultListModel();
         listaClientes.addElement(resultado);
-            ltClientes.setModel(listaClientes);
+        ltClientes.setModel(listaClientes);
     }
-    
-    private boolean inserirItemTabela(Produto item, Integer quantidade){
+
+    private boolean inserirItemTabela(Produto item, Integer quantidade) {
         DefaultTableModel model = (DefaultTableModel) tbProdutos.getModel();
-        for (int i = 0; i < tbProdutos.getRowCount(); i++){
-            if (item.getNome().equals(tbProdutos.getValueAt(i, 0))){
-               Integer quantidadeAnterior = Integer.parseInt(tbProdutos.getValueAt(i, 2).toString());
-              if(quantidadeAnterior + Integer.parseInt(spQuantidade.getValue().toString()) > item.getQuantidade()){
-                 mensagem("Produto excedente da quantidade em estoque");
-                 return false;
-              }else{
-                  tbProdutos.setValueAt(quantidadeAnterior + quantidade, i, 2);
-                  Double novoPreco = item.getPreco() * Integer.parseInt(tbProdutos.getValueAt(i, 2).toString());
-                  tbProdutos.setValueAt(novoPreco, i, 3);
-                return false;
-              }
+        for (int i = 0; i < tbProdutos.getRowCount(); i++) {
+            if (item.getNome().equals(tbProdutos.getValueAt(i, 0))) {
+                Integer quantidadeAnterior = Integer.parseInt(tbProdutos.getValueAt(i, 2).toString());
+                if (quantidadeAnterior + Integer.parseInt(spQuantidade.getValue().toString()) > item.getQuantidade()) {
+                    mensagem("Produto excedente da quantidade em estoque");
+                    return false;
+                } else {
+                    tbProdutos.setValueAt(quantidadeAnterior + quantidade, i, 2);
+                    Double novoPreco = item.getPreco() * Integer.parseInt(tbProdutos.getValueAt(i, 2).toString());
+                    tbProdutos.setValueAt(novoPreco, i, 3);
+                    return false;
+                }
             }
         }
-        model.addRow(new Object[]{item.getNome(), item.getCodigo(), quantidade, item.getPreco()*quantidade});
+        model.addRow(new Object[]{item.getNome(), item.getCodigo(), quantidade, item.getPreco() * quantidade});
         return true;
     }
-    
-    private void removerItemTabela(){
+
+    private void removerItemTabela() {
         ((DefaultTableModel) tbProdutos.getModel()).removeRow(tbProdutos.getSelectedRow());
         atualizarTotal();
     }
-    
+
     //----------------- Metodos de orientação pesquisa e busca -----------------//
-    
-    private void atualizarVistaDeQuantidadeEmEstoque(){
+    private void atualizarVistaDeQuantidadeEmEstoque() {
         verificarEMostrar(buscarProdutoPorNome(ltProdutos.getSelectedValue().getNome()));
     }
-    
-    private void verificarEMostrar (Produto p){
-        if (p == null)
+
+    private void verificarEMostrar(Produto p) {
+        if (p == null) {
             mensagem("Não encontrado!");
-        
+        }
+
         mostrarResultado(p);
     }
-    
-    private void verificarEMostrar (Cliente c){
-        if (c == null)
+
+    private void verificarEMostrar(Cliente c) {
+        if (c == null) {
             mensagem("Não encontrado!");
-        
+        }
+
         mostrarResultado(c);
     }
-    
-    private boolean campoCodigoVazio(){
-        if (tfCodigo.getText().isBlank())
+
+    private boolean campoCodigoVazio() {
+        if (tfCodigo.getText().isBlank()) {
             return true;
+        }
         return false;
     }
-    
-    private boolean campoNomeProdutoVazio(){
-        if (tfNomeProduto.getText().isBlank())
+
+    private boolean campoNomeProdutoVazio() {
+        if (tfNomeProduto.getText().isBlank()) {
             return true;
+        }
         return false;
     }
-    
-    private boolean campoCPFVazio(){
-        if (tfCPF.getText().isBlank())
+
+    private boolean campoCPFVazio() {
+        if (tfCPF.getText().isBlank()) {
             return true;
+        }
         return false;
     }
-    
-    private boolean campoNomeClienteVazio(){
-        if (tfNomeCliente.getText().isBlank())
+
+    private boolean campoNomeClienteVazio() {
+        if (tfNomeCliente.getText().isBlank()) {
             return true;
+        }
         return false;
     }
-    
+
     @Override //Funciona em plenitude (List)
     public Produto buscarProdutoPorNome(String nome) { //todos precisam ser implementados
-       for(Produto p: produtoDAO.getProdutos()){
-            if(p.getNome().toLowerCase().contains(nome.toLowerCase())){
+        for (Produto p : produtoDAO.getProdutos()) {
+            if (p.getNome().toLowerCase().contains(nome.toLowerCase())) {
                 return p;
             }
         }
         return null;
     }
 
-    @Override //Não Funciona (Map)
-    public Produto buscarProdutoPorCodigo(String codigo) {
-       /*for (Produto p : this.produtoDAO.getProdutos()){
-            if(codigo.equals(p.getCodigo()))
-                return p;
-        }
-        return null;*/
-       
-       
-       Map<Integer, Produto> produtos = produtoDAO.getProdutos().stream()
-               .collect(Collectors.toMap(Produto::getCodigo, produto -> produto));
-        
-       return produtos.get(codigo);
+    @Override
+    public Produto buscarProdutoPorCodigo(int codigo) {
+        Map<Integer, Produto> produtos = produtoDAO.getProdutos().stream()
+                .collect(Collectors.toMap(Produto::getCodigo, produto -> produto));
+
+        return produtos.get(codigo);
     }
 
     @Override //Funciona parcialmente (List)
     public Cliente buscarClientePorNome(String nome) {
-        
-        for (Cliente c : this.clienteDAO.getClientes()){
-            if(nome.toLowerCase().contains(c.getNome().toLowerCase()))
+
+        for (Cliente c : this.clienteDAO.getClientes()) {
+            if (nome.toLowerCase().contains(c.getNome().toLowerCase())) {
                 return c;
+            }
         }
         return null;
-        
+
     }
 
     @Override //Funciona em plenitude (Set)
-    public Cliente buscarClientePorCPF(String CPF) { 
+    public Cliente buscarClientePorCPF(String CPF) {
         Set<Cliente> clientes = new HashSet<>();
         clientes.addAll(clienteDAO.getClientes());
-        
+
         for (Cliente cliente : clientes) {
-            if (cliente.getCPF().contains(CPF))
+            if (cliente.getCPF().contains(CPF)) {
                 return cliente;
+            }
         }
         return null;
-        
-        }
+
+    }
 
     @Override
     public void mensagem(String mensagem) {
-         JOptionPane.showMessageDialog(null, mensagem);
+        JOptionPane.showMessageDialog(null, mensagem);
     }
 
     @Override
