@@ -39,6 +39,7 @@ public class Cliente extends Pessoa {
     }
     @Override
     public String toString(){
-        return this.getNome() + "\n Endereço: " + this.getEndereco() + "\n CPF: " + this.getCPF() + "\n";
+        return this.getNome() + "\nEndereço: " + this.getEndereco() + "\nCPF: " + this.getCPF();
+
     }
 }

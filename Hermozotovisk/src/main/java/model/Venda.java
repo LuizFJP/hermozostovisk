@@ -10,7 +10,7 @@ import java.util.Objects;
  *
  * @author ndeba
  */
-public class Venda implements Comparator<Venda> {
+public class Venda implements Comparator<Venda>, Comparable<Venda> {
     
     private LocalDateTime dataHoraVenda;
     private Vendedor vendedor;
@@ -18,10 +18,14 @@ public class Venda implements Comparator<Venda> {
     private List<ItemProduto> itensCompra;
     private double valorTotal;
     private String formaDePagamento;
+    private static int codigoVenda = 1;
+    private int codigo;
     
     private final DateTimeFormatter formataçãoData;
     
     public Venda(Vendedor vendedor, Cliente cliente, List<ItemProduto> itensCompra, String formaDePagamento){
+        this.codigo = Venda.codigoVenda;
+        Venda.codigoVenda += 1;
         this.formataçãoData = DateTimeFormatter.ofPattern("dd/MM/yyyy - hh:mm:ss");
         this.dataHoraVenda = LocalDateTime.now();
         this.vendedor = vendedor;
@@ -37,8 +41,8 @@ public class Venda implements Comparator<Venda> {
         }
     }
     
-    public LocalDateTime getDataHoraVenda() {
-        return dataHoraVenda;
+    public String getDataHoraVenda() {
+        return dataHoraVenda.format(formataçãoData);
     }
 
     public Vendedor getVendedor() {
@@ -60,6 +64,11 @@ public class Venda implements Comparator<Venda> {
     public String getFormaDePagamento() {
         return formaDePagamento;
     }
+
+    public int getCodigo() {
+        return codigo;
+    }
+    
     
     @Override
     public String toString(){
@@ -72,19 +81,25 @@ public class Venda implements Comparator<Venda> {
         return"VENDA REALIZADA DIA: " + getDataHoraVenda() +
                 "\nCLIENTE: " + getCliente() + 
                 "\nVENDEDOR: " + vendedor
-                + "\nFORMA DE PAGAMENTO: " + getFormaDePagamento() + " VALOR TOTAL: R$" + getValorTotal()
+                + "\nFORMA DE PAGAMENTO: " + getFormaDePagamento() 
+                + "\nVALOR TOTAL: R$" + getValorTotal()
                 + "\nPRODUTOS: \n" + produtos;
     }
 
     @Override
     public int compare(Venda o1, Venda o2) {
-       if(o1.getValorTotal() > o2.getValorTotal()){
-           return 1;
-       }else if(o1.getValorTotal() == o2.getValorTotal()){
-           return 0;
-       }else{
-           return -1;
-       }
+            return compareTo(o2);   
+    }
+
+    @Override
+    public int compareTo(Venda o) {
+        if(this.getValorTotal() < o.getValorTotal()){
+            return 1;
+        }else if(this.getValorTotal() > o.getValorTotal()){
+            return -1;
+    }else{
+            return 0;
+        }
     }
 
  
