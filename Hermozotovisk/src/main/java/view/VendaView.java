@@ -36,10 +36,9 @@ public class VendaView extends javax.swing.JFrame implements Controller {
     List<ItemProduto> pedido = new ArrayList<>();
 
     public VendaView(Funcionario vendedor) {
-
         initComponents();
         
-        this.setVisible(true);
+        this.setExtendedState (java.awt.Frame.MAXIMIZED_BOTH);
         
         this.vendedor = (Vendedor) vendedor;
         this.setTitle("Realizar Venda");
@@ -111,9 +110,7 @@ public class VendaView extends javax.swing.JFrame implements Controller {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Hermozostovisky\n");
-        setAlwaysOnTop(true);
-        setLocation(new java.awt.Point(100, 100));
-        setLocationByPlatform(true);
+        setLocation(new java.awt.Point(0, 0));
         setState(1);
 
         jLabel1.setText("Cod. Produto:");
@@ -545,7 +542,6 @@ public class VendaView extends javax.swing.JFrame implements Controller {
     private void btCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCancelarActionPerformed
         devolverProdutos();
         pedido = new ArrayList<>();
-        atualizarVistaDeQuantidadeEmEstoque();
     }//GEN-LAST:event_btCancelarActionPerformed
 
     private void btPesquisarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPesquisarClienteActionPerformed
@@ -770,9 +766,6 @@ public class VendaView extends javax.swing.JFrame implements Controller {
     }
 
     //----------------- Metodos de orientação pesquisa e busca -----------------//
-    private void atualizarVistaDeQuantidadeEmEstoque() {
-        verificarEMostrar(buscarProdutoPorNome(ltProdutos.getSelectedValue().getNome()));
-    }
 
     private void verificarEMostrar(Produto p) {
         if (p == null) {
