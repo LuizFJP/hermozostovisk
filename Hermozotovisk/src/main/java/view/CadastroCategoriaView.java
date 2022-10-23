@@ -1,6 +1,8 @@
 package view;
 
 import model.Categoria;
+import utils.Mensagem;
+import utils.Limpador;
 import javax.swing.JOptionPane;
 
 /**
@@ -93,12 +95,13 @@ public class CadastroCategoriaView extends javax.swing.JFrame {
             String nome = tfNomeCategoria.getText();
             Categoria cat = new Categoria(codigo, nome);
             this.main.getCategorias().add(cat);
-            JOptionPane.showMessageDialog(null, "Categoria Cadastrada!");
+            new Mensagem().mensagem("Categoria Cadastrada!");
             main.limpaCampo(tfNomeCategoria);
             main.limpaCampo(tfCodigoCategoria);
 
         } catch (NumberFormatException err) {
-            
+            new Limpador().limpaCampo(tfCodigoCategoria);
+            new Mensagem().mensagem("Informe apenas números ao cadastrar a categoria");
         }
 
     }//GEN-LAST:event_btCadastrarActionPerformed
