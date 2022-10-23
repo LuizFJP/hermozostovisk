@@ -19,7 +19,7 @@ public class RelatorioVendasView extends javax.swing.JFrame {
     public RelatorioVendasView() {
         initComponents();
         for(Venda v : vendinha.getVendas()){
-            taMostraVenda.append(v.toString());
+            taMostraVenda.append(v.toString() + "\n");
         }
     }
 
