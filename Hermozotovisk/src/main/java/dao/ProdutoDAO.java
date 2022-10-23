@@ -36,6 +36,7 @@ public class ProdutoDAO{
             new Produto("Teclado gamer", 300.00, "Teclado que não tem todas as teclas que vc precisa, porém brilha.", "Periféricos", 64),
             new Produto("Mouse Gamer", 600.00, "Mouse que faz tudo que um mouse normal faz, só que brilha", "Periféricos", 873),
             new Produto("Cadeira Gamer", 1200.00, "Cadeira bonita que machuca as costas", "Escritório", 23),
+            new Produto("Cadeira de Escritório", 2000, "Cadeira feia que machuca as costas A LONGO PRAZO", "Escritório", 15),
         };
         for (Produto p : produtos) {
             this.produtos.add(p);

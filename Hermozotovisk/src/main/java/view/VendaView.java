@@ -481,7 +481,7 @@ public class VendaView extends javax.swing.JFrame implements Controller {
 
         pedido = gerarPedido();
         mensagem("Pedido gerado com sucesso");
-        verificarEMostrar(buscarProdutoPorNome(tfNomeProduto.getText()));
+        verificarEMostrar(buscarProdutoPorNome(ltProdutos.getSelectedValue().getNome()));
     }//GEN-LAST:event_btFecharPedidoActionPerformed
 
     /**
@@ -562,7 +562,9 @@ public class VendaView extends javax.swing.JFrame implements Controller {
         return pedidoGerado;
     }
     
-   //----------------- Metodos de comando da tabela -----------------//
+    
+    
+   //----------------- Metodos de manipulaçao da tabela -----------------//
     
     private void mostrarResultado(Produto resultado){
         DefaultListModel<Produto> listaProdutos = new DefaultListModel();
