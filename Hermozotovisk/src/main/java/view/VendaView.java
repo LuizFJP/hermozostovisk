@@ -491,6 +491,7 @@ public class VendaView extends javax.swing.JFrame implements Controller {
     }//GEN-LAST:event_btCadClienteActionPerformed
 
     private void btPesquisarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPesquisarProdutoActionPerformed
+        try{
         Produto resultadoPorNome = buscarProdutoPorNome(tfNomeProduto.getText());
 
         if (campoCodigoVazio() && !campoNomeProdutoVazio()) {
@@ -520,6 +521,11 @@ public class VendaView extends javax.swing.JFrame implements Controller {
                 limpaCampo(tfCodigo);
                 mensagem("Por favor, informe apenas números na busca por código");
             }
+        }
+        }catch(NullPointerException ex){
+            String mensagem = "Selecione um produto!";
+            System.out.println(mensagem);
+            mensagem(mensagem);
         }
     }//GEN-LAST:event_btPesquisarProdutoActionPerformed
 
