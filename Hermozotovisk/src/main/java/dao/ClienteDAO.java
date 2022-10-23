@@ -17,6 +17,10 @@ import repository.IClienteDAO;
 public class ClienteDAO implements IClienteDAO{
     public static List<Cliente> clientes = new ArrayList<>();   
 
+    public ClienteDAO(){
+        populateCliente();
+    }
+    
     @Override
     public void addCliente(Cliente cliente) {
         clientes.add(cliente);
@@ -41,4 +45,16 @@ public class ClienteDAO implements IClienteDAO{
     public void removeClient(int i) {
         clientes.remove(i);
     }
+    
+    private void populateCliente() {
+        Cliente[] clientes = {
+            new Cliente("João Silva", "2112", "Rua IX"),
+            new Cliente("João Silva", "2223", "Rua X"),
+            new Cliente("Geroncio Gerundido Geraldo Gerarmino da Silva", "7632", "Rua XI")
+        };
+        for (Cliente cliente : clientes) {
+            this.addCliente(cliente);
+        }
+    }
+    
 }
