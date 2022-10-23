@@ -1,3 +1,11 @@
+<<<<<<< HEAD
+view/CadastroProdutoView$1.class
+model/Produto.class
+model/Categoria.class
+dao/ProdutoDAO.class
+view/CadastroProdutoView.class
+view/VendaView.class
+=======
 view\CadastroCategoriaView.class
 exceptions\CadastroException.class
 model\Pessoa.class
@@ -29,3 +37,4 @@ view\RelatorioProdutoView.class
 repository\ProdutoRepository.class
 view\LoginView$3.class
 model\Admin.class
+>>>>>>> df5b684ffd25f65defc7b72473680344d57a4bd5
