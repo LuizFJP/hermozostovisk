@@ -70,8 +70,6 @@ public class AdminView extends javax.swing.JFrame implements Controller {
         miRelatorioVenda = new javax.swing.JMenuItem();
         miRelatorioCliente = new javax.swing.JMenuItem();
         miRelatorioProdutos = new javax.swing.JMenuItem();
-        mVenda = new javax.swing.JMenu();
-        miRealizaVenda = new javax.swing.JMenuItem();
         mRemover = new javax.swing.JMenu();
         miRemoverCliente = new javax.swing.JMenuItem();
         miRemoverProduto = new javax.swing.JMenuItem();
@@ -121,18 +119,6 @@ public class AdminView extends javax.swing.JFrame implements Controller {
         mRelatorio.add(miRelatorioProdutos);
 
         jMenuBar1.add(mRelatorio);
-
-        mVenda.setText("Venda");
-
-        miRealizaVenda.setText("Realizar Venda");
-        miRealizaVenda.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                miRealizaVendaActionPerformed(evt);
-            }
-        });
-        mVenda.add(miRealizaVenda);
-
-        jMenuBar1.add(mVenda);
 
         mRemover.setText("Remover");
 
@@ -189,10 +175,6 @@ public class AdminView extends javax.swing.JFrame implements Controller {
         relProd.setVisible(true);
     }//GEN-LAST:event_miRelatorioProdutosActionPerformed
 
-    private void miRealizaVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miRealizaVendaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_miRealizaVendaActionPerformed
-
     private void miRemoverProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miRemoverProdutoActionPerformed
         // TODO add your handling code here:
 
@@ -211,10 +193,8 @@ public class AdminView extends javax.swing.JFrame implements Controller {
     private javax.swing.JMenu mCadastro;
     private javax.swing.JMenu mRelatorio;
     private javax.swing.JMenu mRemover;
-    private javax.swing.JMenu mVenda;
     private javax.swing.JMenuItem miCadastrarCategoria;
     private javax.swing.JMenuItem miCadastrarProduto;
-    private javax.swing.JMenuItem miRealizaVenda;
     private javax.swing.JMenuItem miRelatorioCliente;
     private javax.swing.JMenuItem miRelatorioProdutos;
     private javax.swing.JMenuItem miRelatorioVenda;
@@ -235,7 +215,6 @@ public class AdminView extends javax.swing.JFrame implements Controller {
     @Override
     public Produto buscarProdutoPorCodigo(int codigo) {
         throw new UnsupportedOperationException("Not supported."); 
-
     }
 
 
