@@ -470,7 +470,7 @@ public class VendaView extends javax.swing.JFrame implements Controller {
     private void btPesquisarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPesquisarProdutoActionPerformed
         
         Produto resultadoPorNome = buscarProdutoPorNome(tfNomeProduto.getText());
-        Produto resultadoPorCodigo = buscarProdutoPorCodigo(tfCodigo.getText());
+        Produto resultadoPorCodigo = buscarProdutoPorCodigo(Integer.parseInt(tfCodigo.getText()));
         
         //APENAS A PESQUISA POR NOME ESTÁ FUNCIONANDO!
         
@@ -592,7 +592,7 @@ public class VendaView extends javax.swing.JFrame implements Controller {
     private javax.swing.JLabel vendedorAtual;
     // End of variables declaration//GEN-END:variables
 
-   //----------------- Metodos de manipulaçao da venda -----------------//
+  //----------------- Metodos de manipulaçao da venda -----------------//
     private String getFormaDePagemento(){
         if (rbDinheiro.isSelected()){
             return "Dinheiro (à vista)";
@@ -755,14 +755,8 @@ public class VendaView extends javax.swing.JFrame implements Controller {
         return null;
     }
 
-    @Override //Não Funciona (Map)
-    public Produto buscarProdutoPorCodigo(String codigo) {
-       /*for (Produto p : this.produtoDAO.getProdutos()){
-            if(codigo.equals(p.getCodigo()))
-                return p;
-        }
-        return null;*/
-       
+    @Override //Funciona em plenitude
+    public Produto buscarProdutoPorCodigo(int codigo) {
        
        Map<Integer, Produto> produtos = produtoDAO.getProdutos().stream()
                .collect(Collectors.toMap(Produto::getCodigo, produto -> produto));
@@ -808,4 +802,4 @@ public class VendaView extends javax.swing.JFrame implements Controller {
     public void limpaCampo(JTextArea textArea) {
         textArea.setText("");
     }
-}
+} 

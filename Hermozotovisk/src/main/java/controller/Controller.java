@@ -12,7 +12,7 @@ import model.Produto;
 public interface Controller {
     Produto buscarProdutoPorNome(String nome);
     
-    Produto buscarProdutoPorCodigo(String codigo);
+    Produto buscarProdutoPorCodigo(int codigo);
     
     Cliente buscarClientePorNome(String nome);
     
