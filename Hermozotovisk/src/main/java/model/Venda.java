@@ -2,19 +2,21 @@ package model;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 
 /**
  *
  * @author ndeba
  */
-public class Venda {
+public class Venda implements Comparator<Venda> {
     
     private LocalDateTime dataHoraVenda;
     private Vendedor vendedor;
     private Cliente cliente;
     private List<ItemProduto> itensCompra;
-    private Double valorTotal;
+    private double valorTotal;
     private String formaDePagamento;
     
     private final DateTimeFormatter formataçãoData;
@@ -51,7 +53,7 @@ public class Venda {
         return itensCompra;
     }
 
-    public Double getValorTotal() {
+    public double getValorTotal() {
         return valorTotal;
     }
 
@@ -71,4 +73,17 @@ public class Venda {
                 + "\nForma de pagamanto: " + formaDePagamento + " Valor total R$" + valorTotal 
                 + "\nProdutos: \n" + produtos;
     }
+
+    @Override
+    public int compare(Venda o1, Venda o2) {
+       if(o1.getValorTotal() > o2.getValorTotal()){
+           return 1;
+       }else if(o1.getValorTotal() == o2.getValorTotal()){
+           return 0;
+       }else{
+           return -1;
+       }
+    }
+
+ 
 }
