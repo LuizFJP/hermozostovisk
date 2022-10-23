@@ -4,50 +4,37 @@ package model;
  *
  * @author ndeba
  */
-public class ItemProduto {
+public class ItemProduto extends Produto{
 
-    private String nome;
-    private Integer codigo;
-    public Integer quantidade;
-    private Double preco; 
-
-    public ItemProduto(String nome, Integer codigo, Integer quantidade, Double preco) {
-        this.nome = nome;
-        this.codigo = codigo;
+    private int quantidade;
+    
+    public ItemProduto(String nome, Integer codigo, Double preco, Integer quantidade) {
+        super(nome, codigo, preco);
         this.quantidade = quantidade;
-        this.preco = preco;
     }
 
+    @Override
     public String getNome() {
-        return nome;
+        return super.nome;
+    }
+    
+    @Override
+    public int getCodigo() {
+        return super.codigo;
     }
 
-    public Integer getCodigo() {
-        return codigo;
+    @Override
+    public double getPreco() {
+        return preco;
     }
 
     public Integer getQuantidade() {
         return quantidade;
     }
 
-    public Double getPreco() {
-        return preco;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
     public void setQuantidade(Integer quantidade) {
         this.quantidade = quantidade;
-    }
-
-    public void setPreco(Double preco) {
-        this.preco = preco;
-    }
-    
-
-    
+    }  
 
     @Override
     public String toString() {

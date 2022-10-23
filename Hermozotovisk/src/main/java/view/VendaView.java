@@ -587,10 +587,10 @@ public class VendaView extends javax.swing.JFrame implements Controller {
             
             String nome = (String)tbProdutos.getValueAt(linhaAtual, colunaNome);
             Integer codigo = (int)tbProdutos.getValueAt(linhaAtual, colunaCodigo);
-            Integer quantidade = (int)tbProdutos.getValueAt(linhaAtual, colunaQuantidade);
             Double preco = (Double)tbProdutos.getValueAt(linhaAtual, colunaPreco);
-            
-            ItemProduto item = new ItemProduto(nome, codigo, quantidade, preco);
+            Integer quantidade = (int)tbProdutos.getValueAt(linhaAtual, colunaQuantidade);
+           
+            ItemProduto item = new ItemProduto(nome, codigo, preco, quantidade);
             
             pedidoGerado.add(item);
             

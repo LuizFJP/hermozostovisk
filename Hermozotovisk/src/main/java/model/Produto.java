@@ -7,12 +7,12 @@ package model;
 public class Produto implements Comparable<Produto> {
 
     
-    private String nome;
-    private int codigo;
-    private double preco;
+    protected String nome;
+    protected int codigo;
+    protected double preco;
     private String categoria;
     String descricao;
-    private static int codigoProduto = 1;
+    protected static int codigoProduto = 1;
     public Integer quantidade;
     
     @Override
@@ -44,6 +44,13 @@ public class Produto implements Comparable<Produto> {
         Produto.codigoProduto += 1;
         this.quantidade = quantidade;
     }
+    
+    protected Produto(String nome, Integer codigo, Double preco){
+      this.nome = nome;
+      this.codigo = Produto.codigoProduto;
+      this.preco = preco;
+    }
+            
     
     public String getNome() {
         return nome;
