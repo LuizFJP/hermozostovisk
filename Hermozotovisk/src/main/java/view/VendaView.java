@@ -98,6 +98,7 @@ public class VendaView extends javax.swing.JFrame implements Controller {
         jTextArea1 = new javax.swing.JTextArea();
         btPesquisarCliente = new javax.swing.JButton();
         vendedorAtual = new javax.swing.JLabel();
+        btCancelar = new javax.swing.JButton();
 
         jList1.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -236,6 +237,13 @@ public class VendaView extends javax.swing.JFrame implements Controller {
 
         vendedorAtual.setText("Vendedor(a): null");
 
+        btCancelar.setText("CANCELAR VENDA");
+        btCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btCancelarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -269,14 +277,17 @@ public class VendaView extends javax.swing.JFrame implements Controller {
                                     .addComponent(rbDebito, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(rbBoletoBancario)
                                     .addComponent(rbDinheiro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(60, 60, 60)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGap(19, 19, 19)
+                                        .addGap(79, 79, 79)
                                         .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(btCancelar))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addGap(60, 60, 60)
+                                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                         .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -314,7 +325,7 @@ public class VendaView extends javax.swing.JFrame implements Controller {
                                 .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 461, Short.MAX_VALUE)
+                                        .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 534, Short.MAX_VALUE)
                                         .addContainerGap())
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                         .addComponent(btFecharPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -329,8 +340,7 @@ public class VendaView extends javax.swing.JFrame implements Controller {
                                         .addGap(218, 218, 218))))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(vendedorAtual, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(47, 47, 47))))))
+                                .addComponent(vendedorAtual, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -409,7 +419,8 @@ public class VendaView extends javax.swing.JFrame implements Controller {
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(7, 7, 7))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(rbDinheiro)
@@ -424,7 +435,7 @@ public class VendaView extends javax.swing.JFrame implements Controller {
                 .addContainerGap(65, Short.MAX_VALUE))
         );
 
-        setSize(new java.awt.Dimension(1007, 828));
+        setSize(new java.awt.Dimension(1080, 828));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -484,6 +495,12 @@ public class VendaView extends javax.swing.JFrame implements Controller {
         verificarEMostrar(buscarProdutoPorNome(ltProdutos.getSelectedValue().getNome()));
     }//GEN-LAST:event_btFecharPedidoActionPerformed
 
+    private void btCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCancelarActionPerformed
+        devolverProdutos();
+        pedido = new ArrayList<>();
+        atualizarVistaDeQuantidadeEmEstoque();
+    }//GEN-LAST:event_btCancelarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -493,6 +510,7 @@ public class VendaView extends javax.swing.JFrame implements Controller {
     private javax.swing.ButtonGroup bgFormasDePagamento;
     private javax.swing.JButton btAdicionar;
     private javax.swing.JButton btCadCliente;
+    private javax.swing.JButton btCancelar;
     private javax.swing.JButton btFecharPedido;
     private javax.swing.JButton btPesquisar;
     private javax.swing.JButton btPesquisarCliente;
@@ -546,6 +564,7 @@ public class VendaView extends javax.swing.JFrame implements Controller {
         byte colunaPreco = 3;
         
         for (int linhaAtual = 0; linhaAtual < tbProdutos.getRowCount(); linhaAtual++){
+            
             String nome = (String)tbProdutos.getValueAt(linhaAtual, colunaNome);
             Integer codigo = (int)tbProdutos.getValueAt(linhaAtual, colunaCodigo);
             Integer quantidade = (int)tbProdutos.getValueAt(linhaAtual, colunaQuantidade);
@@ -562,7 +581,16 @@ public class VendaView extends javax.swing.JFrame implements Controller {
         return pedidoGerado;
     }
     
-    
+    private void devolverProdutos(){
+        if (pedido.size() > 0){
+            for (ItemProduto item : pedido) {
+                Produto prod = buscarProdutoPorNome(item.getNome());
+                prod.setQuantidade(prod.getQuantidade() + item.getQuantidade()); 
+            }
+        }else{
+            mensagem("nenhum pedido feito");
+        }    
+    }
     
    //----------------- Metodos de manipulaçao da tabela -----------------//
     
@@ -598,6 +626,10 @@ public class VendaView extends javax.swing.JFrame implements Controller {
     }
     
     //----------------- Metodos de orientação pesquisa e busca -----------------//
+    
+    private void atualizarVistaDeQuantidadeEmEstoque(){
+        verificarEMostrar(buscarProdutoPorNome(ltProdutos.getSelectedValue().getNome()));
+    }
     
     private void verificarEMostrar (Produto p){
         if (p == null)
