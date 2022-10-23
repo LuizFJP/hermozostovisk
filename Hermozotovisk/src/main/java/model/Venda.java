@@ -22,7 +22,7 @@ public class Venda implements Comparator<Venda> {
     private final DateTimeFormatter formataçãoData;
     
     public Venda(Vendedor vendedor, Cliente cliente, List<ItemProduto> itensCompra, String formaDePagamento){
-        this.formataçãoData = DateTimeFormatter.ofPattern("dd/MM/yyyy - hh:mm");
+        this.formataçãoData = DateTimeFormatter.ofPattern("dd/MM/yyyy - hh:mm:ss");
         this.dataHoraVenda = LocalDateTime.now();
         this.vendedor = vendedor;
         this.cliente = cliente;
