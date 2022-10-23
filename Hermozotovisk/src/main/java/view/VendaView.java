@@ -540,8 +540,15 @@ public class VendaView extends javax.swing.JFrame implements Controller {
     }//GEN-LAST:event_btFecharPedidoActionPerformed
 
     private void btCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCancelarActionPerformed
+        int cancelar = JOptionPane.showConfirmDialog(null, "Deseja cancelar a compra atual?","Cancelar Compra",JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if(cancelar == JOptionPane.YES_OPTION){
         devolverProdutos();
         pedido = new ArrayList<>();
+
+        this.dispose();
+        }else{
+            JOptionPane.showMessageDialog(null, "Operação Cancelada","Action: Operação Cancelada",JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_btCancelarActionPerformed
 
     private void btPesquisarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPesquisarClienteActionPerformed

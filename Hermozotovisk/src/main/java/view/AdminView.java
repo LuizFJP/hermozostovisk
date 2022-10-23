@@ -36,12 +36,10 @@ public class AdminView extends javax.swing.JFrame implements Controller {
     
     public List<Categoria> getCategorias(){
         return this.categorias;
-    }
-    
+    }  
     public ProdutoDAO getProdutoDAO() {
         return this.produtoDAO;
     }
-    
     @Override
     public void limpaCampo(JTextField textField){
         textField.setText("");
@@ -51,8 +49,6 @@ public class AdminView extends javax.swing.JFrame implements Controller {
     public void limpaCampo(JTextArea textArea){
         textArea.setText("");
     }
-     
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -128,6 +124,11 @@ public class AdminView extends javax.swing.JFrame implements Controller {
         mRemover.setText("Remover");
 
         miRemoverCliente.setText("Remover Cliente");
+        miRemoverCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miRemoverClienteActionPerformed(evt);
+            }
+        });
         mRemover.add(miRemoverCliente);
 
         miRemoverProduto.setText("Remover Produto");
@@ -193,6 +194,12 @@ public class AdminView extends javax.swing.JFrame implements Controller {
         RelatorioVendasView relVendas = new RelatorioVendasView();
         relVendas.setVisible(true);
     }//GEN-LAST:event_miRelatorioVendaActionPerformed
+
+    private void miRemoverClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miRemoverClienteActionPerformed
+        // TODO add your handling code here:
+        RemoverClienteView remCliente = new RemoverClienteView();
+        remCliente.setVisible(true);
+    }//GEN-LAST:event_miRemoverClienteActionPerformed
 
     /**
      * @param args the command line arguments
