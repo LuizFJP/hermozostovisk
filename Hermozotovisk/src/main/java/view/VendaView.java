@@ -110,8 +110,10 @@ public class VendaView extends javax.swing.JFrame implements Controller {
         jScrollPane1.setViewportView(jList1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Hermozostovisky\n");
         setAlwaysOnTop(true);
         setLocation(new java.awt.Point(100, 100));
+        setLocationByPlatform(true);
         setState(1);
 
         jLabel1.setText("Cod. Produto:");
@@ -401,7 +403,7 @@ public class VendaView extends javax.swing.JFrame implements Controller {
                             .addComponent(tfTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel5)
                             .addComponent(btFecharPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -461,6 +463,7 @@ public class VendaView extends javax.swing.JFrame implements Controller {
         int quantidade = (int) spQuantidade.getValue();
         if (quantidade <= 0 || quantidade > item.getQuantidade()) {
             mensagem("Quantidade invalida ou excedente");
+            System.out.println("Quantidade invalida ou excedente");
         } else {
             inserirItemTabela(item, quantidade);
             atualizarTotal();
@@ -565,12 +568,9 @@ public class VendaView extends javax.swing.JFrame implements Controller {
     }//GEN-LAST:event_btConcluirActionPerformed
 
     private void rbDinheiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbDinheiroActionPerformed
-        if (rbDinheiro.isSelected()){
+        if (rbDinheiro.isSelected())
            cbParcelas.setSelectedIndex(0);
-           cbParcelas.setEnabled(false);
-        }else{
-            cbParcelas.setEnabled(false);
-        }
+           
     }//GEN-LAST:event_rbDinheiroActionPerformed
 
     /**
@@ -639,6 +639,9 @@ public class VendaView extends javax.swing.JFrame implements Controller {
     }
 
     private Venda gerarVenda(List<ItemProduto> pedido) {
+        if (pedido == null){
+            return null;
+        }
         Cliente cliente = ltClientes.getSelectedValue();
         String formaDePagamento = getFormaDePagemento() + cbParcelas.getSelectedItem();
         Venda venda = new Venda(vendedor, cliente, pedido, formaDePagamento);
