@@ -26,7 +26,7 @@ public class Venda implements Comparator<Venda>, Comparable<Venda> {
     public Venda(Vendedor vendedor, Cliente cliente, List<ItemProduto> itensCompra, String formaDePagamento){
         this.codigo = Venda.codigoVenda;
         Venda.codigoVenda += 1;
-        this.formataçãoData = DateTimeFormatter.ofPattern("dd/MM/yyyy - hh:mm");
+        this.formataçãoData = DateTimeFormatter.ofPattern("dd/MM/yyyy - hh:mm:ss");
         this.dataHoraVenda = LocalDateTime.now();
         this.vendedor = vendedor;
         this.cliente = cliente;
@@ -41,8 +41,8 @@ public class Venda implements Comparator<Venda>, Comparable<Venda> {
         }
     }
     
-    public LocalDateTime getDataHoraVenda() {
-        return dataHoraVenda;
+    public String getDataHoraVenda() {
+        return dataHoraVenda.format(formataçãoData);
     }
 
     public Vendedor getVendedor() {
