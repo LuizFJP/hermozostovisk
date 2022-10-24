@@ -2,6 +2,8 @@ package view;//GEN-LINE:variables
 
 import dao.ClienteDAO;
 import dao.FuncionarioDAO;
+import java.awt.Color;
+import java.awt.Cursor;
 import javax.swing.JOptionPane;
 import model.Admin;
 import model.Funcionario;
@@ -22,7 +24,7 @@ public class LoginView extends javax.swing.JFrame {
     public LoginView() {
         this.setTitle("Realizar Login");
         initComponents();
-
+        decoracao();
     }
 
     /**
@@ -52,7 +54,6 @@ public class LoginView extends javax.swing.JFrame {
                 tfSenhaActionPerformed(evt);
             }
         });
-
         lbEsqueci.setFont(new java.awt.Font("Garuda", 0, 12)); // NOI18N
         lbEsqueci.setText("Esqueceu a senha? Clique aqui.");
         lbEsqueci.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -113,13 +114,24 @@ public class LoginView extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>                        
-
+    private void decoracao(){
+        getContentPane().setBackground(Color.decode("#3f3f46"));
+        jLabel1.setForeground(Color.decode("#fafaf9"));
+        jLabel2.setForeground(Color.decode("#fafaf9"));
+        lbEsqueci.setForeground(Color.decode("#fafaf9"));
+        lbEsqueci.setText("<HTML><U>Esqueceu sua senha? Clique aqui!</U></HTML>");
+        lbEsqueci.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        tfCPF.setBackground(Color.decode("#fafaf9"));
+        tfSenha.setBackground(Color.decode("#fafaf9"));
+        bttEntrar.setBackground(Color.decode("#38bdf8"));
+        bttEntrar.setForeground(Color.decode("#fafaf9"));
+    }
     private void tfSenhaActionPerformed(java.awt.event.ActionEvent evt) {                                        
         // TODO add your handling code here:
     }                                       
 
     private void lbEsqueciMouseClicked(java.awt.event.MouseEvent evt) {                                       
-        JOptionPane.showMessageDialog(null, "Que pena!");
+        JOptionPane.showMessageDialog(null, "Que pena!","Esqueceu sua senha",JOptionPane.ERROR_MESSAGE);
     }                                      
 
 
@@ -134,7 +146,7 @@ public class LoginView extends javax.swing.JFrame {
             VendaView vendaView = new VendaView(usuario);
             vendaView.setVisible(true);
         } else if (usuario instanceof Admin) {
-            AdminView adminView = new AdminView();
+            AdminView adminView = new AdminView(usuario);
             adminView.setVisible(true);
         }
         else {

@@ -11,6 +11,11 @@ import javax.swing.JTextField;
 import dao.ClienteDAO;
 import model.Cliente;
 import controller.Controller;
+import java.awt.Color;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import model.Admin;
+import model.Funcionario;
 
 
 /**
@@ -22,16 +27,17 @@ public class AdminView extends javax.swing.JFrame implements Controller {
     private List<Categoria> categorias;
     private ProdutoDAO produtoDAO = new ProdutoDAO();
     private ClienteDAO clienteDAO = new ClienteDAO();
+    private Admin adm;
     /**    
     /**
      * Creates new form MainView
      */
-    public AdminView(){
+    public AdminView(Funcionario adm){
         this.categorias = new ArrayList<>();
-
-        
         initComponents();
+        this.adm = (Admin) adm; 
         this.setTitle("LGC - HermosoStovisk");
+        decoracao();
     }
     
     public List<Categoria> getCategorias(){
@@ -58,7 +64,10 @@ public class AdminView extends javax.swing.JFrame implements Controller {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jMenuBar1 = new javax.swing.JMenuBar();
+        lbBoasVindas = new javax.swing.JLabel();
+        lbMensagem = new javax.swing.JLabel();
+        lbMensagem1 = new javax.swing.JLabel();
+        mbMain = new javax.swing.JMenuBar();
         mCadastro = new javax.swing.JMenu();
         miCadastrarProduto = new javax.swing.JMenuItem();
         miCadastrarCategoria = new javax.swing.JMenuItem();
@@ -71,7 +80,17 @@ public class AdminView extends javax.swing.JFrame implements Controller {
         miRemoverProduto = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setBackground(new java.awt.Color(254, 248, 232));
+        setBackground(new java.awt.Color(63, 63, 70));
+
+        lbBoasVindas.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lbBoasVindas.setForeground(new java.awt.Color(250, 250, 249));
+        lbBoasVindas.setText("Olá,");
+
+        lbMensagem.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lbMensagem.setText("Bem-Vindo(a) Ao Hermozotovisk,");
+
+        lbMensagem1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lbMensagem1.setText("Seu Gerenciador de Estoque Favorito!");
 
         mCadastro.setText("Cadastrar");
 
@@ -91,7 +110,7 @@ public class AdminView extends javax.swing.JFrame implements Controller {
         });
         mCadastro.add(miCadastrarCategoria);
 
-        jMenuBar1.add(mCadastro);
+        mbMain.add(mCadastro);
 
         mRelatorio.setText("Relatórios");
 
@@ -119,7 +138,7 @@ public class AdminView extends javax.swing.JFrame implements Controller {
         });
         mRelatorio.add(miRelatorioProdutos);
 
-        jMenuBar1.add(mRelatorio);
+        mbMain.add(mRelatorio);
 
         mRemover.setText("Remover");
 
@@ -139,19 +158,32 @@ public class AdminView extends javax.swing.JFrame implements Controller {
         });
         mRemover.add(miRemoverProduto);
 
-        jMenuBar1.add(mRemover);
+        mbMain.add(mRemover);
 
-        setJMenuBar(jMenuBar1);
+        setJMenuBar(mbMain);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1330, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(34, 34, 34)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lbBoasVindas)
+                    .addComponent(lbMensagem1)
+                    .addComponent(lbMensagem))
+                .addContainerGap(58, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1439, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(35, 35, 35)
+                .addComponent(lbBoasVindas)
+                .addGap(29, 29, 29)
+                .addComponent(lbMensagem)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lbMensagem1)
+                .addContainerGap(164, Short.MAX_VALUE))
         );
 
         pack();
@@ -207,10 +239,13 @@ public class AdminView extends javax.swing.JFrame implements Controller {
   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JLabel lbBoasVindas;
+    private javax.swing.JLabel lbMensagem;
+    private javax.swing.JLabel lbMensagem1;
     private javax.swing.JMenu mCadastro;
     private javax.swing.JMenu mRelatorio;
     private javax.swing.JMenu mRemover;
+    private javax.swing.JMenuBar mbMain;
     private javax.swing.JMenuItem miCadastrarCategoria;
     private javax.swing.JMenuItem miCadastrarProduto;
     private javax.swing.JMenuItem miRelatorioCliente;
@@ -258,5 +293,31 @@ public class AdminView extends javax.swing.JFrame implements Controller {
     @Override
     public void mensagem(String mensagem) {
           JOptionPane.showMessageDialog(null, mensagem);
+    }
+    
+    private void decoracao(){
+        getContentPane().setBackground(getBackground());
+        lbBoasVindas.setText("Olá " + adm.getNome() + ", Boa noite");
+        lbBoasVindas.setForeground(Color.decode("#fafaf9"));
+        mbMain.setBackground(Color.decode("#71717a"));
+        mCadastro.setForeground(Color.decode("#fafaf9"));
+        mRelatorio.setForeground(Color.decode("#fafaf9"));
+        mRemover.setForeground(Color.decode("#fafaf9"));
+        miCadastrarCategoria.setForeground(Color.decode("#fafaf9"));
+        miCadastrarProduto.setForeground(Color.decode("#fafaf9"));
+        miRelatorioCliente.setForeground(Color.decode("#fafaf9"));
+        miRelatorioProdutos.setForeground(Color.decode("#fafaf9"));
+        miRelatorioVenda.setForeground(Color.decode("#fafaf9"));
+        miRemoverCliente.setForeground(Color.decode("#fafaf9"));
+        miRemoverProduto.setForeground(Color.decode("#fafaf9"));
+        miCadastrarCategoria.setBackground(Color.decode("#71717a"));
+        miCadastrarProduto.setBackground(Color.decode("#71717a"));
+        miRelatorioCliente.setBackground(Color.decode("#71717a"));
+        miRelatorioProdutos.setBackground(Color.decode("#71717a"));
+        miRelatorioVenda.setBackground(Color.decode("#71717a"));
+        miRemoverCliente.setBackground(Color.decode("#71717a"));
+        miRemoverProduto.setBackground(Color.decode("#71717a"));
+        lbMensagem.setForeground(Color.decode("#fafaf9"));
+        lbMensagem1.setForeground(Color.decode("#fafaf9"));
     }
 }

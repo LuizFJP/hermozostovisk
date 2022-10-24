@@ -70,6 +70,7 @@ public class RelatorioProdutoView extends javax.swing.JFrame{
         taBuscaCat = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setBackground(new java.awt.Color(63, 63, 70));
 
         taNome.setEditable(false);
         taNome.setColumns(20);

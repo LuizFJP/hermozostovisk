@@ -55,6 +55,7 @@ public class RelatorioVendasView extends javax.swing.JFrame {
         lbTotal = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setBackground(new java.awt.Color(63, 63, 70));
 
         taMostraVenda.setEditable(false);
         taMostraVenda.setColumns(20);

@@ -15,6 +15,14 @@ public class App {
 //        cadastro.setVisible(true);
         LoginView login = new LoginView();
         login.setVisible(true);
-
     }
 }
+/*Paleta de Cores do Sistema:
+Background: "#3f3f46"
+Font: "#fafaf9"
+Menu: "#71717a"
+Button: "#38bdf8"
+Button-Font: "#fafaf9"
+
+*/
+
