@@ -1,5 +1,6 @@
 package view;
 
+import java.awt.Color;
 import model.Categoria;
 import utils.Mensagem;
 import utils.Limpador;
@@ -22,6 +23,17 @@ public class CadastroCategoriaView extends javax.swing.JFrame {
         this.main = main;
         initComponents();
         this.setTitle("Cadastrar Categoria");
+        decoracao();
+    }
+    private void decoracao(){
+        getContentPane().setBackground(Color.decode("#3f3f46"));
+        lbTitulo.setForeground(Color.decode("#fafaf9"));
+        lbNome.setForeground(Color.decode("#fafaf9"));
+        lbCodigo.setForeground(Color.decode("#fafaf9"));
+        tfCodigoCategoria.setForeground(Color.decode("#18181b"));
+        tfNomeCategoria.setForeground(Color.decode("#18181b"));
+        btCadastrar.setBackground(Color.decode("#38bdf8"));
+        btCadastrar.setForeground(Color.decode("#fafaf9"));
     }
 
     /**
@@ -34,20 +46,23 @@ public class CadastroCategoriaView extends javax.swing.JFrame {
     private void initComponents() {
 
         tfNomeCategoria = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
+        lbNome = new javax.swing.JLabel();
         tfCodigoCategoria = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
+        lbCodigo = new javax.swing.JLabel();
         btCadastrar = new javax.swing.JButton();
+        lbTitulo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         tfNomeCategoria.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
-        jLabel1.setText("Nome da Categoria");
+        lbNome.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lbNome.setText("Nome da Categoria");
 
         tfCodigoCategoria.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
-        jLabel2.setText("Código da Categoria");
+        lbCodigo.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lbCodigo.setText("Código da Categoria");
 
         btCadastrar.setText("Cadastrar");
         btCadastrar.addActionListener(new java.awt.event.ActionListener() {
@@ -56,34 +71,43 @@ public class CadastroCategoriaView extends javax.swing.JFrame {
             }
         });
 
+        lbTitulo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lbTitulo.setText("Cadastro de Categoria");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(168, 168, 168)
+                .addComponent(lbTitulo)
+                .addGap(168, 168, 168))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(134, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btCadastrar)
-                    .addComponent(tfCodigoCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(tfNomeCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel1))
-                .addGap(134, 134, 134))
+                .addGap(64, 64, 64)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfNomeCategoria, javax.swing.GroupLayout.DEFAULT_SIZE, 371, Short.MAX_VALUE)
+                    .addComponent(lbCodigo)
+                    .addComponent(lbNome)
+                    .addComponent(tfCodigoCategoria))
+                .addGap(64, 64, 64))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(50, 50, 50)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tfNomeCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(45, 45, 45)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tfCodigoCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(45, 45, 45)
-                .addComponent(btCadastrar)
-                .addContainerGap(50, Short.MAX_VALUE))
+                .addGap(32, 32, 32)
+                .addComponent(lbTitulo)
+                .addGap(32, 32, 32)
+                .addComponent(lbNome)
+                .addGap(8, 8, 8)
+                .addComponent(tfNomeCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(32, 32, 32)
+                .addComponent(lbCodigo)
+                .addGap(8, 8, 8)
+                .addComponent(tfCodigoCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addComponent(btCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
         pack();
@@ -112,8 +136,9 @@ public class CadastroCategoriaView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btCadastrar;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel lbCodigo;
+    private javax.swing.JLabel lbNome;
+    private javax.swing.JLabel lbTitulo;
     private javax.swing.JTextField tfCodigoCategoria;
     private javax.swing.JTextField tfNomeCategoria;
     // End of variables declaration//GEN-END:variables

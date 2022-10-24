@@ -21,8 +21,10 @@ public class App {
 Background: "#3f3f46"
 Font: "#fafaf9"
 Menu: "#71717a"
-Button: "#38bdf8"
+Button-Background: "#38bdf8"
 Button-Font: "#fafaf9"
+Input-Background: "#f3f4f6"
+Input-font-color: "#18181b"
 
 */
 

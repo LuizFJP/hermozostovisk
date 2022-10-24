@@ -121,10 +121,12 @@ public class LoginView extends javax.swing.JFrame {
         lbEsqueci.setForeground(Color.decode("#fafaf9"));
         lbEsqueci.setText("<HTML><U>Esqueceu sua senha? Clique aqui!</U></HTML>");
         lbEsqueci.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        tfCPF.setBackground(Color.decode("#fafaf9"));
-        tfSenha.setBackground(Color.decode("#fafaf9"));
+        tfCPF.setBackground(Color.decode("#f3f4f6"));
+        tfSenha.setBackground(Color.decode("#f3f4f6"));
         bttEntrar.setBackground(Color.decode("#38bdf8"));
         bttEntrar.setForeground(Color.decode("#fafaf9"));
+        tfCPF.setForeground(Color.decode("#18181b"));
+        tfSenha.setForeground(Color.decode("#18181b"));
     }
     private void tfSenhaActionPerformed(java.awt.event.ActionEvent evt) {                                        
         // TODO add your handling code here:
