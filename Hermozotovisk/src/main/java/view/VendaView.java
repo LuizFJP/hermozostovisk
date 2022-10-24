@@ -471,17 +471,22 @@ public class VendaView extends javax.swing.JFrame implements Controller {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAdicionarActionPerformed
-        Produto item = ltProdutos.getSelectedValue();
-        int quantidade = (int) spQuantidade.getValue();
-        if (quantidade <= 0 || quantidade > item.getQuantidade()) {
-            mensagem("Quantidade invalida ou excedente");
-            System.out.println("Quantidade invalida ou excedente");
-        } else {
-            inserirItemTabela(item, quantidade);
-            atualizarTotal();
+        try{
+            Produto item = ltProdutos.getSelectedValue();
+            int quantidade = (int) spQuantidade.getValue();
+            if (quantidade <= 0 || quantidade > item.getQuantidade()) {
+                mensagem("Quantidade invalida ou excedente");
+                System.out.println("Quantidade invalida ou excedente");
+            } else {
+                inserirItemTabela(item, quantidade);
+                atualizarTotal();
 
-            limpaCampo(tfNomeProduto);
-            limpaCampo(tfCodigo);
+                limpaCampo(tfNomeProduto);
+                limpaCampo(tfCodigo);
+            }
+        }
+        catch(NullPointerException ex){
+            mensagem ("Selecione um Produto");
         }
     }//GEN-LAST:event_btAdicionarActionPerformed
 
@@ -491,7 +496,7 @@ public class VendaView extends javax.swing.JFrame implements Controller {
     }//GEN-LAST:event_btCadClienteActionPerformed
 
     private void btPesquisarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPesquisarProdutoActionPerformed
-        try{
+  
         Produto resultadoPorNome = buscarProdutoPorNome(tfNomeProduto.getText());
 
         if (campoCodigoVazio() && !campoNomeProdutoVazio()) {
@@ -520,11 +525,7 @@ public class VendaView extends javax.swing.JFrame implements Controller {
                 mensagem("Por favor, informe apenas números na busca por código");
             }
         }
-        }catch(NullPointerException ex){
-            String mensagem = "Selecione um produto!";
-            System.out.println(mensagem);
-            mensagem(mensagem);
-        }
+
     }//GEN-LAST:event_btPesquisarProdutoActionPerformed
 
     private void btRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRemoverActionPerformed
@@ -533,25 +534,36 @@ public class VendaView extends javax.swing.JFrame implements Controller {
     }//GEN-LAST:event_btRemoverActionPerformed
 
     private void btFecharPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btFecharPedidoActionPerformed
-
-        if (gerarPedido() == null)
-            mensagem("Algum produto excede a capacidade disponível, verifique a disponibilidade e refaça o pedido.");
-        else {
+            
+            devolverProdutos();
             pedido = gerarPedido();
+            
+            if (pedido.isEmpty())
+                mensagem("Nenhum produto Selecionado!");
+            else if (pedido == null)
+                mensagem("Algum produto excede a capacidade disponível, verifique a disponibilidade e refaça o pedido.");
+            else
             mensagem("Pedido gerado com sucesso");
-            verificarEMostrar(buscarProdutoPorNome(ltProdutos.getSelectedValue().getNome()));
-        }
+            try{
+                verificarEMostrar(buscarProdutoPorNome(ltProdutos.getSelectedValue().getNome()));
+            }catch(NullPointerException e){}
+        
     }//GEN-LAST:event_btFecharPedidoActionPerformed
 
     private void btCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCancelarActionPerformed
-        int cancelar = JOptionPane.showConfirmDialog(null, "Deseja cancelar a compra atual?","Cancelar Compra",JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-        if(cancelar == JOptionPane.YES_OPTION){
-        devolverProdutos();
-        pedido = new ArrayList<>();
-            limparTodosOsCampos();
-        }else{
-            JOptionPane.showMessageDialog(null, "Operação Cancelada","Action: Operação Cancelada",JOptionPane.WARNING_MESSAGE);
-        }
+       
+        if (pedido.isEmpty()) {
+            mensagem("nenhum pedido feito");
+        } else {
+            int cancelar = JOptionPane.showConfirmDialog(null, "Deseja cancelar a compra atual?","Cancelar Compra",JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if(cancelar == JOptionPane.YES_OPTION){
+            devolverProdutos();
+            pedido = new ArrayList<>();
+                limparTodosOsCampos();
+            }else{
+                JOptionPane.showMessageDialog(null, "Operação Cancelada","Action: Operação Cancelada",JOptionPane.WARNING_MESSAGE);
+            }
+       }
     }//GEN-LAST:event_btCancelarActionPerformed
 
     private void btPesquisarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPesquisarClienteActionPerformed
@@ -705,13 +717,13 @@ public class VendaView extends javax.swing.JFrame implements Controller {
         byte colunaCodigo = 1;
         byte colunaQuantidade = 2;
         byte colunaPreco = 3;
-
+       
         for (int linhaAtual = 0; linhaAtual < tbProdutos.getRowCount(); linhaAtual++) {
 
             String nome = (String) tbProdutos.getValueAt(linhaAtual, colunaNome);
             Integer codigo = (int) tbProdutos.getValueAt(linhaAtual, colunaCodigo);
             Double preco = (Double) tbProdutos.getValueAt(linhaAtual, colunaPreco);
-            Integer quantidade = (int) tbProdutos.getValueAt(linhaAtual, colunaQuantidade);
+            int quantidade = (int) tbProdutos.getValueAt(linhaAtual, colunaQuantidade);
 
             ItemProduto item = new ItemProduto(nome, codigo, preco, quantidade);
 
@@ -720,7 +732,7 @@ public class VendaView extends javax.swing.JFrame implements Controller {
                 return null;
             }
 
-            pedidoGerado.add(item);
+            pedidoGerado.add(item);           
             prod.setQuantidade(prod.getQuantidade() - quantidade);
         }
 
@@ -728,13 +740,9 @@ public class VendaView extends javax.swing.JFrame implements Controller {
     }
 
     private void devolverProdutos() {
-        if (pedido.isEmpty()) {
-            mensagem("nenhum pedido feito");
-        } else {
-            for (ItemProduto item : pedido) {
-                Produto prod = buscarProdutoPorNome(item.getNome());
-                buscarProdutoPorNome(item.getNome()).setQuantidade(prod.getQuantidade() + item.getQuantidade());
-            }
+        for (ItemProduto item : pedido) {
+            Produto prod = buscarProdutoPorNome(item.getNome());
+            prod.setQuantidade(prod.quantidade + item.getQuantidade());
         }
     }
 
@@ -780,7 +788,11 @@ public class VendaView extends javax.swing.JFrame implements Controller {
     }
 
     private void removerItemTabela() {
+       try{
         ((DefaultTableModel) tbProdutos.getModel()).removeRow(tbProdutos.getSelectedRow());
+       }catch(ArrayIndexOutOfBoundsException ex){
+           mensagem("Selecione o produto a ser removido");
+       }
         atualizarTotal();
     }
 
