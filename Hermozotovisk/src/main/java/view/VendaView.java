@@ -496,26 +496,19 @@ public class VendaView extends javax.swing.JFrame implements Controller {
 
         if (campoCodigoVazio() && !campoNomeProdutoVazio()) {
             verificarEMostrar(resultadoPorNome);
+            limpaCampo(tfNomeProduto);
         } else {
             try {
                 int codigoProduto = Integer.parseInt(tfCodigo.getText());
                 Produto resultadoPorCodigo = buscarProdutoPorCodigo(codigoProduto);
                 if (campoNomeProdutoVazio() && !campoCodigoVazio()) {
                     verificarEMostrar(resultadoPorCodigo);
-                        limpaCampo(tfCodigo);
+                    limpaCampo(tfCodigo);
                 } else if (!campoNomeProdutoVazio() && !campoCodigoVazio()) {
                     if (resultadoPorNome.equals(resultadoPorCodigo)) {
                         verificarEMostrar(resultadoPorNome);
                         limpaCampo(tfNomeProduto);
                         limpaCampo(tfCodigo);
-                    }
-                } else if (campoNomeProdutoVazio() && !campoCodigoVazio()) {
-                    verificarEMostrar(resultadoPorCodigo);
-                        limpaCampo(tfCodigo);
-                } else if (!campoNomeProdutoVazio() && !campoCodigoVazio()) {
-                    if (resultadoPorNome.equals(resultadoPorCodigo)) {
-                        verificarEMostrar(resultadoPorNome);
-                        limpaCampo(tfNomeProduto);
                     } else {
                         mensagem("Não encotrado");
                         limpaCampo(tfNomeProduto);
