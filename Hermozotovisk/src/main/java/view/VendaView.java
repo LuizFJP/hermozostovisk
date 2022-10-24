@@ -471,17 +471,22 @@ public class VendaView extends javax.swing.JFrame implements Controller {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAdicionarActionPerformed
-        Produto item = ltProdutos.getSelectedValue();
-        int quantidade = (int) spQuantidade.getValue();
-        if (quantidade <= 0 || quantidade > item.getQuantidade()) {
-            mensagem("Quantidade invalida ou excedente");
-            System.out.println("Quantidade invalida ou excedente");
-        } else {
-            inserirItemTabela(item, quantidade);
-            atualizarTotal();
+        try{
+            Produto item = ltProdutos.getSelectedValue();
+            int quantidade = (int) spQuantidade.getValue();
+            if (quantidade <= 0 || quantidade > item.getQuantidade()) {
+                mensagem("Quantidade invalida ou excedente");
+                System.out.println("Quantidade invalida ou excedente");
+            } else {
+                inserirItemTabela(item, quantidade);
+                atualizarTotal();
 
-            limpaCampo(tfNomeProduto);
-            limpaCampo(tfCodigo);
+                limpaCampo(tfNomeProduto);
+                limpaCampo(tfCodigo);
+            }
+        }
+        catch(NullPointerException ex){
+            mensagem ("Selecione um Produto");
         }
     }//GEN-LAST:event_btAdicionarActionPerformed
 
