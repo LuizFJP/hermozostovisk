@@ -37,7 +37,7 @@ public class Venda implements Comparator<Venda>, Comparable<Venda> {
     
     private void calculaValor(){
         for (ItemProduto produto: itensCompra){
-            valorTotal += produto.getPreco() * produto.getQuantidade();
+            valorTotal += produto.getPreco();
         }
     }
     
@@ -75,7 +75,7 @@ public class Venda implements Comparator<Venda>, Comparable<Venda> {
         String produtos = "";
         
         for (ItemProduto p : itensCompra){
-            produtos += p.getNome() + " R$" + p.getPreco() + " " + p.getQuantidade() + "Un. \n";
+            produtos += p.getNome() + " R$" + p.getPreco()/p.getQuantidade() + " - " + p.getQuantidade() + " Un. \n";
         }
         
         return"VENDA REALIZADA DIA: " + getDataHoraVenda() +

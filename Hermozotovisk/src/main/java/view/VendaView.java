@@ -24,7 +24,7 @@ import model.Vendedor;
 
 /**
  *
- * @author Nicolas
+ * @author Nicolas Debacher
  */
 public class VendaView extends javax.swing.JFrame implements Controller {
 
@@ -83,8 +83,6 @@ public class VendaView extends javax.swing.JFrame implements Controller {
         jScrollPane5 = new javax.swing.JScrollPane();
         tbProdutos = new javax.swing.JTable();
         rbDinheiro = new javax.swing.JRadioButton();
-        tfEndereco = new javax.swing.JTextField();
-        JLabel12 = new javax.swing.JLabel();
         btFecharPedido = new javax.swing.JButton();
         rbCredito = new javax.swing.JRadioButton();
         rbDebito = new javax.swing.JRadioButton();
@@ -93,8 +91,6 @@ public class VendaView extends javax.swing.JFrame implements Controller {
         jLabel12 = new javax.swing.JLabel();
         btConcluir = new javax.swing.JButton();
         cbParcelas = new javax.swing.JComboBox<>();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
         btPesquisarCliente = new javax.swing.JButton();
         lbVendedorAtual = new javax.swing.JLabel();
         btCancelar = new javax.swing.JButton();
@@ -116,7 +112,7 @@ public class VendaView extends javax.swing.JFrame implements Controller {
         jLabel1.setText("Cod. Produto:");
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel2.setText("NOME DA LOJA");
+        jLabel2.setText("AL Informática");
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel3.setText("Pesquisar");
@@ -207,8 +203,6 @@ public class VendaView extends javax.swing.JFrame implements Controller {
             }
         });
 
-        JLabel12.setText("Endereço:");
-
         btFecharPedido.setText("Fechar pedido");
         btFecharPedido.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -253,10 +247,6 @@ public class VendaView extends javax.swing.JFrame implements Controller {
         });
 
         cbParcelas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1x (à vista)", "2x", "3x", "4x", "5x", "6x", "7x", "8x", "9x", "10x", "11x", "12x" }));
-
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane2.setViewportView(jTextArea1);
 
         btPesquisarCliente.setText("Pesquisar");
         btPesquisarCliente.addActionListener(new java.awt.event.ActionListener() {
@@ -308,17 +298,12 @@ public class VendaView extends javax.swing.JFrame implements Controller {
                                     .addComponent(rbDebito, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(rbBoletoBancario)
                                     .addComponent(rbDinheiro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(79, 79, 79)
-                                        .addComponent(cbParcelas, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(btConcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(btCancelar))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addGap(60, 60, 60)
-                                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addGap(79, 79, 79)
+                                .addComponent(cbParcelas, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btConcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btCancelar)))
                         .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -335,8 +320,6 @@ public class VendaView extends javax.swing.JFrame implements Controller {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(btPesquisarProduto))))
                             .addComponent(jLabel3)
-                            .addComponent(tfEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, 368, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(JLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(12, 12, 12)
@@ -354,7 +337,7 @@ public class VendaView extends javax.swing.JFrame implements Controller {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 564, Short.MAX_VALUE)
+                                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 566, Short.MAX_VALUE)
                                 .addContainerGap())
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(btFecharPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -415,7 +398,7 @@ public class VendaView extends javax.swing.JFrame implements Controller {
                             .addComponent(tfTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel5)
                             .addComponent(btFecharPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
                 .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -437,12 +420,7 @@ public class VendaView extends javax.swing.JFrame implements Controller {
                             .addComponent(btPesquisarCliente))))
                 .addGap(19, 19, 19)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(JLabel12)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(tfEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
@@ -458,13 +436,9 @@ public class VendaView extends javax.swing.JFrame implements Controller {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                         .addComponent(rbDebito)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(rbBoletoBancario)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(64, Short.MAX_VALUE))
+                        .addComponent(rbBoletoBancario)))
+                .addContainerGap(79, Short.MAX_VALUE))
         );
-
-        getAccessibleContext().setAccessibleParent(JLabel12);
 
         setSize(new java.awt.Dimension(1100, 828));
         setLocationRelativeTo(null);
@@ -534,20 +508,26 @@ public class VendaView extends javax.swing.JFrame implements Controller {
     }//GEN-LAST:event_btRemoverActionPerformed
 
     private void btFecharPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btFecharPedidoActionPerformed
-            
-            devolverProdutos();
-            pedido = gerarPedido();
-            
-            if (pedido.isEmpty())
-                mensagem("Nenhum produto Selecionado!");
-            else if (pedido == null)
-                mensagem("Algum produto excede a capacidade disponível, verifique a disponibilidade e refaça o pedido.");
-            else
-            mensagem("Pedido gerado com sucesso");
             try{
-                verificarEMostrar(buscarProdutoPorNome(ltProdutos.getSelectedValue().getNome()));
+            devolverProdutos();
             }catch(NullPointerException e){}
-        
+            finally{
+                pedido = gerarPedido();
+
+                try{
+                if (pedido.isEmpty())
+                    mensagem("Nenhum produto Selecionado!");
+                else
+                    mensagem("Pedido gerado com sucesso");
+
+                }catch(NullPointerException e){
+                    mensagem("Algum produto excede a capacidade disponível, verifique a disponibilidade e refaça o pedido.");
+                }
+
+                try{
+                    verificarEMostrar(buscarProdutoPorNome(ltProdutos.getSelectedValue().getNome()));
+                }catch(NullPointerException e){}
+            }
     }//GEN-LAST:event_btFecharPedidoActionPerformed
 
     private void btCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCancelarActionPerformed
@@ -635,7 +615,6 @@ public class VendaView extends javax.swing.JFrame implements Controller {
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel JLabel12;
     private javax.swing.ButtonGroup bgFormasDePagamento;
     private javax.swing.JButton btAdicionar;
     private javax.swing.JButton btCadCliente;
@@ -660,11 +639,9 @@ public class VendaView extends javax.swing.JFrame implements Controller {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JList<String> jList1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JLabel lbVendedorAtual;
     private javax.swing.JList<Cliente> ltClientes;
     private javax.swing.JList<Produto> ltProdutos;
@@ -676,7 +653,6 @@ public class VendaView extends javax.swing.JFrame implements Controller {
     private javax.swing.JTable tbProdutos;
     private javax.swing.JTextField tfCPF;
     private javax.swing.JTextField tfCodigo;
-    private javax.swing.JTextField tfEndereco;
     private javax.swing.JTextField tfNomeCliente;
     private javax.swing.JTextField tfNomeProduto;
     private javax.swing.JTextField tfTotal;
@@ -740,6 +716,7 @@ public class VendaView extends javax.swing.JFrame implements Controller {
     }
 
     private void devolverProdutos() {
+        
         for (ItemProduto item : pedido) {
             Produto prod = buscarProdutoPorNome(item.getNome());
             prod.setQuantidade(prod.quantidade + item.getQuantidade());
@@ -852,7 +829,7 @@ public class VendaView extends javax.swing.JFrame implements Controller {
         return null;
     }
 
-    @Override //Funciona em plenitude (List)
+    @Override //Funciona em plenitude (Map)
     public Produto buscarProdutoPorCodigo(int codigo) {
         Map<Integer, Produto> produtos = produtoDAO.getProdutos().stream()
                 .collect(Collectors.toMap(Produto::getCodigo, produto -> produto));
