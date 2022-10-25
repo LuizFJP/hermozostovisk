@@ -13,7 +13,7 @@ public class Produto implements Comparable<Produto> {
     private String categoria;
     private String descricao;
     protected static int codigoProduto = 1;
-    public Integer quantidade;
+    public int quantidade;
     
     @Override
     public int compareTo(Produto o) {
@@ -35,7 +35,7 @@ public class Produto implements Comparable<Produto> {
         Produto.codigoProduto += 1;
     }
 
-    public Produto(String nome, double preco, String descricao, String categoria, Integer quantidade) {
+    public Produto(String nome, double preco, String descricao, String categoria, int quantidade) {
         this.nome = nome;
         this.descricao = descricao;
         this.preco = preco;
@@ -89,7 +89,7 @@ public class Produto implements Comparable<Produto> {
         this.descricao = descricao;
     }
 
-    public void setQuantidade(Integer quantidade){
+    public void setQuantidade(int quantidade){
         if (quantidade >= 0)
         this.quantidade = quantidade;
     }

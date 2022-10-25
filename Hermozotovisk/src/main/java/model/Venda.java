@@ -4,7 +4,6 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Objects;
 
 /**
  *
@@ -27,6 +26,7 @@ public class Venda implements Comparator<Venda>, Comparable<Venda> {
         this.codigo = Venda.codigoVenda;
         Venda.codigoVenda += 1;
         this.formataçãoData = DateTimeFormatter.ofPattern("dd/MM/yyyy - hh:mm:ss");
+        
         this.dataHoraVenda = LocalDateTime.now();
         this.vendedor = vendedor;
         this.cliente = cliente;
@@ -82,13 +82,14 @@ public class Venda implements Comparator<Venda>, Comparable<Venda> {
                 "\nCLIENTE: " + getCliente() + 
                 "\nVENDEDOR: " + vendedor
                 + "\nFORMA DE PAGAMENTO: " + getFormaDePagamento() 
-                + "\nVALOR TOTAL: R$" + getValorTotal()
-                + "\nPRODUTOS: \n" + produtos;
+                + "\nPRODUTOS: " + produtos
+                + "\nVALOR TOTAL: R$" + getValorTotal() + "\n";
     }
 
     @Override
     public int compare(Venda o1, Venda o2) {
-            return compareTo(o2);   
+
+            return compareTo(o2); 
     }
 
     @Override

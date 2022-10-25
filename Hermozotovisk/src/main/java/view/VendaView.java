@@ -33,14 +33,14 @@ public class VendaView extends javax.swing.JFrame implements Controller {
     private ProdutoDAO produtoDAO = new ProdutoDAO();
     private ClienteDAO clienteDAO = new ClienteDAO();
     private VendaDAO vendaDAO = new VendaDAO();
-    
+
     private Vendedor vendedor;
     List<ItemProduto> pedido = new ArrayList<>();
 
     public VendaView(Funcionario vendedor) {
         initComponents();
         decoracao();
-        this.setExtendedState (java.awt.Frame.MAXIMIZED_BOTH);
+        this.setExtendedState(java.awt.Frame.MAXIMIZED_BOTH);
         lbClienteNovo.setText("<HTML><U>Clique aqui</U></HTML>");
         lbClienteNovo.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         this.vendedor = (Vendedor) vendedor;
@@ -48,7 +48,8 @@ public class VendaView extends javax.swing.JFrame implements Controller {
         lbVendedorAtual.setText("Vendedor(a): " + vendedor.getNome());
         atualizarTotal();
     }
-    private void decoracao(){
+
+    private void decoracao() {
         getContentPane().setBackground(Color.decode("#3f3f46"));
         rbBoletoBancario.setBackground(Color.decode("#3f3f46"));
         rbCredito.setBackground(Color.decode("#3f3f46"));
@@ -86,7 +87,7 @@ public class VendaView extends javax.swing.JFrame implements Controller {
         jLabel7.setForeground(Color.decode("#fafaf9"));
         jLabel8.setForeground(Color.decode("#fafaf9"));
         jLabel9.setForeground(Color.decode("#fafaf9"));
-        
+
         tfCPF.setBackground(Color.decode("#f3f4f6"));
         tfNomeProduto.setBackground(Color.decode("#f3f4f6"));
         tfNomeCliente.setBackground(Color.decode("#f3f4f6"));
@@ -107,6 +108,7 @@ public class VendaView extends javax.swing.JFrame implements Controller {
         cbParcelas.setBackground(Color.decode("#f3f4f6"));
         cbParcelas.setForeground(Color.decode("#18181b"));
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -520,22 +522,26 @@ public class VendaView extends javax.swing.JFrame implements Controller {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAdicionarActionPerformed
-        Produto item = ltProdutos.getSelectedValue();
-        int quantidade = (int) spQuantidade.getValue();
-        if (quantidade <= 0 || quantidade > item.getQuantidade()) {
-            mensagem("Quantidade invalida ou excedente");
-            System.out.println("Quantidade invalida ou excedente");
-        } else {
-            inserirItemTabela(item, quantidade);
-            atualizarTotal();
+        try {
+            Produto item = ltProdutos.getSelectedValue();
+            int quantidade = (int) spQuantidade.getValue();
+            if (quantidade <= 0 || quantidade > item.getQuantidade()) {
+                mensagem("Quantidade invalida ou excedente");
+                System.out.println("Quantidade invalida ou excedente");
+            } else {
+                inserirItemTabela(item, quantidade);
+                atualizarTotal();
 
-            limpaCampo(tfNomeProduto);
-            limpaCampo(tfCodigo);
+                limpaCampo(tfNomeProduto);
+                limpaCampo(tfCodigo);
+            }
+        } catch (NullPointerException ex) {
+            mensagem("Selecione um Produto");
         }
     }//GEN-LAST:event_btAdicionarActionPerformed
 
     private void btPesquisarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPesquisarProdutoActionPerformed
-        try{
+
         Produto resultadoPorNome = buscarProdutoPorNome(tfNomeProduto.getText());
 
         if (campoCodigoVazio() && !campoNomeProdutoVazio()) {
@@ -564,11 +570,7 @@ public class VendaView extends javax.swing.JFrame implements Controller {
                 mensagem("Por favor, informe apenas números na busca por código");
             }
         }
-        }catch(NullPointerException ex){
-            String mensagem = "Selecione um produto!";
-            System.out.println(mensagem);
-            mensagem(mensagem);
-        }
+
     }//GEN-LAST:event_btPesquisarProdutoActionPerformed
 
     private void btRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRemoverActionPerformed
@@ -578,23 +580,36 @@ public class VendaView extends javax.swing.JFrame implements Controller {
 
     private void btFecharPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btFecharPedidoActionPerformed
 
-        if (gerarPedido() == null)
+        devolverProdutos();
+        pedido = gerarPedido();
+
+        if (pedido.isEmpty()) {
+            mensagem("Nenhum produto Selecionado!");
+        } else if (pedido == null) {
             mensagem("Algum produto excede a capacidade disponível, verifique a disponibilidade e refaça o pedido.");
-        else {
-            pedido = gerarPedido();
+        } else {
             mensagem("Pedido gerado com sucesso");
-            verificarEMostrar(buscarProdutoPorNome(ltProdutos.getSelectedValue().getNome()));
         }
+        try {
+            verificarEMostrar(buscarProdutoPorNome(ltProdutos.getSelectedValue().getNome()));
+        } catch (NullPointerException e) {
+        }
+
     }//GEN-LAST:event_btFecharPedidoActionPerformed
 
     private void btCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCancelarActionPerformed
-        int cancelar = JOptionPane.showConfirmDialog(null, "Deseja cancelar a compra atual?","Cancelar Compra",JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-        if(cancelar == JOptionPane.YES_OPTION){
-        devolverProdutos();
-        pedido = new ArrayList<>();
-            limparTodosOsCampos();
-        }else{
-            JOptionPane.showMessageDialog(null, "Operação Cancelada","Action: Operação Cancelada",JOptionPane.WARNING_MESSAGE);
+
+        if (pedido.isEmpty()) {
+            mensagem("nenhum pedido feito");
+        } else {
+            int cancelar = JOptionPane.showConfirmDialog(null, "Deseja cancelar a compra atual?", "Cancelar Compra", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if (cancelar == JOptionPane.YES_OPTION) {
+                devolverProdutos();
+                pedido = new ArrayList<>();
+                limparTodosOsCampos();
+            } else {
+                JOptionPane.showMessageDialog(null, "Operação Cancelada", "Action: Operação Cancelada", JOptionPane.WARNING_MESSAGE);
+            }
         }
     }//GEN-LAST:event_btCancelarActionPerformed
 
@@ -620,34 +635,32 @@ public class VendaView extends javax.swing.JFrame implements Controller {
     }//GEN-LAST:event_btPesquisarClienteActionPerformed
 
     private void btConcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btConcluirActionPerformed
-       
-        if (ltClientes.getSelectedValue() == null){
+
+        if (ltClientes.getSelectedValue() == null) {
             JOptionPane.showMessageDialog(null, "Compra inválida!"
-                    + "\nPreencha corretamente todos os campos!","Compra inválida", JOptionPane.ERROR_MESSAGE);
-        } 
-        else if (bgFormasDePagamento.getSelection() == null){
-           JOptionPane.showMessageDialog(null, "Compra inválida!"
-                    + "\nPreencha corretamente todos os campos!","Compra inválida", JOptionPane.ERROR_MESSAGE);
-        }
-        else{
-            try{
-            Venda venda = gerarVenda(pedido);
-            vendaDAO.getVendas().add(venda);
-            JOptionPane.showMessageDialog(null, "Compra Realizada com Sucesso!","Compra Concluida", JOptionPane.WARNING_MESSAGE);
-            System.out.println("Foi");
-            }
-            catch (NullPointerException ex){
-                   mensagem("Operacao falhou");
-                   System.out.println("falhou");
+                    + "\nPreencha corretamente todos os campos!", "Compra inválida", JOptionPane.ERROR_MESSAGE);
+        } else if (bgFormasDePagamento.getSelection() == null) {
+            JOptionPane.showMessageDialog(null, "Compra inválida!"
+                    + "\nPreencha corretamente todos os campos!", "Compra inválida", JOptionPane.ERROR_MESSAGE);
+        } else {
+            try {
+                Venda venda = gerarVenda(pedido);
+                vendaDAO.getVendas().add(venda);
+                JOptionPane.showMessageDialog(null, "Compra Realizada com Sucesso!", "Compra Concluida", JOptionPane.WARNING_MESSAGE);
+                System.out.println("Foi");
+            } catch (NullPointerException ex) {
+                mensagem("Operacao falhou");
+                System.out.println("falhou");
             }
         }
     }//GEN-LAST:event_btConcluirActionPerformed
 
     private void rbDinheiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbDinheiroActionPerformed
-        if (rbDinheiro.isSelected())
-           cbParcelas.setSelectedIndex(0);
-           cbParcelas.setEnabled(false);
-           
+        if (rbDinheiro.isSelected()) {
+            cbParcelas.setSelectedIndex(0);
+        }
+        cbParcelas.setEnabled(false);
+
     }//GEN-LAST:event_rbDinheiroActionPerformed
 
     private void rbCreditoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbCreditoActionPerformed
@@ -742,18 +755,18 @@ public class VendaView extends javax.swing.JFrame implements Controller {
     }
 
     private Venda gerarVenda(List<ItemProduto> pedido) {
-        
-        if(pedido == null){
+
+        if (pedido == null) {
             JOptionPane.showMessageDialog(null, "Compra inválida!"
-                    + "\nPreencha corretamente todos os campos!","Compra inválida", JOptionPane.ERROR_MESSAGE);
+                    + "\nPreencha corretamente todos os campos!", "Compra inválida", JOptionPane.ERROR_MESSAGE);
             return null;
         }
-       
-            Cliente cliente = ltClientes.getSelectedValue();
-            String formaDePagamento = getFormaDePagemento() + cbParcelas.getSelectedItem();
-            Venda venda = new Venda(vendedor, cliente, pedido, formaDePagamento);
-            return venda;
-       
+
+        Cliente cliente = ltClientes.getSelectedValue();
+        String formaDePagamento = getFormaDePagemento() + cbParcelas.getSelectedItem();
+        Venda venda = new Venda(vendedor, cliente, pedido, formaDePagamento);
+        return venda;
+
     }
 
     private List<ItemProduto> gerarPedido() {
@@ -769,7 +782,7 @@ public class VendaView extends javax.swing.JFrame implements Controller {
             String nome = (String) tbProdutos.getValueAt(linhaAtual, colunaNome);
             Integer codigo = (int) tbProdutos.getValueAt(linhaAtual, colunaCodigo);
             Double preco = (Double) tbProdutos.getValueAt(linhaAtual, colunaPreco);
-            Integer quantidade = (int) tbProdutos.getValueAt(linhaAtual, colunaQuantidade);
+            int quantidade = (int) tbProdutos.getValueAt(linhaAtual, colunaQuantidade);
 
             ItemProduto item = new ItemProduto(nome, codigo, preco, quantidade);
 
@@ -786,13 +799,9 @@ public class VendaView extends javax.swing.JFrame implements Controller {
     }
 
     private void devolverProdutos() {
-        if (pedido.isEmpty()) {
-            mensagem("nenhum pedido feito");
-        } else {
-            for (ItemProduto item : pedido) {
-                Produto prod = buscarProdutoPorNome(item.getNome());
-                buscarProdutoPorNome(item.getNome()).setQuantidade(prod.getQuantidade() + item.getQuantidade());
-            }
+        for (ItemProduto item : pedido) {
+            Produto prod = buscarProdutoPorNome(item.getNome());
+            prod.setQuantidade(prod.quantidade + item.getQuantidade());
         }
     }
 
@@ -838,12 +847,15 @@ public class VendaView extends javax.swing.JFrame implements Controller {
     }
 
     private void removerItemTabela() {
-        ((DefaultTableModel) tbProdutos.getModel()).removeRow(tbProdutos.getSelectedRow());
+        try {
+            ((DefaultTableModel) tbProdutos.getModel()).removeRow(tbProdutos.getSelectedRow());
+        } catch (ArrayIndexOutOfBoundsException ex) {
+            mensagem("Selecione o produto a ser removido");
+        }
         atualizarTotal();
     }
 
     //----------------- Metodos de orientação pesquisa e busca -----------------//
-
     private void verificarEMostrar(Produto p) {
         if (p == null) {
             mensagem("Não encontrado!");
@@ -941,18 +953,19 @@ public class VendaView extends javax.swing.JFrame implements Controller {
     public void limpaCampo(JTextField textField) {
         textField.setText("");
     }
+
     @Override
     public void limpaCampo(JTextArea textArea) {
         textArea.setText("");
     }
-    
-    public void limparTodosOsCampos(){
+
+    public void limparTodosOsCampos() {
         limpaCampo(tfNomeProduto);
         limpaCampo(tfNomeCliente);
         limpaCampo(tfCPF);
         limpaCampo(tfCodigo);
         bgFormasDePagamento.clearSelection();
-        
+
         DefaultListModel<Produto> listaProdutos = new DefaultListModel();
         ltProdutos.setModel(listaProdutos);
     }
