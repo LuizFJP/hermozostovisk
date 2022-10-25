@@ -46,6 +46,7 @@ public class VendaView extends javax.swing.JFrame implements Controller {
         this.vendedor = (Vendedor) vendedor;
         this.setTitle("Realizar Venda");
         lbVendedorAtual.setText("Vendedor(a): " + vendedor.getNome());
+        
         atualizarTotal();
     }
 
@@ -587,22 +588,29 @@ public class VendaView extends javax.swing.JFrame implements Controller {
 
     private void btFecharPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btFecharPedidoActionPerformed
 
-
+        try{
         devolverProdutos();
-        pedido = gerarPedido();
-
-        if (pedido.isEmpty()) {
-            mensagem("Nenhum produto Selecionado!");
-        } else if (pedido == null) {
-            mensagem("Algum produto excede a capacidade disponível, verifique a disponibilidade e refaça o pedido.");
-        } else {
-            mensagem("Pedido gerado com sucesso");
         }
-        try {
-            verificarEMostrar(buscarProdutoPorNome(ltProdutos.getSelectedValue().getNome()));
-        } catch (NullPointerException e) {
+        catch(NullPointerException e){}
+        
+        finally{
+            pedido = gerarPedido();
+            
+            try{
+            if (pedido.isEmpty()) {
+                mensagem("Nenhum produto Selecionado!");
+    
+            } else {
+                mensagem("Pedido gerado com sucesso");
+            }
+            }catch(NullPointerException e){
+                mensagem("Algum produto excede a capacidade disponível, verifique a disponibilidade e refaça o pedido.");
+            }
+            try {
+                verificarEMostrar(buscarProdutoPorNome(ltProdutos.getSelectedValue().getNome()));
+            } catch (NullPointerException e) {
+            }
         }
-
 
     }//GEN-LAST:event_btFecharPedidoActionPerformed
 
