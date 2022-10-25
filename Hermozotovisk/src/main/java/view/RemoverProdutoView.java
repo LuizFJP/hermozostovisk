@@ -5,6 +5,7 @@
 package view;
 
 import dao.ProdutoDAO;
+import java.awt.Color;
 import javax.swing.JOptionPane;
 import model.Produto;
 
@@ -21,6 +22,16 @@ public class RemoverProdutoView extends javax.swing.JFrame {
     public RemoverProdutoView() {
         initComponents();
         this.setTitle("Remover Produto");
+        decoracao();
+    }
+    private void decoracao(){
+        getContentPane().setBackground(Color.decode("#3f3f46"));
+        lbInserirCodigo.setForeground(Color.decode("#fafaf9"));
+        lbTitulo.setForeground(Color.decode("#fafaf9"));
+        tfCodigoProduto.setBackground(Color.decode("#f3f4f6"));
+        tfCodigoProduto.setForeground(Color.decode("#18181b"));
+        btRemover.setBackground(Color.decode("#38bdf8"));
+        btRemover.setForeground(Color.decode("#fafaf9"));
     }
 
     /**
@@ -57,32 +68,29 @@ public class RemoverProdutoView extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(64, 64, 64)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(194, 194, 194)
-                        .addComponent(lbTitulo))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(208, 208, 208)
-                        .addComponent(btRemover))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(38, 38, 38)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbInserirCodigo)
-                            .addComponent(tfCodigoProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(198, Short.MAX_VALUE))
+                    .addComponent(lbInserirCodigo)
+                    .addComponent(tfCodigoProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btRemover))
+                .addContainerGap(64, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lbTitulo)
+                .addGap(109, 109, 109))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(40, 40, 40)
+                .addGap(32, 32, 32)
                 .addComponent(lbTitulo)
-                .addGap(61, 61, 61)
+                .addGap(32, 32, 32)
                 .addComponent(lbInserirCodigo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tfCodigoProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
+                .addGap(8, 8, 8)
+                .addComponent(tfCodigoProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(32, 32, 32)
                 .addComponent(btRemover)
-                .addGap(40, 40, 40))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
 
         pack();

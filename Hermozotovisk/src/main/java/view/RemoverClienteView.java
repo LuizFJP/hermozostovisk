@@ -5,6 +5,7 @@
 package view;
 
 import dao.ClienteDAO;
+import java.awt.Color;
 import javax.swing.JOptionPane;
 
 /**
@@ -19,8 +20,18 @@ public class RemoverClienteView extends javax.swing.JFrame {
     public RemoverClienteView() {
         initComponents();
         this.setTitle("Remover Cliente");
+        decoracao();
     }
-
+    private void decoracao(){
+        getContentPane().setBackground(Color.decode("#3f3f46"));
+        lbInserirCodigo.setForeground(Color.decode("#fafaf9"));
+        lbTitulo.setForeground(Color.decode("#fafaf9"));
+        tfCPF.setBackground(Color.decode("#f3f4f6"));
+        tfCPF.setForeground(Color.decode("#18181b"));
+        btRemover.setBackground(Color.decode("#38bdf8"));
+        btRemover.setForeground(Color.decode("#fafaf9"));
+        
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -57,30 +68,28 @@ public class RemoverClienteView extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(194, 194, 194)
-                        .addComponent(lbTitulo))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(208, 208, 208)
-                        .addComponent(btRemover))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(38, 38, 38)
+                        .addGap(64, 64, 64)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lbInserirCodigo)
-                            .addComponent(tfCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(206, Short.MAX_VALUE))
+                            .addComponent(tfCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btRemover)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(111, 111, 111)
+                        .addComponent(lbTitulo)))
+                .addContainerGap(64, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(40, 40, 40)
+                .addGap(31, 31, 31)
                 .addComponent(lbTitulo)
-                .addGap(61, 61, 61)
+                .addGap(33, 33, 33)
                 .addComponent(lbInserirCodigo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tfCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
+                .addGap(8, 8, 8)
+                .addComponent(tfCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(32, 32, 32)
                 .addComponent(btRemover)
-                .addGap(40, 40, 40))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
 
         pack();

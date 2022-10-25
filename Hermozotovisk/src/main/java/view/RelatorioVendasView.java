@@ -5,6 +5,7 @@
 package view;
 
 import dao.VendaDAO;
+import java.awt.Color;
 import java.util.Collections;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -23,6 +24,7 @@ public class RelatorioVendasView extends javax.swing.JFrame {
     public RelatorioVendasView() {
         initComponents();
         this.setTitle("Relatório de Vendas");
+        decoracao();
         List<Venda> vendas = this.vendinha.getVendas();
         Collections.sort(vendas, venda);
         double total = 0;
@@ -32,7 +34,24 @@ public class RelatorioVendasView extends javax.swing.JFrame {
         }
         taTotalVendas.append("R$"+Double.toString(total));
     }
-
+    
+    private void decoracao(){
+        getContentPane().setBackground(Color.decode("#3f3f46"));
+        lbLista.setForeground(Color.decode("#fafaf9"));
+        lbTotal.setForeground(Color.decode("#fafaf9"));
+        lbVendas.setForeground(Color.decode("#fafaf9"));
+        lbPesquisa.setForeground(Color.decode("#fafaf9"));
+        tfBuscaCodigo.setBackground(Color.decode("#f3f4f6"));
+        tfBuscaCodigo.setForeground(Color.decode("#18181b"));
+        btPesquisar.setBackground(Color.decode("#38bdf8"));
+        btPesquisar.setForeground(Color.decode("#fafaf9"));
+        taTotalVendas.setBackground(Color.decode("#f3f4f6"));
+        taTotalVendas.setForeground(Color.decode("#18181b"));
+        taMostraVenda.setBackground(Color.decode("#f3f4f6"));
+        taMostraVenda.setForeground(Color.decode("#18181b"));
+        taListaVenda.setBackground(Color.decode("#f3f4f6"));
+        taListaVenda.setForeground(Color.decode("#18181b"));
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -46,13 +65,14 @@ public class RelatorioVendasView extends javax.swing.JFrame {
         taMostraVenda = new javax.swing.JTextArea();
         lbVendas = new javax.swing.JLabel();
         tfBuscaCodigo = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
+        lbPesquisa = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        taListaCodigo = new javax.swing.JTextArea();
+        taListaVenda = new javax.swing.JTextArea();
         btPesquisar = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         taTotalVendas = new javax.swing.JTextArea();
         lbTotal = new javax.swing.JLabel();
+        lbLista = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(63, 63, 70));
@@ -64,14 +84,21 @@ public class RelatorioVendasView extends javax.swing.JFrame {
         jScrollPane1.setViewportView(taMostraVenda);
 
         lbVendas.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        lbVendas.setText("Vendas Realizadas");
+        lbVendas.setText("Relatório de Vendas");
 
-        jLabel1.setText("Pesquisar por código");
+        tfBuscaCodigo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfBuscaCodigoActionPerformed(evt);
+            }
+        });
 
-        taListaCodigo.setEditable(false);
-        taListaCodigo.setColumns(20);
-        taListaCodigo.setRows(5);
-        jScrollPane2.setViewportView(taListaCodigo);
+        lbPesquisa.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lbPesquisa.setText("Pesquisar por código");
+
+        taListaVenda.setEditable(false);
+        taListaVenda.setColumns(20);
+        taListaVenda.setRows(5);
+        jScrollPane2.setViewportView(taListaVenda);
 
         btPesquisar.setText("Pesquisar");
         btPesquisar.addActionListener(new java.awt.event.ActionListener() {
@@ -88,60 +115,66 @@ public class RelatorioVendasView extends javax.swing.JFrame {
         taTotalVendas.setAutoscrolls(false);
         jScrollPane3.setViewportView(taTotalVendas);
 
-        lbTotal.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lbTotal.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lbTotal.setText("Total:");
+
+        lbLista.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lbLista.setText("Lista de Vendas no Sistema");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(0, 64, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbTotal)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 987, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(lbVendas)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 395, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(tfBuscaCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btPesquisar))
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1))
-                        .addGap(16, 16, 16))))
+                                .addComponent(tfBuscaCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 371, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(16, 16, 16)
+                                .addComponent(btPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(lbPesquisa)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 371, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lbTotal)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(64, 64, 64))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lbLista)
+                    .addComponent(lbVendas))
+                .addGap(457, 457, 457))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(32, 32, 32)
+                .addComponent(lbVendas)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
+                .addComponent(lbLista)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(16, 16, 16)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(27, 27, 27)
-                        .addComponent(lbVendas)
-                        .addGap(9, 9, 9)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGap(56, 56, 56)
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lbTotal)
+                        .addGap(8, 8, 8)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lbPesquisa)
+                        .addGap(8, 8, 8)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(tfBuscaCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btPesquisar))
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
-                .addComponent(lbTotal)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(53, Short.MAX_VALUE))
+                            .addComponent(tfBuscaCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(16, 16, 16)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(32, Short.MAX_VALUE))
         );
 
         pack();
@@ -152,10 +185,14 @@ public class RelatorioVendasView extends javax.swing.JFrame {
         int codigo = Integer.parseInt(tfBuscaCodigo.getText());
         for(Venda v : vendinha.getVendas()){
             if(codigo == v.getCodigo()){
-                taListaCodigo.append(v.toString());
+                taListaVenda.append(v.toString());
             }
         }
     }//GEN-LAST:event_btPesquisarActionPerformed
+
+    private void tfBuscaCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfBuscaCodigoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfBuscaCodigoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -163,13 +200,14 @@ public class RelatorioVendasView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btPesquisar;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JLabel lbLista;
+    private javax.swing.JLabel lbPesquisa;
     private javax.swing.JLabel lbTotal;
     private javax.swing.JLabel lbVendas;
-    private javax.swing.JTextArea taListaCodigo;
+    private javax.swing.JTextArea taListaVenda;
     private javax.swing.JTextArea taMostraVenda;
     private javax.swing.JTextArea taTotalVendas;
     private javax.swing.JTextField tfBuscaCodigo;
