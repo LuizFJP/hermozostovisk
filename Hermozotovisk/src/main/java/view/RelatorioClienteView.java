@@ -5,6 +5,7 @@
 package view;
 
 import dao.ClienteDAO;
+import java.awt.Color;
 import model.Cliente;
 
 /**
@@ -19,10 +20,16 @@ public class RelatorioClienteView extends javax.swing.JFrame {
     public RelatorioClienteView() {
         this.setTitle("Relatório de Clientes");
         initComponents();
+        decoracao();
         for(Cliente c : clienteDAO.getClientes()){
             taListaClientes.append(c.toString());
         }
         
+    }
+    private void decoracao(){
+        jLabel1.setForeground(Color.decode("#fafaf9"));
+        taListaClientes.setBackground(Color.decode("#f3f4f6"));
+        taListaClientes.setForeground(Color.decode("#18181b"));
     }
 
     /**
@@ -40,7 +47,7 @@ public class RelatorioClienteView extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel1.setText("Lista de Clientes no Sistema");
 
         taListaClientes.setEditable(false);
@@ -57,19 +64,19 @@ public class RelatorioClienteView extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(255, 255, 255)
+                        .addGap(270, 270, 270)
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(29, 29, 29)
+                        .addGap(64, 64, 64)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 622, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addContainerGap(64, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(26, 26, 26)
+                .addContainerGap(32, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addGap(30, 30, 30)
+                .addGap(32, 32, 32)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(32, Short.MAX_VALUE))
         );
