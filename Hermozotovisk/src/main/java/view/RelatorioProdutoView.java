@@ -60,11 +60,9 @@ public class RelatorioProdutoView extends javax.swing.JFrame{
     public String listaProdutos(){
         String buscarCat = tfBuscaCategoria.getText();
         String text = "";
-        for(Produto prod : this.produtoDAO.getProdutos()){
+            for(Produto prod : this.produtoDAO.getProdutos()){
             if(prod.getCategoria().equals(buscarCat) && !buscarCat.isBlank()){
                 text += prod.getNome() + "\n";
-            }else{
-                JOptionPane.showMessageDialog(null, "Categoria não encontrada no sistema!","Error: Categoria não existente", JOptionPane.ERROR_MESSAGE);
             }
         }
         return text;
@@ -207,21 +205,26 @@ public class RelatorioProdutoView extends javax.swing.JFrame{
     }// </editor-fold>//GEN-END:initComponents
 
     private void btBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarActionPerformed
-        
-        String buscar = tfBuscarNome.getText();
-        Produto p = main.buscarProdutoPorNome(buscar);
-        if(p != null){
+        try{
+            String buscar = tfBuscarNome.getText();
+            Produto p = main.buscarProdutoPorNome(buscar);
+            if(p != null){
             main.limpaCampo(taBusca);
             taBusca.append(p.relatoBusca());
             main.limpaCampo(tfBuscarNome);
-        }else{
+        }
+        }catch(NullPointerException ex){
             JOptionPane.showMessageDialog(null, "Produto não consta no sistema", "Erro: Produto não encontrado", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btBuscarActionPerformed
 
     private void btnBuscaCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscaCategoriaActionPerformed
         // TODO add your handling code here:
-        taBuscaCat.append(listaProdutos());
+        try{
+            taBuscaCat.append(listaProdutos());
+        }catch(NullPointerException ex){
+                JOptionPane.showMessageDialog(null, "Categoria não encontrada no sistema!","Error: Categoria não existente", JOptionPane.ERROR_MESSAGE);
+         }
     }//GEN-LAST:event_btnBuscaCategoriaActionPerformed
 
     /**

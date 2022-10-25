@@ -87,6 +87,8 @@ public class CadastroProdutoView extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
+        tfNomeProduto.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
         tfPrecoProduto.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         lbTituloProduto.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -114,6 +116,8 @@ public class CadastroProdutoView extends javax.swing.JFrame {
             }
         });
 
+        tfDescricaoProduto.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
         tbListaProdutos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -128,6 +132,8 @@ public class CadastroProdutoView extends javax.swing.JFrame {
         lbListaProduto.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lbListaProduto.setText("Lista de Produtos");
         lbListaProduto.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
+        tfQuantidade.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         lbQTD.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lbQTD.setText("Quantidade");
@@ -196,7 +202,7 @@ public class CadastroProdutoView extends javax.swing.JFrame {
                         .addComponent(lbDesc)
                         .addGap(8, 8, 8)
                         .addComponent(tfDescricaoProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
                         .addComponent(btCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap(32, Short.MAX_VALUE))

@@ -67,7 +67,7 @@ public class AdminView extends javax.swing.JFrame implements Controller {
         lbBoasVindas = new javax.swing.JLabel();
         lbMensagem = new javax.swing.JLabel();
         lbMensagem1 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        lbImg = new javax.swing.JLabel();
         mbMain = new javax.swing.JMenuBar();
         mCadastro = new javax.swing.JMenu();
         miCadastrarProduto = new javax.swing.JMenuItem();
@@ -93,9 +93,9 @@ public class AdminView extends javax.swing.JFrame implements Controller {
         lbMensagem1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lbMensagem1.setText("Seu Gerenciador de Estoque Favorito!");
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/logo.png"))); // NOI18N
-        jLabel1.setText("Hermozotoviski");
+        lbImg.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
+        lbImg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/logo.png"))); // NOI18N
+        lbImg.setText("Hermozotoviski");
 
         mCadastro.setText("Cadastrar");
 
@@ -177,7 +177,7 @@ public class AdminView extends javax.swing.JFrame implements Controller {
                     .addComponent(lbBoasVindas)
                     .addComponent(lbMensagem1)
                     .addComponent(lbMensagem)
-                    .addComponent(jLabel1))
+                    .addComponent(lbImg))
                 .addContainerGap(64, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -190,7 +190,7 @@ public class AdminView extends javax.swing.JFrame implements Controller {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lbMensagem1)
                 .addGap(32, 32, 32)
-                .addComponent(jLabel1)
+                .addComponent(lbImg)
                 .addContainerGap(32, Short.MAX_VALUE))
         );
 
@@ -247,8 +247,8 @@ public class AdminView extends javax.swing.JFrame implements Controller {
   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel lbBoasVindas;
+    private javax.swing.JLabel lbImg;
     private javax.swing.JLabel lbMensagem;
     private javax.swing.JLabel lbMensagem1;
     private javax.swing.JMenu mCadastro;
@@ -328,5 +328,6 @@ public class AdminView extends javax.swing.JFrame implements Controller {
         miRemoverProduto.setBackground(Color.decode("#71717a"));
         lbMensagem.setForeground(Color.decode("#fafaf9"));
         lbMensagem1.setForeground(Color.decode("#fafaf9"));
+        lbImg.setForeground(Color.decode("#fafaf9"));
     }
 }
