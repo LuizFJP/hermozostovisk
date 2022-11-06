@@ -1,5 +1,5 @@
 package model;
-import interfaces.IPessoa;
+import repository.IPessoa;
 /**
  *
  * @author luizportel4
@@ -8,8 +8,8 @@ public class Cliente extends Pessoa {
 
     private String endereco;
 
-    public Cliente(String nome, String cpf, String senha, String endereco) {
-        super(nome, cpf, senha);
+    public Cliente(String nome, String cpf, String endereco) {
+        super(nome, cpf);
         this.endereco = endereco;
     }
 
@@ -32,5 +32,14 @@ public class Cliente extends Pessoa {
     
     public void setNome(String nome) {
         this.nome = nome;
+    }
+    
+    public void removeClient(String cpf) {
+        
+    }
+    @Override
+    public String toString(){
+        return this.getNome() + "\n Endereço: " + this.getEndereco() + "\n CPF: " + this.getCPF();
+
     }
 }

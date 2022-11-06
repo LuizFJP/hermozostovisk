@@ -1,31 +1,72 @@
 package view;
 
 import dao.ProdutoDAO;
-import model.Produto;
+import java.awt.Color;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import javax.swing.JOptionPane;
+import model.Produto;
 
 /**
  *
  * @author Gustavo
  */
 
-public class RelatorioProdutoView extends javax.swing.JFrame {
+public class RelatorioProdutoView extends javax.swing.JFrame{
     private AdminView main;
-    private ProdutoDAO produtoDAO;
+    private ProdutoDAO produtoDAO = new ProdutoDAO();
     /**
      * Creates new form RelatorioProdutosView
      */
     public RelatorioProdutoView(AdminView main) {
         this.main = main;
-        this.produtoDAO = this.main.getProdutoDAO();
         
         initComponents();
-        for(Produto prod : this.produtoDAO.getProdutos()){
-            taNome.append(prod.getNome() + "(" + Integer.toString(prod.getCodigo()) + ")");
+        this.setTitle("Relatório de Produtos");
+        decoracao();
+        List<Produto> produtos = this.produtoDAO.getProdutos();
+        Collections.sort(produtos);
+        for(Produto prod : produtos){
+            
+            taNome.append("| COD : " + prod.getCodigo() + " | NOME: " + prod.getNome() + " | PRECO: R$" + prod.getPreco());
             taNome.append("\n");
+            
         }
+        
     }
-    
+    private void decoracao(){
+        getContentPane().setBackground(Color.decode("#3f3f46"));
+        btBuscar.setBackground(Color.decode("#38bdf8"));
+        btnBuscaCategoria.setBackground(Color.decode("#38bdf8"));
+        btBuscar.setForeground(Color.decode("#fafaf9"));
+        btnBuscaCategoria.setForeground(Color.decode("#fafaf9"));
+        lbBuscaCat.setForeground(Color.decode("#fafaf9"));
+        lbBuscanome.setForeground(Color.decode("#fafaf9"));
+        lbTitulo.setForeground(Color.decode("#fafaf9"));
+        lbTitulo2.setForeground(Color.decode("#fafaf9"));
+        tfBuscaCategoria.setBackground(Color.decode("#f3f4f6"));
+        tfBuscarNome.setBackground(Color.decode("#f3f4f6"));
+        tfBuscaCategoria.setForeground(Color.decode("#18181b"));
+        tfBuscarNome.setForeground(Color.decode("#18181b"));
+        taBuscaCat.setBackground(Color.decode("#f3f4f6"));
+        taBuscaCat.setForeground(Color.decode("#18181b"));
+        taBusca.setBackground(Color.decode("#f3f4f6"));
+        taBusca.setForeground(Color.decode("#18181b"));
+        taNome.setBackground(Color.decode("#f3f4f6"));
+        taNome.setForeground(Color.decode("#18181b"));
+       
+    }
+    public String listaProdutos(){
+        String buscarCat = tfBuscaCategoria.getText();
+        String text = "";
+            for(Produto prod : this.produtoDAO.getProdutos()){
+            if(prod.getCategoria().equals(buscarCat) && !buscarCat.isBlank()){
+                text += prod.getNome() + "\n";
+            }
+        }
+        return text;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -38,15 +79,21 @@ public class RelatorioProdutoView extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         taNome = new javax.swing.JTextArea();
-        jLabel2 = new javax.swing.JLabel();
+        lbTitulo2 = new javax.swing.JLabel();
         jScrollPane5 = new javax.swing.JScrollPane();
         taBusca = new javax.swing.JTextArea();
         tfBuscarNome = new javax.swing.JTextField();
         btBuscar = new javax.swing.JButton();
-        lbTituloBusca = new javax.swing.JLabel();
-        lbBuscaNome = new javax.swing.JLabel();
-        lbBuscarCategoria = new javax.swing.JLabel();
+        lbBuscanome = new javax.swing.JLabel();
         tfBuscaCategoria = new javax.swing.JTextField();
+        lbBuscaCat = new javax.swing.JLabel();
+        btnBuscaCategoria = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        taBuscaCat = new javax.swing.JTextArea();
+        lbTitulo = new javax.swing.JLabel();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setBackground(new java.awt.Color(63, 63, 70));
 
         taNome.setEditable(false);
         taNome.setColumns(20);
@@ -55,8 +102,8 @@ public class RelatorioProdutoView extends javax.swing.JFrame {
         taNome.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jScrollPane1.setViewportView(taNome);
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel2.setText("Lista de Produtos");
+        lbTitulo2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lbTitulo2.setText("Lista de Produtos no Sistema");
 
         taBusca.setEditable(false);
         taBusca.setColumns(20);
@@ -70,81 +117,115 @@ public class RelatorioProdutoView extends javax.swing.JFrame {
             }
         });
 
-        lbTituloBusca.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        lbTituloBusca.setText("Busca de Produtos");
+        lbBuscanome.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lbBuscanome.setText("Nome do Produto");
 
-        lbBuscaNome.setText("Buscar por Nome");
+        lbBuscaCat.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lbBuscaCat.setText("Buscar por Categoria");
 
-        lbBuscarCategoria.setText("Buscar por Categoria");
+        btnBuscaCategoria.setText("Buscar");
+        btnBuscaCategoria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscaCategoriaActionPerformed(evt);
+            }
+        });
+
+        taBuscaCat.setEditable(false);
+        taBuscaCat.setColumns(20);
+        taBuscaCat.setRows(5);
+        jScrollPane2.setViewportView(taBuscaCat);
+
+        lbTitulo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        lbTitulo.setText("Produtos Cadastrados no Sistema");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(23, 23, 23)
+                .addGap(64, 64, 64)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(lbBuscanome, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(tfBuscarNome, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.Alignment.LEADING))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lbBuscaCat)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(tfBuscaCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnBuscaCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane2))
+                .addGap(136, 136, 136))
+            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addComponent(lbBuscaNome)
-                                    .addGap(102, 102, 102)
-                                    .addComponent(lbBuscarCategoria))
-                                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(btBuscar)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(tfBuscarNome, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(tfBuscaCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(114, Short.MAX_VALUE))
+                        .addGap(32, 32, 32)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1023, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lbTituloBusca)
-                        .addGap(215, 215, 215))))
+                        .addGap(443, 443, 443)
+                        .addComponent(lbTitulo2)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(399, 399, 399)
+                .addComponent(lbTitulo)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(lbTituloBusca))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addComponent(lbTitulo)
+                .addGap(34, 34, 34)
+                .addComponent(lbTitulo2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lbBuscaNome)
-                            .addComponent(lbBuscarCategoria))
-                        .addGap(5, 5, 5)
+                            .addComponent(lbBuscanome)
+                            .addComponent(lbBuscaCat))
+                        .addGap(8, 8, 8)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(tfBuscarNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tfBuscaCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(31, 31, 31)
-                        .addComponent(jScrollPane5)
-                        .addGap(18, 18, 18)
-                        .addComponent(btBuscar))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(33, Short.MAX_VALUE))
+                            .addComponent(tfBuscarNome, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tfBuscaCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnBuscaCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(8, 8, 8)
+                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBuscarActionPerformed
-
-        String buscar = tfBuscarNome.getText();
-        Produto p = main.buscarProdutoPorNome(buscar);
-        
-        if(p != null){
+        try{
+            String buscar = tfBuscarNome.getText();
+            Produto p = main.buscarProdutoPorNome(buscar);
+            if(p != null){
+            main.limpaCampo(taBusca);
             taBusca.append(p.relatoBusca());
-        }else{
-            JOptionPane.showMessageDialog(null, "Produto não está no Sistema");
+            main.limpaCampo(tfBuscarNome);
+        }
+        }catch(NullPointerException ex){
+            JOptionPane.showMessageDialog(null, "Produto não consta no sistema", "Erro: Produto não encontrado", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btBuscarActionPerformed
+
+    private void btnBuscaCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscaCategoriaActionPerformed
+        // TODO add your handling code here:
+        try{
+            taBuscaCat.append(listaProdutos());
+        }catch(NullPointerException ex){
+                JOptionPane.showMessageDialog(null, "Categoria não encontrada no sistema!","Error: Categoria não existente", JOptionPane.ERROR_MESSAGE);
+         }
+    }//GEN-LAST:event_btnBuscaCategoriaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -152,15 +233,20 @@ public class RelatorioProdutoView extends javax.swing.JFrame {
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btBuscar;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JButton btnBuscaCategoria;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JLabel lbBuscaNome;
-    private javax.swing.JLabel lbBuscarCategoria;
-    private javax.swing.JLabel lbTituloBusca;
+    private javax.swing.JLabel lbBuscaCat;
+    private javax.swing.JLabel lbBuscanome;
+    private javax.swing.JLabel lbTitulo;
+    private javax.swing.JLabel lbTitulo2;
     private javax.swing.JTextArea taBusca;
+    private javax.swing.JTextArea taBuscaCat;
     private javax.swing.JTextArea taNome;
     private javax.swing.JTextField tfBuscaCategoria;
     private javax.swing.JTextField tfBuscarNome;
     // End of variables declaration//GEN-END:variables
+
+
 }

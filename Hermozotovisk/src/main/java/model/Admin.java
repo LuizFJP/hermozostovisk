@@ -4,31 +4,13 @@
  */
 package model;
 
-import interfaces.IPessoa;
 
-/**
- *
- * @author luizportel4
- */
-public class Admin extends Pessoa {
+import repository.IFuncionario;
+
+
+public class Admin extends Funcionario {
 
     public Admin(String nome, String cpf, String senha) {
         super(nome, cpf, senha);
     }
-
-    @Override
-    public String getNome() {
-        return super.nome;
-    }
-
-    @Override
-    public String getCPF() {
-        return super.cpf;
-    }
-
-    @Override
-    public void setNome(String nome) {
-        super.nome = nome;
-    }
-
 }
