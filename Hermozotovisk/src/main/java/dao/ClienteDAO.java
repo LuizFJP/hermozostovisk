@@ -18,7 +18,7 @@ public class ClienteDAO implements IClienteDAO{
     public static List<Cliente> clientes = new ArrayList<>();   
 
     public ClienteDAO(){
-        populateCliente();
+//        populateCliente();
     }
     
     @Override

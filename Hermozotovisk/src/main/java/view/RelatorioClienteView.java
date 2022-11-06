@@ -27,9 +27,11 @@ public class RelatorioClienteView extends javax.swing.JFrame {
         
     }
     private void decoracao(){
+        getContentPane().setBackground(Color.decode("#3f3f46"));
         jLabel1.setForeground(Color.decode("#fafaf9"));
         taListaClientes.setBackground(Color.decode("#f3f4f6"));
         taListaClientes.setForeground(Color.decode("#18181b"));
+        
     }
 
     /**
@@ -83,7 +85,7 @@ public class RelatorioClienteView extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
     /**
      * @param args the command line arguments
      */
