@@ -12,7 +12,7 @@ public class ProdutoDAO{
     public static List<Produto> produtos = new ArrayList<>();
     
     public ProdutoDAO(){
-        populateProdutos();
+//        populateProdutos();
     }
     public void addProduto(Produto produto) {
         produtos.add(produto);
